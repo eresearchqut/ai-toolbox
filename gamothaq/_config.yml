@@ -1,0 +1,20 @@
+# https://jupyterbook.org/customize/config.html
+title: Generative AI / ML on the HPC at QUT
+author: Adam Smith
+logo: logo.png 
+execute:
+  execute_notebooks: force
+latex:
+  latex_documents:
+    targetname: book.tex
+bibtex_bibfiles:
+  - references.bib
+repository:
+  url: https://github.com/ScriptSmith/gamothaq
+  path_to_book: gamothaq
+  branch: main
+html:
+  announcement: "WORK IN PROGRESS"
+  baseurl: https://scriptsmith.github.io/gamothaq/
+  use_issues_button: true
+  use_repository_button: true
