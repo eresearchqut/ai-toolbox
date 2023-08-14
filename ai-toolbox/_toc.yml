@@ -1,0 +1,13 @@
+# https://jupyterbook.org/customize/toc.html
+format: jb-book
+root: intro
+parts:
+  - caption: HPC
+    chapters:
+      - file: content/hpc/01_what_is_lyra/index.md
+      - file: content/hpc/02_connecting_to_lyra/index.md
+  - caption: AI
+    chapters:
+      - file: content/ai/index.md
+  # - caption: AI
+  #   chapers:

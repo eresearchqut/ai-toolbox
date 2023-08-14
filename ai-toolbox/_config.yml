@@ -10,11 +10,11 @@ latex:
 bibtex_bibfiles:
   - references.bib
 repository:
-  url: https://github.com/ScriptSmith/gamothaq
-  path_to_book: gamothaq
+  url: https://github.com/ScriptSmith/ai-toolbox
+  path_to_book: ai-toolbox
   branch: main
 html:
   announcement: "WORK IN PROGRESS"
-  baseurl: https://scriptsmith.github.io/gamothaq/
+  baseurl: https://scriptsmith.github.io/ai-toolbox/
   use_issues_button: true
   use_repository_button: true

@@ -1,4 +1,4 @@
-# **GAMOTHAQ** - **G**enerative **A**I **O**n **T**he **H**PC **A**t **Q**UT
+# **ai-toolbox** - **G**enerative **A**I and **M**achine Learning **O**n **T**he **H**PC **A**t **Q**UT
 
 ## Building
 
@@ -7,11 +7,15 @@
 ```
 python3 -m venv venv
 source venv/bin/activate
-pip install -r gamothaq/requirements.txt
+pip install -r ai-toolbox/requirements.txt
 ```
 
 ### Build
 
 ```
-jupyter-book build gamothaq
+jupyter-book build ai-toolbox
+```
+
+```
+sphinx-autobuild ai-toolbox _build/html -b html
 ```
