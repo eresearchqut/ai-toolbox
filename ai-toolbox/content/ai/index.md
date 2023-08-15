@@ -7,6 +7,7 @@
       - Llama
         - Basic
           - Inference
+            - CPU
             - [NVIDIA / AMD / IPU]
               - Single GPU
               - Multi GPU
@@ -30,6 +31,10 @@
       - MMS-TTS
       - SpeechT5
   - Video
+- Tabular data
+  - Regression
+  - Classification
+  - Clustering
 
 ````{div} full-width
 

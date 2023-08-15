@@ -16,6 +16,28 @@ To list all of Lyra's nodes, run the following:
 pbsnodeinfo
 ```
 
+```
+$ pbsnodeinfo
+Node    :   cputype |        cpuarch ;    cpu usage;    mem usage; gputype; gpu usage
+=====================================================================================
+cl4n001 : E7-8890v4 |       avx,avx2 ;  6 / 192 cpus; 500 / 5794 GB
+cl4n002 :      6140 |avx,avx2,avx512 ; 20 / 36 cpus;  62 / 186 GB;  P100; 3 / 4 gpus
+cl4n003 :      6140 |avx,avx2,avx512 ; 28 / 36 cpus; 160 / 186 GB;  P100; 4 / 4 gpus
+cl4n007 :      6140 |avx,avx2,avx512 ; 36 / 36 cpus; 291 / 376 GB
+cl4n008 :      6140 |avx,avx2,avx512 ; 33 / 36 cpus; 200 / 376 GB
+cl4n009 :      6140 |avx,avx2,avx512 ; 35 / 36 cpus; 371 / 376 GB
+cl4n010 :      6140 |avx,avx2,avx512 ; 34 / 36 cpus; 287 / 376 GB
+cl4n011 :      6140 |avx,avx2,avx512 ; 34 / 36 cpus; 188 / 376 GB
+cl4n012 :      6140 |avx,avx2,avx512 ; 31 / 36 cpus; 368 / 376 GB
+cl4n013 :      6140 |avx,avx2,avx512 ; 35 / 36 cpus; 332 / 376 GB
+cl4n014 :      6140 |avx,avx2,avx512 ; 36 / 36 cpus; 361 / 376 GB
+cl4n015 :      6140 |avx,avx2,avx512 ; 35 / 36 cpus; 372 / 376 GB
+cl4n016 :      6140 |avx,avx2,avx512 ; 35 / 36 cpus; 372 / 376 GB
+cl4n017 :      6140 |avx,avx2,avx512 ; 35 / 36 cpus; 364 / 376 GB
+cl4n018 :      6140 |avx,avx2,avx512 ; 23 / 36 cpus; 376 / 376 GB
+...
+```
+
 ````
 
 ### General
