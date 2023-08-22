@@ -1,6 +1,5 @@
 # AI
 
-
 - Media
   - Text
     - Large Language Models
