@@ -1,7 +1,8 @@
 # https://jupyterbook.org/customize/config.html
 title: Generative AI / ML on the HPC at QUT
 author: Adam Smith
-logo: logo.png 
+logo: logo.png
+copyright: "2023"
 execute:
   execute_notebooks: force
 latex:
