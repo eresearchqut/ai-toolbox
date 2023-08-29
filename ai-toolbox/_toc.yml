@@ -30,6 +30,7 @@ parts:
     chapters:
       - file: content/ai/images/object-detection/index.md
       - file: content/ai/images/segmentation/index.md
+      - file: content/ai/images/captioning/index.md
       - file: content/ai/images/classification/index.md
       - file: content/ai/images/generation/index.md
   - caption: Audio
