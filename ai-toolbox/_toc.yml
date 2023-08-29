@@ -37,6 +37,7 @@ parts:
     chapters:
       - file: content/ai/audio/transcription/index.md
       - file: content/ai/audio/text-to-speech/index.md
+      - file: content/ai/audio/translation/index.md
       - file: content/ai/audio/generation/index.md
   - caption: Structured Data
     chapters:
