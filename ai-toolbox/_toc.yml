@@ -32,6 +32,7 @@ parts:
       - file: content/ai/images/segmentation/index.md
       - file: content/ai/images/captioning/index.md
       - file: content/ai/images/classification/index.md
+      - file: content/ai/images/text-recognition/index.md
       - file: content/ai/images/generation/index.md
   - caption: Audio
     chapters:
