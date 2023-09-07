@@ -1,0 +1,9 @@
+{
+    "label": "Images",
+    "position": 3,
+    "link": {
+      "type": "generated-index",
+      "description": "Models for interpreting and generating images"
+    }
+}
+  

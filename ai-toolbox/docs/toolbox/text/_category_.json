@@ -1,0 +1,9 @@
+{
+    "label": "Text",
+    "position": 2,
+    "link": {
+      "type": "generated-index",
+      "description": "Models for interpreting and generating text"
+    }
+}
+  

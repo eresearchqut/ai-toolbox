@@ -1,0 +1,127 @@
+---
+sidebar_position: 1
+---
+
+# Introduction
+
+- Media
+  - Text
+    - Large Language Models
+      - Llama
+        - Basic
+          - Inference
+            - CPU
+            - [NVIDIA / AMD / IPU]
+              - Single GPU
+              - Multi GPU
+          - Training
+            - Single GPU
+            - Multi Node
+        - Llama.cpp
+          - Quantization
+          - Inference
+  - Images
+    - StableDiffusion
+  - Audio
+    - Generation
+      - Audio
+        - AudioGen
+        - Bark
+      - Music
+        - MusicGen
+      - Speech
+    - Transcription
+      - MMS-TTS
+      - SpeechT5
+  - Video
+- Tabular data
+  - Regression
+  - Classification
+  - Clustering
+
+````{div} full-width
+
+::::{grid}
+:gutter: 1
+
+:::{grid-item-card} Commodity Hardware
+- Lyra
+    - CPU
+    - NVIDIA, AMD, and Intel🤞 GPUs
+    - Graphcore IPUs
+- RVDI
+    - NVIDIA GPUs
+- Misc
+    - Tanzu
+    - Cube
+    - eSports Arena
+- Nectar
+    - GPU Service
+- NCI
+    - CPU
+    - GPUs
+- AWS / GCP
+    - GPUs, TPUs, FPGAs
+:::
+
+:::{grid-item-card} Tools
+- ai-toolbox
+- `/work/models/`
+    - Llama*
+    - StableLM*
+    - Falcon*
+    - StableDiffusion*
+    - Whisper*
+    - Audiocraft*
+    - VGG*
+    - ResNet*
+    - MobileNet*
+- Apptainer compiled for various hardware
+    - CLI
+    - Gradio Web UI
+- Vector databases
+    - FAISS
+    - Chroma
+    - Qdrant
+    - pgvector
+:::
+
+:::{grid-item-card} Services
+- Lyra JupyterHub
+- Teaching JupyterHub
+- Nectar JupyterHub
+- Google Colab
+- (GCP) Vertex AI Workbench
+- (AWS) Sagemaker Studio
+:::
+
+:::{grid-item-card} APIs
+- LocalAI
+- OpenAI
+- Azure OpenAI
+- Amazon Bedrock
+- huggingface/text-generation-inference
+:::
+
+
+:::{grid-item-card} Applications
+- QUT
+    - Transcription service
+    - Object detection / segmentation service
+    - Classification / regression service
+    - Semantic search service
+    - Text to speech service
+    - Translation service
+    - Text generation / summarization
+    - Image, Video, Audio generation / art studio
+    - T&L Study assistant
+    - ChatQUT
+- (AWS) Rekognition, Sagemaker Canvas, (GCP) Vertex AI, BigQuery ML
+    - Image classification, object detection, face detection
+    - Video action recognition, classification, object tracking
+    - Text classification, entity extraction, sentiment analysis
+    - Tabular data classification, regression, forecasting
+:::
+::::
+
+````
