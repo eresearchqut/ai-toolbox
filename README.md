@@ -1,21 +1,41 @@
-# **ai-toolbox** - **G**enerative **A**I and **M**achine Learning **O**n **T**he **H**PC **A**t **Q**UT
+# Website
 
-## Building
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-### Setup
+### Installation
 
 ```
-python3 -m venv venv
-source venv/bin/activate
-pip install -r ai-toolbox/requirements.txt
+$ yarn
 ```
+
+### Local Development
+
+```
+$ yarn start
+```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ### Build
 
 ```
-jupyter-book build ai-toolbox
+$ yarn build
 ```
 
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+### Deployment
+
+Using SSH:
+
 ```
-sphinx-autobuild ai-toolbox _build/html -b html
+$ USE_SSH=true yarn deploy
 ```
+
+Not using SSH:
+
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

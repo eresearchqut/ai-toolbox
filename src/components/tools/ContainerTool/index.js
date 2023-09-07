@@ -25,7 +25,7 @@ const AVAILABLE_PLATFORMS = [
     "rvdi"
 ]
 
-export default ({ architectures }) =>
+export default ({ architectures, interfaces, platforms, image, models,  }) =>
     <div>
 
     </div>;
