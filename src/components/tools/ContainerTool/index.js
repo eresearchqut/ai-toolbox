@@ -7,22 +7,22 @@
 // - Multiple layers of tabs like in pytorch downloader
 
 export const models = {
-    "llama2-chat-7b": "/work/models/llama/llama2"
+    "llama2-chat-7b": "/work/models/llama/llama2",
 }
 
 const AVAILABLE_ARCHITECTURES = {
     "accelerated": ["nvidia", "amd", "ipu", "intel"],
-    "cpu": ["intel", "amd"]
+    "cpu": ["intel", "amd"],
 };
 
 const AVAILABLE_INTERFACES = [
     "gui",
-    "tui"
+    "tui",
 ]
 
 const AVAILABLE_PLATFORMS = [
     "hpc",
-    "rvdi"
+    "rvdi",
 ]
 
 export default ({ architectures, interfaces, platforms, image, models,  }) =>
