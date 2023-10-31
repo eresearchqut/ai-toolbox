@@ -24,6 +24,6 @@ See also: [Chat](../chat/index.md)
 
 ![ollama](assets/ollama.png)
 
-## Hugging Face pipeline
+## Gradio pipeline
 
 [text-generation](https://huggingface.co/tasks/text-generation)

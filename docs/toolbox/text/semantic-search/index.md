@@ -18,6 +18,6 @@ Semantic search is used to query a corpus of documents in order to find informat
 
 [Sentence Transformers](https://www.sbert.net/) is a Python framework for creating text embeddings.
 
-## Hugging Face pipeline
+## Gradio pipeline
 
 [question answering](https://huggingface.co/tasks/question-answering)

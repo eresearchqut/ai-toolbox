@@ -10,6 +10,6 @@ Translation converts text from in one language to another.
 
 [T5X](https://github.com/google-research/t5x) is
 
-## Hugging Face pipeline
+## Gradio pipeline
 
 [translation](https://huggingface.co/tasks/translation)

@@ -25,6 +25,15 @@ See also: [Completion](../completion/index.md)
 
 ![ollama](assets/ollama.png)
 
-## Hugging Face pipeline
+## Gradio pipeline
+
+import GradioPipeline from '@site/src/components/tools/GradioPipeline';
+
+<GradioPipeline
+    title="Text Generation"
+    link="https://huggingface.co/tasks/text-generation"
+    task="text-generation"
+/>
+
 
 [conversational](https://huggingface.co/tasks/conversational)
