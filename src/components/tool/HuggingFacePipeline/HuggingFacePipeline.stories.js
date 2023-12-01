@@ -1,28 +1,22 @@
----
-sidebar_position: 1
----
+import HuggingFacePipeline from './HuggingFacePipeline'
 
-# Chat
+export default {
+    title: 'Tools/HuggingFacePipeline',
+    component: HuggingFacePipeline,
+}
 
+export const TextGeneration = {
+    args: {
+        title: 'Text Generation',
+        task: 'text-generation'
+    }
+}
 
-Large Language Models (LLMs) like GPT-n from OpenAI, or Llama from Meta have been trained to generate text. We can use versions of these models that have been fine-tuned to act as chatbots, allowing you to interact with said models in a conversational style.
-
-:::note
-
-See also: [Completion](../completion/index.md)
-
-:::
-
-## Gradio pipeline
-
-import HuggingFacePipeline from '@site/src/components/tool/HuggingFacePipeline/HuggingFacePipeline';
-
-<HuggingFacePipeline
-    title="Text Generation"
-    link="https://huggingface.co/tasks/text-generation"
-    task="text-generation"
-    presets={
-        [
+export const TextGenerationPresets = {
+    args: {
+        title: 'Text Generation',
+        task: 'text-generation',
+        presets: [
             {
                 name: "Llama-2-70b-chat on Lyra with 8 A100 GPUs",
                 model: "meta-llama/Llama-2-70b-chat-hf",
@@ -66,17 +60,41 @@ import HuggingFacePipeline from '@site/src/components/tool/HuggingFacePipeline/H
                     environment: "Apptainer"
                 }
             }
-        ]   }
-/>
+        ]
+    }
+}
 
-## text-generation-webui
+export const ImageClassification = {
+    args: {
+        title: 'Image Classification',
+        task: 'image-classification'
+    }
+}
 
-[text-generation-webui](https://github.com/oobabooga/text-generation-webui) is a popular web interface to interact with Large Language Models.
+export const ObjectDetection = {
+    args: {
+        title: 'Object Detection',
+        task: 'object-detection'
+    }
+}
 
-![text-generation-ui](assets/text-generation-webui.png)
+export const AutomaticSpeechRecognition = {
+    args: {
+        title: 'Automatic Speech Recognition',
+        task: 'automatic-speech-recognition'
+    }
+}
 
-## Ollama
+export const TextToSpeech = {
+    args: {
+        title: 'Text to Speech',
+        task: 'text-to-speech'
+    }
+}
 
-[Ollama](https://github.com/jmorganca/ollama) is a CLI tool for interacting with Large Language Models.
-
-![ollama](assets/ollama.png)
+export const TextToImage = {
+    args: {
+        title: 'Text to Image',
+        task: 'text-to-image'
+    }
+}

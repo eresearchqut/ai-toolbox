@@ -9,7 +9,7 @@ const config = {
   tagline: 'AI / ML on the HPC at QUT',
   favicon: 'img/favicon.ico',
   url: 'https://eresearchqut.github.io',
-  baseUrl: '/ai-toolbox/',
+  baseUrl: '/',
   organizationName: 'eresearchqut',
   projectName: 'ai-toolbox',
   onBrokenLinks: 'throw',
@@ -90,7 +90,7 @@ const config = {
             items: [
               {
                 label: 'Toolbox',
-                to: '/toolbox/intro',
+                to: 'docs/toolbox',
               },
             ],
           },
