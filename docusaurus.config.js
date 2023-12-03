@@ -42,6 +42,12 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
+      announcementBar: {
+        id: 'wip_announcement',
+        content: "This site is a work in progress.",
+        backgroundColor: '#ffff00',
+        textColor: '#000000',
+      },
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: 'AI Toolbox',
