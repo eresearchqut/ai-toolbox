@@ -19,7 +19,7 @@ jobs:
         id: generate
         uses: docker/bake-action/subaction/list-targets@v4
         with:
-          target: validate
+          target: hf_pipeline
   build:
     runs-on: ubuntu-latest
     needs: prepare
