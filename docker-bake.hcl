@@ -10,6 +10,9 @@ group "hf_pipeline" {
 
 target "hf_pipeline_cpu" {
   inherits = ["docker-metadata-action"]
+  tags = [
+    "ghcr.io/eresearchqut/hf_pipeline_cpu"
+  ]
   context = "./"
   dockerfile = "containers/hf_pipeline.Dockerfile"
   target = "cpu"
@@ -20,6 +23,9 @@ target "hf_pipeline_cpu" {
 
 target "hf_pipeline_nvidia" {
   inherits = ["docker-metadata-action"]
+  tags = [
+    "ghcr.io/eresearchqut/hf_pipeline_cpu"
+  ]
   context = "./"
   dockerfile = "containers/hf_pipeline.Dockerfile"
   target = "nvidia"
@@ -30,6 +36,9 @@ target "hf_pipeline_nvidia" {
 
 target "hf_pipeline_amd" {
   inherits = ["docker-metadata-action"]
+  tags = [
+    "ghcr.io/eresearchqut/hf_pipeline_cpu"
+  ]
   context = "./"
   dockerfile = "containers/hf_pipeline.Dockerfile"
   target = "amd"
