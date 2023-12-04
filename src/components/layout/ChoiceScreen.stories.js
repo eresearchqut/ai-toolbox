@@ -1,9 +1,19 @@
 import ChoiceScreen from "./ChoiceScreen";
 import {Center} from "@chakra-ui/react";
+import {useArgs} from "@storybook/preview-api";
 
 export default {
     title: 'Layouts/ChoiceScreen',
     component: ChoiceScreen,
+    decorators: [
+        (Story) => {
+            const [args, setArgs] = useArgs();
+            const onPageChange = (show, page) => {
+                setArgs({showPage: show, page});
+            };
+            return <Story args={{...args, onPageChange}}/>;
+        },
+    ]
 }
 
 export const Empty = {

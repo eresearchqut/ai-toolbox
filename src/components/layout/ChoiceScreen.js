@@ -1,20 +1,8 @@
 import {Box, Button, Card, CardBody, SimpleGrid} from "@chakra-ui/react";
-import {useEffect, useState} from "react";
 import {ArrowBackIcon} from "@chakra-ui/icons";
 
-export default function ChoiceScreen({choices, page, showPage = false, onPageChange, clickable = false}) {
-    const [pageShown, setPageShown] = useState(showPage);
-
-    useEffect(() => {
-        setPageShown(showPage);
-    }, [showPage]);
-
-    const onShowPage = (show, page) => {
-        if (onPageChange) onPageChange(show, page)
-        setPageShown(show);
-    }
-
-    if (pageShown) {
+export default function ChoiceScreen({choices, page, showPage = false, onPageChange = (show, page) => {}, clickable = false}) {
+    if (showPage) {
         return <Box>
             {page}
             <Button
@@ -23,7 +11,7 @@ export default function ChoiceScreen({choices, page, showPage = false, onPageCha
                 right="4"
                 top="4"
                 size="sm"
-                onClick={() => onShowPage(false)}
+                onClick={() => onPageChange(false, undefined)}
             >
                 Back
             </Button>
@@ -35,7 +23,7 @@ export default function ChoiceScreen({choices, page, showPage = false, onPageCha
     return (
         <SimpleGrid columns={columns} spacing={2} >
             {choices.map((child, idx) => (
-                <Box key={idx} onClick={clickable ? () => onShowPage(true, idx) : null} cursor={clickable ? "pointer" : "auto"}>
+                <Box key={idx} onClick={clickable ? () => onPageChange(true, idx) : null} cursor={clickable ? "pointer" : "auto"}>
                     <Card height="100%">
                         <CardBody>
                             {child}

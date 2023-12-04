@@ -1,17 +1,6 @@
-import {Box, Button, Center, Flex, Heading, Spacer, Square, Text, Tooltip} from "@chakra-ui/react";
-import React, {useEffect, useState} from "react";
+import {Button, Flex, Tooltip} from "@chakra-ui/react";
 
-export default function InputPicker({choices, value: parentValue, onChange}) {
-    const [value, setValue] = useState(parentValue);
-
-    useEffect(() => {
-        setValue(parentValue);
-    }, [parentValue]);
-    const onClick = (choice) => {
-        setValue(choice);
-        if (onChange) onChange(choice);
-    }
-
+export default function InputPicker({choices, value, onChange = () => {}}) {
     return (
         <Flex flexGrow="1">
             {
@@ -30,7 +19,7 @@ export default function InputPicker({choices, value: parentValue, onChange}) {
                                 borderRadius='0'
                                 m='0'
                                 p='0'
-                                onClick={() => onClick(label)}
+                                onClick={() => onChange(label)}
                                 colorScheme={selected ? 'yellow' : 'gray'}
                             >
                                 {label}

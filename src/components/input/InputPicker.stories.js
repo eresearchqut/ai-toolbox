@@ -1,14 +1,24 @@
 import InputPicker from './InputPicker'
+import {useArgs} from "@storybook/preview-api";
 
 export default {
     title: 'Inputs/InputPicker',
     component: InputPicker,
+    decorators: [
+        (Story) => {
+            const [args, setArgs] = useArgs();
+            const onChange = (value) => {
+                setArgs({value});
+            };
+            return <Story args={{...args, onChange}}/>;
+        },
+    ]
 }
 
 export const Simple = {
     args: {
         choices: ['Option A', 'Option B'],
-        selected: 'Option B',
+        value: 'Option B',
     }
 }
 
@@ -20,6 +30,6 @@ export const HuggingFace = {
             ["rVDI", "Research Virtual Desktop Infrastructure managed by QUT"],
             ["Local", "Your own workstation"]
         ],
-        selected: 'rVDI',
+        value: 'rVDI',
     }
 }
