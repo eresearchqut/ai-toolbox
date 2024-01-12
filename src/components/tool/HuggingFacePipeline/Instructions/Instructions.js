@@ -72,6 +72,8 @@ export function Instructions({task, model, config, port}) {
             os={config.os}
         />}
         <InstallInstructions
+            hardware={config.hardware}
+            gpuVendor={config.gpuVendor}
             service={config.service}
             tool={config.tool}
             environment={config.environment}

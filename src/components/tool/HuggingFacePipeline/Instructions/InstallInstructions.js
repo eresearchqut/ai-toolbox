@@ -1,9 +1,33 @@
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 import CopyBox from "../../../output/CopyBox";
-import {Alert, AlertIcon, Code, Link, Tab, TabList, TabPanel, TabPanels, Tabs} from "@chakra-ui/react";
+import {Alert, AlertIcon, Link, Tab, TabList, TabPanel, TabPanels, Tabs} from "@chakra-ui/react";
+import {singularityContainerName} from "./utils";
 
-export function InstallInstructions({service, environment, tool}) {
+function SingularityBuildInstructions({hardware, gpuVendor}) {
+    const containerName = singularityContainerName(hardware, gpuVendor);
+    let containerTag = "cpu";
+    if (hardware === "GPU") {
+        if (gpuVendor === "NVIDIA") {
+            containerTag = "nvidia";
+        } else if (gpuVendor === "AMD") {
+            containerTag = "amd";
+        }
+    }
+    return <CopyBox>
+        singularity build {containerName} docker://ghcr.io/eresearchqut/ai-toolbox/hf_pipeline:{containerTag}
+    </CopyBox>
+}
+function SingularityRunInstructions({hardware, gpuVendor, service}) {
+    const nvFlag = hardware === "GPU" ? "--nv " : "";
+    const containerLocation = service === "Lyra" ? "/work/ai-toolbox/containers/" : "";
+    let containerName = singularityContainerName(hardware, gpuVendor);
+    return <CopyBox>
+        singularity run {nvFlag}{containerLocation}{containerName} bash
+    </CopyBox>
+}
+
+export function InstallInstructions({hardware, gpuVendor, service, environment, tool}) {
     const isWorkstation = ["rVDI", "Local"].includes(service);
     const isWorkstationNotebook = isWorkstation && tool === "Notebook";
 
@@ -16,21 +40,13 @@ export function InstallInstructions({service, environment, tool}) {
                     color="blue.500">here</Link> to install singularity.</InstructionText>
                 <InstructionHeading>Set up the container</InstructionHeading>
                 <InstructionText>Build the container:</InstructionText>
-                <CopyBox>
-                    singularity build hf_pipeline.sif docker://ghcr.io/eresearchqut/ai-toolbox/hf_pipeline:nvidia
-                </CopyBox>
-                <InstructionText>Run the container:</InstructionText>
-                <CopyBox>
-                    singularity run hf_pipeline.sif bash
-                </CopyBox>
+                <SingularityBuildInstructions hardware={hardware} gpuVendor={gpuVendor}/>
             </>}
             {service === "Lyra" && <>
                 <InstructionHeading>Set up the container</InstructionHeading>
-                <InstructionText>Run the container:</InstructionText>
-                <CopyBox>
-                    singularity run /work/ai-toolbox/containers/hf_pipeline.sif bash
-                </CopyBox>
             </>}
+            <InstructionText>Run the container:</InstructionText>
+            <SingularityRunInstructions hardware={hardware} gpuVendor={gpuVendor} service={service}/>
         </>}
         {environment === "Conda" && <>
             {service !== "JupyterHub" && <>
