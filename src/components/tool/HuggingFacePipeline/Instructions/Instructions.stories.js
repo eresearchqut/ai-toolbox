@@ -19,7 +19,7 @@ export const LyraGPU = {
             gpuModel: "A100",
             gpuModules: 8,
             tool: "CLI",
-            environment: "Apptainer"
+            environment: "Singularity"
         },
         port: 3456
     },

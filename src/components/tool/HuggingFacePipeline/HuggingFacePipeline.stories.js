@@ -30,7 +30,7 @@ export const TextGenerationPresets = {
                     gpuModel: "A100",
                     gpuModules: 8,
                     tool: "CLI",
-                    environment: "Apptainer"
+                    environment: "Singularity"
                 }
             },
             {
@@ -41,7 +41,7 @@ export const TextGenerationPresets = {
                     os: "Linux",
                     hardware: "GPU",
                     tool: "CLI",
-                    environment: "Apptainer"
+                    environment: "Singularity"
                 }
             },
             {
@@ -57,7 +57,7 @@ export const TextGenerationPresets = {
                     gpuModel: "A100",
                     gpuModules: 1,
                     tool: "CLI",
-                    environment: "Apptainer"
+                    environment: "Singularity"
                 }
             }
         ]

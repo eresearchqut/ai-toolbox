@@ -8,36 +8,27 @@ export function InstallInstructions({service, environment, tool}) {
     const isWorkstationNotebook = isWorkstation && tool === "Notebook";
 
     return <>
-        {environment === "Apptainer" && <>
+        {environment === "Singularity" && <>
             {isWorkstation && <>
-                <InstructionHeading>Install Apptainer (if it has not been installed)</InstructionHeading>
+                <InstructionHeading>Install Singularity (if it has not been installed)</InstructionHeading>
                 <InstructionText>Follow the instructions <Link
-                    href="https://apptainer.org/docs/admin/main/installation.html" isExternal
-                    color="blue.500">here</Link> to install apptainer.</InstructionText>
+                    href="https://sylabs.io/docs/" isExternal
+                    color="blue.500">here</Link> to install singularity.</InstructionText>
                 <InstructionHeading>Set up the container</InstructionHeading>
-                <InstructionText>Save the following to a file named <Code>hf.def</Code>:</InstructionText>
-                <CopyBox>
-                    {`Bootstrap: docker
-From: python:3.10
-
-%post
-    pip install gradio jupyterlab 'transformers[torch]'
-`}
-                </CopyBox>
                 <InstructionText>Build the container:</InstructionText>
                 <CopyBox>
-                    apptainer build hf.sif hf.def
+                    singularity build hf_pipeline.sif docker://ghcr.io/eresearchqut/ai-toolbox/hf_pipeline:nvidia
                 </CopyBox>
                 <InstructionText>Run the container:</InstructionText>
                 <CopyBox>
-                    apptainer run hf.sif bash
+                    singularity run hf_pipeline.sif bash
                 </CopyBox>
             </>}
             {service === "Lyra" && <>
                 <InstructionHeading>Set up the container</InstructionHeading>
                 <InstructionText>Run the container:</InstructionText>
                 <CopyBox>
-                    apptainer run /work/ai-toolbox/containers/hf.sif bash
+                    singularity run /work/ai-toolbox/containers/hf_pipeline.sif bash
                 </CopyBox>
             </>}
         </>}

@@ -338,7 +338,7 @@ export function getConfigGroups(config, onConfigChange = () => {
             } else if (isWorkstation(config) && ["macOS", "Windows"].includes(config?.os)) {
                 environments = [["Conda", "Conda package manager"], ["venv", "Python virtual environments"]];
             } else {
-                environments = [["Apptainer", "Apptainer / Singularity container"], ["Conda", "Conda package manager"], ["venv", "Python virtual environments"]];
+                environments = [["Singularity", "Singularity / Singularity container"], ["Conda", "Conda package manager"], ["venv", "Python virtual environments"]];
             }
 
             return {

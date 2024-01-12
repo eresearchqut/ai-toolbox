@@ -18,7 +18,7 @@ export function TeardownInstructions({service, environment}) {
         <InstructionText>
             It may take up to a minute for the server to cancel any ongoing tasks and shut down.
         </InstructionText>
-        {environment === "Apptainer" && <>
+        {environment === "Singularity" && <>
             <InstructionHeading>Exit the container</InstructionHeading>
             <InstructionText>
                 Exit the container by pressing <Kbd>Ctrl</Kbd> + <Kbd>D</Kbd>, or typing <Code>exit</Code> in the

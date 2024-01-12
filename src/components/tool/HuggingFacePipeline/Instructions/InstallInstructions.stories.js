@@ -5,10 +5,10 @@ export default {
     component: InstallInstructions,
 }
 
-export const LyraApptainerCli = {
+export const LyraSingularityCli = {
     args: {
         service: "Lyra",
-        environment: "Apptainer",
+        environment: "Singularity",
         tool: "CLI"
     }
 }
@@ -29,10 +29,10 @@ export const LyraVenvCli = {
     }
 }
 
-export const LyraApptainerScript = {
+export const LyraSingularityScript = {
     args: {
         service: "Lyra",
-        environment: "Apptainer",
+        environment: "Singularity",
         tool: "Script"
     }
 }
@@ -77,26 +77,26 @@ export const JupyterHubCondaNotebook = {
     }
 }
 
-export const RVDIApptainerCli = {
+export const RVDISingularityCli = {
     args: {
         service: "rVDI",
-        environment: "Apptainer",
+        environment: "Singularity",
         tool: "CLI"
     }
 }
 
-export const RVDIApptainerScript = {
+export const RVDISingularityScript = {
     args: {
         service: "rVDI",
-        environment: "Apptainer",
+        environment: "Singularity",
         tool: "Script"
     }
 }
 
-export const RVDIApptainerNotebook = {
+export const RVDISingularityNotebook = {
     args: {
         service: "rVDI",
-        environment: "Apptainer",
+        environment: "Singularity",
         tool: "Notebook"
     }
 }
@@ -150,18 +150,18 @@ export const RVDIVenvNotebook = {
 }
 
 
-export const LocalApptainerScript = {
+export const LocalSingularityScript = {
     args: {
         service: "Local",
-        environment: "Apptainer",
+        environment: "Singularity",
         tool: "Script"
     }
 }
 
-export const LocalApptainerNotebook = {
+export const LocalSingularityNotebook = {
     args: {
         service: "Local",
-        environment: "Apptainer",
+        environment: "Singularity",
         tool: "Notebook"
     }
 }
