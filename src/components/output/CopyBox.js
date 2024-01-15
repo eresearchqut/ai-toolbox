@@ -6,6 +6,7 @@ export default function CopyBox({children}) {
     const [hover, setHover] = useState(false);
     const [copied, setCopied] = useState(false);
 
+    const text = Array.isArray(children) ? children.join("") : children;
     return (
         <Box
             as="pre"
@@ -22,7 +23,7 @@ export default function CopyBox({children}) {
             onMouseOut={() => setHover(false)}
             position="relative"
         >
-            {children}
+            {text}
             {
                 hover &&
                 <Tooltip label={copied ? "Copied!" : "Copy to clipboard"} placement="top" closeDelay={500}>
@@ -32,7 +33,7 @@ export default function CopyBox({children}) {
                         top="2"
                         size="sm"
                         onClick={() => {
-                            navigator.clipboard.writeText(children);
+                            navigator.clipboard.writeText(text);
                             setCopied(true)
                             setTimeout(() => setCopied(false), 1000);
                         }}
