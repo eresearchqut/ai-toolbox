@@ -19,6 +19,6 @@ jobs:
       - name: Build storybook
         run: yarn build-storybook
       - name: Build container image
-        run: docker build -t ghcr.io/eresearchqut/eresearch-job:latest -f containers/EresearchJob.Dockerfile .
+        run: docker build -t ghcr.io/eresearchqut/ai-toolbox/eresearch-job:latest -f containers/EresearchJob.Dockerfile .
       - name: Push container image
-        run: docker push ghcr.io/eresearchqut/eresearch-job:latest
+        run: docker push ghcr.io/eresearchqut/ai-toolbox/eresearch-job:latest
