@@ -1,7 +1,7 @@
 import {InstallInstructions} from './InstallInstructions';
 
 export default {
-    title: 'Tools/HuggingFacePipeline/Instructions/InstallInstructions',
+    title: 'Tools/HuggingFacePipeline/HuggingFaceInstructions/InstallInstructions',
     component: InstallInstructions,
 }
 

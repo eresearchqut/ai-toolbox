@@ -1,8 +1,8 @@
-import {Instructions} from "./Instructions";
+import {HuggingFaceInstructions} from "./HuggingFaceInstructions";
 
 export default {
-    title: 'Tools/HuggingFacePipeline/Instructions',
-    component: Instructions,
+    title: 'Tools/HuggingFacePipeline/HuggingFaceInstructions',
+    component: HuggingFaceInstructions,
 }
 
 export const LyraGPU = {

@@ -1,7 +1,7 @@
 import {ConnectInstructions} from "./ConnectInstructions";
 
 export default {
-    title: 'Tools/HuggingFacePipeline/Instructions/ConnectInstructions',
+    title: 'Tools/HuggingFacePipeline/HuggingFaceInstructions/ConnectInstructions',
     component: ConnectInstructions,
 }
 

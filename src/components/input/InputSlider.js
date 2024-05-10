@@ -1,7 +1,8 @@
 import {
     Box,
     Input,
-    InputGroup, InputRightAddon,
+    InputGroup,
+    InputRightAddon,
     Slider,
     SliderFilledTrack,
     SliderThumb,
@@ -9,7 +10,11 @@ import {
     Text,
 } from "@chakra-ui/react";
 
+import {useGuideContext} from "../tool/guide/Guide";
+
 export default function InputSlider({value = 1, label, onChange = () => {}, ...props}) {
+    const {colorScheme} = useGuideContext();
+
     return (
         <>
             <Box width="120px">
@@ -33,7 +38,7 @@ export default function InputSlider({value = 1, label, onChange = () => {}, ...p
                 ml={2}
                 value={value}
                 focusThumbOnChange={false}
-                colorScheme='yellow'
+                colorScheme={colorScheme}
                 onChange={(v) => onChange(v)}
                 {...props}
             >

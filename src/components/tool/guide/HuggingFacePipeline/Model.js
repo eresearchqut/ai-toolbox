@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import {CloseIcon, ExternalLinkIcon} from "@chakra-ui/icons";
 import React from "react";
-import useData from "../../hooks/useData";
+import useData from "../../../hooks/useData";
 import {
     AutoComplete,
     AutoCompleteCreatable,

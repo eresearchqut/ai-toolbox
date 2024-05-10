@@ -4,6 +4,8 @@ import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 
 export function LyraStartInstructions({
+                                          jobType,
+                                          nodes,
                                           hardware,
                                           cpuVendor,
                                           cpuModel,
@@ -13,7 +15,11 @@ export function LyraStartInstructions({
                                           gpuModel,
                                           gpuModules,
                                       }) {
-    const resources = ["select=1", `ncpus=${cpuCores}`, `mem=${ram}gb`];
+    const resources = [
+        `select=${jobType === "Interactive" ? 1 : nodes}`,
+        `ncpus=${cpuCores}`,
+        `mem=${ram}gb`,
+    ];
     if (cpuVendor !== "Any" && cpuModel) resources.push(`cputype=${cpuModel}`);
     if (hardware === "GPU") {
         resources.push(`ngpus=${gpuModules}`);
@@ -21,17 +27,28 @@ export function LyraStartInstructions({
             resources.push(`gputype=${gpuModel}`);
         }
     }
+
     return <>
-        <InstructionHeading>Schedule an interactive job</InstructionHeading>
+        <InstructionHeading>Schedule a job</InstructionHeading>
         <InstructionText>
             In the ssh session, run the following command to schedule an interactive job:
         </InstructionText>
         <CopyBox>
-            {`qsub -I -l walltime=1:00:00 -l ${resources.join(":")}`}
+            {`qsub${jobType === "Interactive" ? " -I" : ""} -l walltime=1:00:00 -l ${resources.join(":")}`}
         </CopyBox>
-        <InstructionText>
-            Wait for the job to start, and take note of the node you are on (eg. <Code>cl5n042</Code>).
-        </InstructionText>
+        {jobType === "Interactive" && <>
+            <InstructionText>
+                Wait for the job to start, and take note of the node you are on (eg. <Code>cl5n042</Code>).
+            </InstructionText>
+        </>}
+        {jobType === "Batch" && <>
+            <InstructionText>
+                You can check the status of your jobs by running the following:
+            </InstructionText>
+            <CopyBox>
+                qstat -u $USER
+            </CopyBox>
+        </>}
     </>
 }
 

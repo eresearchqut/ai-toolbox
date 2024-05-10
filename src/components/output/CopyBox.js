@@ -1,10 +1,13 @@
 import React, {useState} from "react";
-import {Box, Button, Tooltip} from "@chakra-ui/react";
+import {Box, Button, Tooltip, useColorModeValue} from "@chakra-ui/react";
 import {CopyIcon} from "@chakra-ui/icons";
 
 export default function CopyBox({children}) {
     const [hover, setHover] = useState(false);
     const [copied, setCopied] = useState(false);
+
+    const borderColor = useColorModeValue("gray.200", 'gray.500')
+    const bg = useColorModeValue("gray.50", 'gray.800')
 
     const text = Array.isArray(children) ? children.join("") : children;
     return (
@@ -13,8 +16,8 @@ export default function CopyBox({children}) {
             p="4"
             rounded="md"
             border="1px"
-            borderColor="gray.200"
-            bg="gray.50"
+            borderColor={borderColor}
+            bg={bg}
             fontSize="sm"
             whiteSpace="pre-wrap"
             wordBreak="break-all"

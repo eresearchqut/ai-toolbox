@@ -9,13 +9,13 @@ Large Language Models (LLMs) like GPT-n from OpenAI, or Llama from Meta have bee
 
 :::note
 
-See also: [Completion](../completion/index.md)
+See also: [Completion](../completion/index.mdx)
 
 :::
 
 ## Gradio pipeline
 
-import HuggingFacePipeline from '@site/src/components/tool/HuggingFacePipeline/HuggingFacePipeline';
+import HuggingFacePipeline from '@site/src/components/tool/guide/HuggingFacePipeline/HuggingFacePipeline';
 
 <HuggingFacePipeline
     title="Text Generation"
@@ -24,8 +24,8 @@ import HuggingFacePipeline from '@site/src/components/tool/HuggingFacePipeline/H
     presets={
         [
             {
-                name: "Llama-2-70b-chat on Lyra with 8 A100 GPUs",
-                model: "meta-llama/Llama-2-70b-chat-hf",
+                name: "Mixtral-8x7B-Instruct on Lyra with an A100 GPU",
+                model: "/work/models/mistral/Mixtral-8x7B-Instruct-v0.1",
                 config: {
                     service: "Lyra",
                     hardware: "GPU",
@@ -34,7 +34,23 @@ import HuggingFacePipeline from '@site/src/components/tool/HuggingFacePipeline/H
                     ram: 32,
                     gpuVendor: "NVIDIA",
                     gpuModel: "A100",
-                    gpuModules: 8,
+                    gpuModules: 1,
+                    tool: "CLI",
+                    environment: "Singularity"
+                }
+            },
+            {
+                name: "Llama-2-7b-chat on Lyra with an A100 GPU",
+                model: "/work/models/llama/llama-2/llama-2-7b-chat-hf",
+                config: {
+                    service: "Lyra",
+                    hardware: "GPU",
+                    cpuVendor: "Any",
+                    cpuCores: 8,
+                    ram: 32,
+                    gpuVendor: "NVIDIA",
+                    gpuModel: "A100",
+                    gpuModules: 1,
                     tool: "CLI",
                     environment: "Singularity"
                 }

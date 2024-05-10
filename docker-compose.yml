@@ -1,0 +1,7 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: containers/EresearchJob.Dockerfile
+    ports:
+      - "3000:80"

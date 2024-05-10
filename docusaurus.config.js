@@ -8,7 +8,7 @@ const config = {
   staticDirectories: ['static'],
   tagline: 'AI / ML on the HPC at QUT',
   favicon: 'img/favicon.ico',
-  url: 'https://eresearchqut.github.io',
+  url: 'http://localhost:3000',
   baseUrl: '/ai-toolbox/',
   organizationName: 'eresearchqut',
   projectName: 'ai-toolbox',

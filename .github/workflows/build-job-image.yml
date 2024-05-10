@@ -1,0 +1,24 @@
+name: Build eResearch Job static page container image
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build website
+        run: yarn build
+      - name: Build storybook
+        run: yarn build-storybook
+      - name: Build container image
+        run: docker build -t ghcr.io/eresearchqut/eresearch-job:latest .
+      - name: Push container image
+        run: docker push ghcr.io/eresearchqut/eresearch-job:latest

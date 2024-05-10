@@ -1,7 +1,7 @@
 import React from 'react';
 // Import the original mapper
 import MDXComponents from '@theme-original/MDXComponents';
-import HuggingFacePipeline from '@site/src/components/tool/HuggingFacePipeline/HuggingFacePipeline';
+import HuggingFacePipeline from '@site/src/components/tool/guide/HuggingFacePipeline/HuggingFacePipeline';
 
 export default {
     // Re-use the default mapping

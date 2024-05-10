@@ -19,11 +19,23 @@ function SingularityBuildInstructions({hardware, gpuVendor}) {
     </CopyBox>
 }
 function SingularityRunInstructions({hardware, gpuVendor, service}) {
-    const nvFlag = hardware === "GPU" ? "--nv " : "";
+    const args = []
+    if (hardware === "GPU") {
+        args.push("--nv");
+    }
+    if (service === "Lyra") {
+        args.push(
+            "--bind /:/lyra",
+            "--bind /work:/work",
+            "--contain",
+            "--cleanenv",
+        );
+    }
+    const argsString = args.length > 0 ? args.join(" ") + " " : "";
     const containerLocation = service === "Lyra" ? "/work/ai-toolbox/containers/" : "";
     let containerName = singularityContainerName(hardware, gpuVendor);
     return <CopyBox>
-        singularity run {nvFlag}{containerLocation}{containerName} bash
+        singularity run {argsString}{containerLocation}{containerName} bash
     </CopyBox>
 }
 

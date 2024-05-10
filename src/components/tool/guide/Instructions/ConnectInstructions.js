@@ -13,7 +13,7 @@ function LyraInstructions({username}) {
             If you are off-campus, you will first need to connect to the QUT network using the VPN.
         </Alert>
         <InstructionText>
-            See the instructions <Link href="/ai-toolbox/docs/hpc/lyra/connecting" isExternal
+            See the instructions <Link href="https://qutvirtual4.qut.edu.au/group/research-students/conducting-research/specialty-research-facilities/advanced-research-computing-storage/supercomputing/getting-started-with-hpc" isExternal
                                        color="blue.500">here</Link> for more information about how to use Lyra.
         </InstructionText>
         <OperatingSystemTabs>
@@ -49,11 +49,6 @@ function JupyterHubInstructions() {
     return <>
         <InstructionHeading>Connect to JupyterHub</InstructionHeading>
         <InstructionText>
-            See the instructions <Link href="/ai-toolbox/docs/hpc/jupyterhub/connecting" isExternal
-                                       color="blue.500">here</Link> for more information about how to use JupyterHub on
-            Lyra.
-        </InstructionText>
-        <InstructionText>
             Visit <Link href="https://jupyterhub.eres.qut.edu.au" isExternal
                         color="blue.500">https://jupyterhub.eres.qut.edu.au</Link> and log in with your QUT
             username and password.
@@ -65,9 +60,7 @@ function RvdiInstructions() {
     return <>
         <InstructionHeading>Connect to rVDI</InstructionHeading>
         <InstructionText>
-            See the instructions <Link href="/ai-toolbox/docs/rvdi" isExternal color="blue.500">here</Link> for
-            more
-            information.
+            See the instructions <Link href="https://qutvirtual4.qut.edu.au/group/research-students/conducting-research/specialty-research-facilities/advanced-research-computing-storage/virtual-workstations" isExternal color="blue.500">here</Link> for more information.
         </InstructionText>
         <InstructionText>
             If you have not already, download and install the VMware Horizon client from <Link
