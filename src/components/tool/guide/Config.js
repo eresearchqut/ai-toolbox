@@ -4,7 +4,8 @@ import {CheckCircleIcon, WarningIcon} from "@chakra-ui/icons";
 import InputPicker from "../../input/InputPicker";
 import InputSlider from "../../input/InputSlider";
 
-import pbsnodeinfo from "./pbsnodeinfo.json";
+// import pbsnodeinfo from "./pbsnodeinfo.json";
+const pbsnodeinfo = {nodes: {}};
 
 export const DEFAULT_CONFIG = {nodes: 1, cpuCores: 4, ram: 16, gpuModules: 1};
 
