@@ -31,7 +31,7 @@ export function LyraStartInstructions({
     return <>
         <InstructionHeading>Schedule a job</InstructionHeading>
         <InstructionText>
-            In the ssh session, run the following command to schedule an interactive job:
+            In the ssh session, run the following command to schedule the {jobType.toLowerCase()} job:
         </InstructionText>
         <CopyBox>
             {`qsub${jobType === "Interactive" ? " -I" : ""} -l walltime=1:00:00 -l ${resources.join(":")}`}

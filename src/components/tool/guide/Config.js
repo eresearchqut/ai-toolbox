@@ -286,9 +286,17 @@ export const getGpuVendor = (config, onChange) => () => {
 export const getGpuModel = (config, onChange) => () => {
     let gpuModels = [];
     if (config?.gpuVendor === "NVIDIA") {
-        gpuModels = ["T4", "P100", "V100", "A100"];
+        gpuModels = [
+            ["T4", "Tesla T4 16 GB"],
+            ["P100", "TESLA P100-PCIE-16GB"],
+            ["V100", "TESLA V100-PCIE-32GB"],
+            ["A100", "NVIDIA A100-SXM4-40GB"],
+        ]
     } else if (config?.gpuVendor === "AMD") {
-        gpuModels = ["MI100", "MI210"];
+        gpuModels = [
+            ["MI100", "AMD MI100 32 GB"],
+            ["MI210", "AMD MI210 16 GB"],
+        ]
     }
     return {
         element: (key, selected) => <ConfigGroup

@@ -233,7 +233,7 @@ export default function HuggingFacePipeline({title, task, presets = []}) {
                                             Instructions
                                         </AccordionHeading>
                                         <AccordionPanel>
-                                            <Hug    gingFaceInstructions
+                                            <HuggingFaceInstructions
                                                 task={task}
                                                 model={model}
                                                 config={config}

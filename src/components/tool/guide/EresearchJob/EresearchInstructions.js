@@ -1,4 +1,4 @@
-import {AbsoluteCenter, Box, Divider, Heading, useColorModeValue} from "@chakra-ui/react";
+import {Box} from "@chakra-ui/react";
 import {ConnectInstructions} from "../Instructions/ConnectInstructions";
 import {
     JupyterHubStartInstructions,
@@ -8,7 +8,7 @@ import {
 } from "../Instructions/StartInstructions";
 import {TeardownInstructions} from "../Instructions/TeardownInstructions";
 import useLocalStorageState from "../../../hooks/useLocalStorageState";
-import React, {useState} from "react";
+import React from "react";
 import InstructionInput from "../Instructions/InstructionInput";
 
 const TEXT_PATTERN = /^[a-z0-9]*$/;

@@ -132,46 +132,47 @@ const getConfigGroups = (config, onConfigChange = () => {
     }
 }
 
-export default function EresearchJob() {
+export default function EresearchJob({showHeader = true}) {
     const [config, setConfig] = useState(DEFAULT_CONFIG);
 
     const isConfigComplete = configComplete(config, getConfigGroups)
 
+    const header = showHeader ? <GuideHeader
+        title="eResearch Job"
+        subtitle="Use the form below to configure a workload that runs on the eResearch infrastructure at QUT."
+        logo={QUTLogo}
+        alt="QUT logo"
+        link="https://www.qut.edu.au/research/eresearch"
+    /> : null;
+
+    const body = <>
+        <Heading as="h2" size="md" my={2}>
+            Configuration
+        </Heading>
+        <Config
+            config={config}
+            onConfigChange={setConfig}
+            getConfigGroups={getConfigGroups}
+        />
+        {
+            isConfigComplete && (
+                <>
+                    <Heading as="h2" size="md" my={2}>
+                        Instructions
+                    </Heading>
+                    <EresearchInstructions
+                        config={config}
+                    />
+                </>
+            )
+        }
+    </>;
+
     return (
         <Guide
             colorScheme="qut"
-            header={
-                <GuideHeader
-                    title="eResearch Job"
-                    logo={QUTLogo}
-                    alt="QUT logo"
-                    link="https://www.qut.edu.au/research/eresearch"
-                />
-            }
-            body={
-                <>
-                    <Heading as="h2" size="md" my={2}>
-                        Configuration
-                    </Heading>
-                    <Config
-                        config={config}
-                        onConfigChange={setConfig}
-                        getConfigGroups={getConfigGroups}
-                    />
-                    {
-                        isConfigComplete && (
-                            <>
-                                <Heading as="h2" size="md" my={2}>
-                                    Instructions
-                                </Heading>
-                                <EresearchInstructions
-                                    config={config}
-                                />
-                            </>
-                        )
-                    }
-                </>
-            }
+            header={header}
+            body={body}
         />
     )
 }

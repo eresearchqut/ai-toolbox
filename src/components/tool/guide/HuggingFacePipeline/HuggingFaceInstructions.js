@@ -40,6 +40,7 @@ export function HuggingFaceInstructions({task, model, config, port}) {
         {config.service === "Lyra" &&
             <>
                 <LyraStartInstructions
+                    jobType={"Interactive"}
                     hardware={config.hardware}
                     cpuVendor={config.cpuVendor}
                     cpuModel={config.cpuModel}
