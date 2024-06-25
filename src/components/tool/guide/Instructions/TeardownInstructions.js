@@ -7,7 +7,7 @@ export function TeardownInstructions({service, environment, usingTool = false}) 
         {service === "Lyra" && <>
             <Alert status="warning" variant="left-accent">
                 <AlertIcon/>
-                Lyra is a shared resource. Please be considerate of other users and stop the job when you are finished.
+                Lyra is a shared resource, only request the resources you need.
             </Alert>
         </>}
         {usingTool && <>
