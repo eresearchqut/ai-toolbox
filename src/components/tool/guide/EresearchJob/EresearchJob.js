@@ -87,7 +87,7 @@ const getConfigGroups = (config, onConfigChange = () => {
                     }}
                     showAlert={config?.nodes > 1}
                     alertType="warning"
-                    alertMsg="Only use more than 1 nodes if you are using MPI type software."
+                    alertMsg="Only use more than 1 node if you are using MPI-type software."
                 />,
                 show: (config) => config?.service === "Lyra" && config?.jobType === "Batch",
                 selected: (config) => config?.nodes > 0,

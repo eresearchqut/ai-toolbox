@@ -75,7 +75,7 @@ export function ConfigGroup({title, description, type, selected, inputProps, sho
                     }
                 </Flex>
                 {
-                    showAlert === true &&
+                    showAlert &&
                     <Flex direction="row" align='center'>
                         <Box minWidth='120px'/>
                         <Square size="10px"></Square>
