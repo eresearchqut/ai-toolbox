@@ -1,8 +1,9 @@
-import {Alert, AlertIcon, Box, Flex, Heading, Square, Tooltip} from "@chakra-ui/react";
-import React from "react";
+import {Alert, AlertIcon, CloseButton, Box, Flex, Heading, Square, Tooltip} from "@chakra-ui/react";
+import React, {useState} from "react";
 import {CheckCircleIcon, WarningIcon} from "@chakra-ui/icons";
 import InputPicker from "../../input/InputPicker";
 import InputSlider from "../../input/InputSlider";
+import {auto} from "@popperjs/core";
 
 // import pbsnodeinfo from "./pbsnodeinfo.json";
 const pbsnodeinfo = {nodes: {}};
@@ -50,7 +51,12 @@ const lyraConfigOptions = (config) => {
     }
 }
 
-export function ConfigGroup({title, description, type, selected, inputProps, showAlert = false, alertType = "info", alertMsg = ""}) {
+export function ConfigGroup({title, description, type, selected, inputProps, showAlert = false, alertDismissible = true, alertType = "info", alertMsg = ""}) {
+    const [alertDismissed, setAlertDismissed] = useState(false);
+    const onClose = () => {
+        setAlertDismissed(true);
+    }
+
     return (
         <Box>
             <Flex direction="column" width="100%">
@@ -75,14 +81,25 @@ export function ConfigGroup({title, description, type, selected, inputProps, sho
                     }
                 </Flex>
                 {
-                    showAlert &&
+                    showAlert && !alertDismissed &&
                     <Flex direction="row" align='center'>
                         <Box minWidth='120px'/>
                         <Square size="10px"></Square>
                         <Box w='100%'>
-                            <Alert status={alertType}>
+                            <Alert display="flex" status={alertType}>
                                 <AlertIcon/>
                                 {alertMsg}
+                                {
+                                    alertDismissible &&
+                                    <CloseButton
+                                        size='sm'
+                                        style={{ marginLeft: 'auto' }}
+                                        position='relative'
+                                        right='0'
+                                        top='0'
+                                        onClick={onClose}
+                                    />
+                                }
                             </Alert>
                         </Box>
                     </Flex>
