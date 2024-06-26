@@ -1,8 +1,9 @@
-import {Box, Flex, Heading, Square, Tooltip} from "@chakra-ui/react";
-import React from "react";
+import {Alert, AlertIcon, CloseButton, Box, Flex, Heading, Square, Tooltip} from "@chakra-ui/react";
+import React, {useState} from "react";
 import {CheckCircleIcon, WarningIcon} from "@chakra-ui/icons";
 import InputPicker from "../../input/InputPicker";
 import InputSlider from "../../input/InputSlider";
+import {auto} from "@popperjs/core";
 
 // import pbsnodeinfo from "./pbsnodeinfo.json";
 const pbsnodeinfo = {nodes: {}};
@@ -50,27 +51,58 @@ const lyraConfigOptions = (config) => {
     }
 }
 
-export function ConfigGroup({title, description, type, selected, inputProps}) {
+export function ConfigGroup({title, description, type, selected, inputProps, showAlert = false, alertDismissible = true, alertType = "info", alertMsg = ""}) {
+    const [alertDismissed, setAlertDismissed] = useState(false);
+    const onClose = () => {
+        setAlertDismissed(true);
+    }
+
     return (
         <Box>
-            <Flex align='center'>
-                <Box w='120px'>
-                    {selected ?
-                        <CheckCircleIcon color="green.500"/> :
-                        <Tooltip label="Pick an option"><WarningIcon color="orange.500"/></Tooltip>
+            <Flex direction="column" width="100%">
+                <Flex direction="row" align='center'>
+                    <Box w='120px'>
+                        {selected ?
+                            <CheckCircleIcon color="green.500"/> :
+                            <Tooltip label="Pick an option"><WarningIcon color="orange.500"/></Tooltip>
+                        }
+                        <Tooltip label={description} placement="top" hasArrow>
+                            <Heading size='xs' mb="0" display="inline" ml="2">{title}</Heading>
+                        </Tooltip>
+                    </Box>
+                    <Square size="10px"/>
+                    {
+                        type === "picker" &&
+                        <InputPicker {...inputProps}/>
                     }
-                    <Tooltip label={description} placement="top" hasArrow>
-                        <Heading size='xs' mb="0" display="inline" ml="2">{title}</Heading>
-                    </Tooltip>
-                </Box>
-                <Square size="10px"/>
+                    {
+                        type === "slider" &&
+                        <InputSlider {...inputProps}/>
+                    }
+                </Flex>
                 {
-                    type === "picker" &&
-                    <InputPicker {...inputProps}/>
-                }
-                {
-                    type === "slider" &&
-                    <InputSlider {...inputProps}/>
+                    showAlert && !alertDismissed &&
+                    <Flex direction="row" align='center'>
+                        <Box minWidth='120px'/>
+                        <Square size="10px"></Square>
+                        <Box w='100%'>
+                            <Alert display="flex" status={alertType}>
+                                <AlertIcon/>
+                                {alertMsg}
+                                {
+                                    alertDismissible &&
+                                    <CloseButton
+                                        size='sm'
+                                        style={{ marginLeft: 'auto' }}
+                                        position='relative'
+                                        right='0'
+                                        top='0'
+                                        onClick={onClose}
+                                    />
+                                }
+                            </Alert>
+                        </Box>
+                    </Flex>
                 }
             </Flex>
         </Box>
