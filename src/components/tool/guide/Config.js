@@ -240,9 +240,9 @@ export const getRam = (config, onChange) => () => {
 export const getJobProfile = (config, onChange) => () => {
     let profiles = [];
     if (config?.hardware === "CPU") {
-        profiles = ["1 core, 8 GB", "4 cores, 32 GB", "8 cores, 64 GB", "16 cores, 128GB"];
+        profiles = ["1 core, 8 GB, 8 hours", "4 cores, 32 GB, 8 hours", "8 cores, 64 GB, 4 hours", "16 cores, 128GB, 4 hours"];
     } else if (config?.hardware === "GPU") {
-        profiles = ["4 cores, 32 GB, T4 GPU", "8 cores, 64 GB, T4 GPU"]
+        profiles = ["4 cores, 32 GB, T4 GPU, 4 hours", "8 cores, 64 GB, T4 GPU, 2 hours"]
     }
     return {
         element: (key, selected) => <ConfigGroup
