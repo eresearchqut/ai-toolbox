@@ -12,12 +12,12 @@ import React from "react";
 import InstructionInput from "../Instructions/InstructionInput";
 
 const TEXT_PATTERN = /^[a-z0-9]*$/;
-const JOB_NAME_PATTERN = /^(?=.*[a-z0-9-])[a-z0-9-]+$/;
+const JOB_NAME_PATTERN = /^(?=.*[a-z-])[a-z-]+$/;
 
 
 export function EresearchInstructions({config}) {
     const [username, setUsername] = useLocalStorageState("qutUsername", "qutusername");
-    const [batchJobName, setBatchJobName] = useLocalStorageState("qutBatchJobName", "batch-job-001");
+    const [batchJobName, setBatchJobName] = useLocalStorageState("qutBatchJobName", "batch-job-name");
 
     return <Box>
         {config.service === "Lyra" &&
@@ -34,17 +34,17 @@ export function EresearchInstructions({config}) {
                 {config.jobType === "Batch" &&
                     <InstructionInput
                         label="Batch Job Name"
-                        placeholder="batch-job-001"
+                        placeholder="batch-job-name"
                         value={batchJobName}
                         onChange={setBatchJobName}
                         pattern={JOB_NAME_PATTERN}
                         helperText="Please enter your batch job name so that it can be pre-populated in the commands below."
-                        errorText="Job name must only contain lowercase letters, numbers, '-' and must not be empty."
+                        errorText="Job name must only contain lowercase letters, '-', and must not be empty."
                     />
                 }
             </>
         }
-        {batchJobName !== '' &&
+        {batchJobName &&
             <ConnectInstructions
                 service={config.service}
                 username={username}
@@ -52,7 +52,7 @@ export function EresearchInstructions({config}) {
         }
         {config.service === "Lyra" &&
             <>
-            {batchJobName !== '' &&
+            {batchJobName &&
                 <LyraStartInstructions
                     jobType={config.jobType}
                     jobName={batchJobName}
@@ -80,7 +80,7 @@ export function EresearchInstructions({config}) {
             hardware={config.hardware}
             os={config.os}
         />}
-        {batchJobName !== '' && <TeardownInstructions
+        {batchJobName && <TeardownInstructions
             service={config.service}
             jobType={config.jobType}
             environment={config.environment}
