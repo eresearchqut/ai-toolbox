@@ -8,7 +8,7 @@ import {
 } from "../Instructions/StartInstructions";
 import {TeardownInstructions} from "../Instructions/TeardownInstructions";
 import useLocalStorageState from "../../../hooks/useLocalStorageState";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import InstructionInput from "../Instructions/InstructionInput";
 
 const TEXT_PATTERN = /^[a-z0-9]*$/;
