@@ -74,12 +74,17 @@ export function JupyterHubStartInstructions({jobProfile}) {
             Wait for the screen to change when the server is ready for use.
         </InstructionText>
         <InstructionText>
-            It generally takes around 2-3 minutes for the server to start up, but it can take up to 5-10 minutes,
-            depending on the CPU/GPU units you requested. If it is taking too long please{' '}
-            <Link color='teal.500' href='https://eresearchqut.atlassian.net/servicedesk/customer/portals' isExternal>
-                submit a ticket at portal.
+            It may take up to 10 minutes for your job to be queued and for the
+            server to start. If it fails to start, please raise an incident in the{" "}
+            <Link
+                color='teal.500'
+                href='https://eresearchqut.atlassian.net/servicedesk/customer/portals'
+                isExternal
+            >
+                eResearch help centre
                 <ExternalLinkIcon mx='2px' />
             </Link>
+            .
         </InstructionText>
     </>
 }
