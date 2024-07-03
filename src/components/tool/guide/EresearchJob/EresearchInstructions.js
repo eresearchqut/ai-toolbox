@@ -62,6 +62,7 @@ export function EresearchInstructions({config}) {
         />}
         <TeardownInstructions
             service={config.service}
+            jobType={config.jobType}
             environment={config.environment}
         />
     </Box>
