@@ -1,7 +1,8 @@
 import CopyBox from "../../../output/CopyBox";
-import {Code} from "@chakra-ui/react";
+import {Code, Link} from "@chakra-ui/react";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
+import {ExternalLinkIcon} from "@chakra-ui/icons";
 
 export function LyraStartInstructions({
                                           jobType,
@@ -59,8 +60,31 @@ export function JupyterHubStartInstructions({jobProfile}) {
             From the JupyterHub home page, click <Code>Start My Server</Code> to schedule a job.
         </InstructionText>
         <InstructionText>
-            From the list of available options, select the one containing <Code>Lyra - {jobProfile}</Code> and click the
-            start button.
+            From the list of available options, select the one containing <Code>Lyra - {jobProfile}</Code> and
+            click the <Code>Start</Code> button.
+        </InstructionText>
+        <InstructionHeading>Waiting Screen</InstructionHeading>
+        <InstructionText>
+            You will now enter a waiting screen and see the following message:
+            <br/>
+            <Code>Your server is starting up.</Code><br/>
+            <Code>You will be redirected automatically when it's ready for you</Code>
+        </InstructionText>
+        <InstructionText>
+            Wait for the screen to change when the server is ready for use.
+        </InstructionText>
+        <InstructionText>
+            It may take up to 10 minutes for your job to be queued and for the
+            server to start. If it fails to start, please raise an incident in the{" "}
+            <Link
+                color='teal.500'
+                href='https://eresearchqut.atlassian.net/servicedesk/customer/portals'
+                isExternal
+            >
+                eResearch help centre
+                <ExternalLinkIcon mx='2px' />
+            </Link>
+            .
         </InstructionText>
     </>
 }
