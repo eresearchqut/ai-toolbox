@@ -1,4 +1,4 @@
-import {toolboxTheme} from "../src/theme/Root";
+import { toolboxTheme } from "../src/theme/Root";
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
@@ -12,7 +12,7 @@ const preview = {
     },
     chakra: {
       theme: toolboxTheme,
-    }
+    },
   },
 };
 

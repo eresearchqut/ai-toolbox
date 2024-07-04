@@ -1,6 +1,7 @@
-import globals from "globals";
 import pluginJs from "@eslint/js";
+
 import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
+import globals from "globals";
 
 export default [
   { ignores: [".docusaurus/", "build/", "docs/", "blog/"] },

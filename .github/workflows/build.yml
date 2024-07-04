@@ -24,5 +24,3 @@ jobs:
         run: yarn build
       - name: Test build storybook
         run: yarn build-storybook
-      - name: Build storybook
-        run: yarn build-storybook
