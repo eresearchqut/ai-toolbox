@@ -12,12 +12,12 @@ import React from "react";
 import InstructionInput from "../Instructions/InstructionInput";
 
 const TEXT_PATTERN = /^[a-z0-9]*$/;
-const JOB_NAME_PATTERN = /^(?=.*[a-z-])[a-z-]+$/;
+const JOB_NAME_PATTERN = /^(?=.*[A-Za-z0-9._+-])[A-Za-z0-9._+-]+$/;
 
 
 export function EresearchInstructions({config}) {
     const [username, setUsername] = useLocalStorageState("qutUsername", "qutusername");
-    const [batchJobName, setBatchJobName] = useLocalStorageState("qutBatchJobName", "batch-job-name");
+    const [batchJobName, setBatchJobName] = useLocalStorageState("qutBatchJobName", "Batch-job-name");
 
     return <Box>
         {config.service === "Lyra" &&
@@ -34,12 +34,12 @@ export function EresearchInstructions({config}) {
                 {config.jobType === "Batch" &&
                     <InstructionInput
                         label="Batch Job Name"
-                        placeholder="batch-job-name"
+                        placeholder="Batch-job-name"
                         value={batchJobName}
                         onChange={setBatchJobName}
                         pattern={JOB_NAME_PATTERN}
                         helperText="Please enter your batch job name so that it can be pre-populated in the commands below."
-                        errorText="Job name must only contain lowercase letters, '-', and must not be empty."
+                        errorText="Job name must only contain alphanumerics or '-', '_', '+', '.' and must not be empty."
                     />
                 }
             </>
