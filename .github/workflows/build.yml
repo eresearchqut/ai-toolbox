@@ -1,11 +1,12 @@
-name: Test deployment
+name: Build
 on:
-  pull_request:
+  push:
     branches:
       - main
+  pull_request:
 jobs:
-  test-deploy:
-    name: Test deployment
+  build:
+    name: Build, lint, and check formatting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,7 +16,11 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Test build website
+      - name: Lint
+        run: yarn lint
+      - name: Check formatting
+        run: yarn format:check
+      - name: Build website
         run: yarn build
       - name: Test build storybook
         run: yarn build-storybook

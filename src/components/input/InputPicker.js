@@ -1,38 +1,42 @@
-import {Button, Flex, Tooltip} from "@chakra-ui/react";
+import { Button, Flex, Tooltip } from "@chakra-ui/react";
 
-import {useGuideContext} from "../tool/guide/Guide";
+import { useGuideContext } from "../tool/guide/Guide";
 
-export default function InputPicker({choices, value, onChange = () => {}}) {
-    const {colorScheme} = useGuideContext();
+export default function InputPicker({ choices, value, onChange = () => {} }) {
+  const { colorScheme } = useGuideContext();
 
-    return (
-        <Flex flexGrow="1">
-            {
-                choices.map((choice) => {
-                    const {label, description} = Array.isArray(choice) ?
-                        {label: choice[0], description: choice[1]} :
-                        {label: choice, description: ""}
-                    const selected = label === value;
+  return (
+    <Flex flexGrow="1">
+      {choices.map((choice) => {
+        const { label, description } = Array.isArray(choice)
+          ? { label: choice[0], description: choice[1] }
+          : { label: choice, description: "" };
+        const selected = label === value;
 
-                    return (
-                        <Tooltip key={label} label={description} flexGrow="1" placement="top" hasArrow>
-                            <Button
-                                flex='1'
-                                variant={selected ? 'solid' : 'outline'}
-                                size='sm'
-                                borderRadius='0'
-                                m='0'
-                                p='0'
-                                onClick={() => onChange(label)}
-                                colorScheme={selected ? colorScheme : 'gray'}
-                                // textShadow={selected ? '1px 1px 2px white' : 'none'}
-                            >
-                                {label}
-                            </Button>
-                        </Tooltip>
-                    )
-                })
-            }
-        </Flex>
-    )
+        return (
+          <Tooltip
+            key={label}
+            label={description}
+            flexGrow="1"
+            placement="top"
+            hasArrow
+          >
+            <Button
+              flex="1"
+              variant={selected ? "solid" : "outline"}
+              size="sm"
+              borderRadius="0"
+              m="0"
+              p="0"
+              onClick={() => onChange(label)}
+              colorScheme={selected ? colorScheme : "gray"}
+              // textShadow={selected ? '1px 1px 2px white' : 'none'}
+            >
+              {label}
+            </Button>
+          </Tooltip>
+        );
+      })}
+    </Flex>
+  );
 }
