@@ -12,31 +12,50 @@ import React from "react";
 import InstructionInput from "../Instructions/InstructionInput";
 
 const TEXT_PATTERN = /^[a-z0-9]*$/;
+const JOB_NAME_PATTERN = /^(?=.*[A-Za-z0-9._+-])[A-Za-z0-9._+-]+$/;
 
 
 export function EresearchInstructions({config}) {
     const [username, setUsername] = useLocalStorageState("qutUsername", "qutusername");
+    const [batchJobName, setBatchJobName] = useLocalStorageState("qutBatchJobName", "Batch-job-name");
 
     return <Box>
         {config.service === "Lyra" &&
-            <InstructionInput
-                label="QUT Username"
-                placeholder="username"
-                value={username}
-                onChange={setUsername}
-                pattern={TEXT_PATTERN}
-                helperText="Optionally enter your QUT username so that it can be pre-populated in the commands below."
-                errorText="Username must only contain lowercase letters and numbers"
+            <>
+                <InstructionInput
+                    label="QUT Username"
+                    placeholder="username"
+                    value={username}
+                    onChange={setUsername}
+                    pattern={TEXT_PATTERN}
+                    helperText="Optionally enter your QUT username so that it can be pre-populated in the commands below."
+                    errorText="Username must only contain lowercase letters and numbers"
+                />
+                {config.jobType === "Batch" &&
+                    <InstructionInput
+                        label="Batch Job Name"
+                        placeholder="Batch-job-name"
+                        value={batchJobName}
+                        onChange={setBatchJobName}
+                        pattern={JOB_NAME_PATTERN}
+                        helperText="Please enter your batch job name so that it can be pre-populated in the commands below."
+                        errorText="Job name must only contain alphanumerics or '-', '_', '+', '.' and must not be empty."
+                    />
+                }
+            </>
+        }
+        {batchJobName &&
+            <ConnectInstructions
+                service={config.service}
+                username={username}
             />
         }
-        <ConnectInstructions
-            service={config.service}
-            username={username}
-        />
         {config.service === "Lyra" &&
             <>
+            {batchJobName &&
                 <LyraStartInstructions
                     jobType={config.jobType}
+                    jobName={batchJobName}
                     hardware={config.hardware}
                     cpuVendor={config.cpuVendor}
                     cpuModel={config.cpuModel}
@@ -47,6 +66,7 @@ export function EresearchInstructions({config}) {
                     gpuModules={config.gpuModules}
                     nodes={config.nodes}
                 />
+            }
             </>
         }
         {config.service === "JupyterHub" && <JupyterHubStartInstructions
@@ -60,10 +80,10 @@ export function EresearchInstructions({config}) {
             hardware={config.hardware}
             os={config.os}
         />}
-        <TeardownInstructions
+        {batchJobName && <TeardownInstructions
             service={config.service}
             jobType={config.jobType}
             environment={config.environment}
-        />
+        />}
     </Box>
 }
