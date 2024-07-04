@@ -15,7 +15,13 @@ import { useState } from "react";
 import InputPicker from "../../input/InputPicker";
 import InputSlider from "../../input/InputSlider";
 
-export const DEFAULT_CONFIG = { nodes: 1, cpuCores: 4, ram: 16, gpuModules: 1 };
+export const DEFAULT_CONFIG = {
+  nodes: 1,
+  cpuCores: 4,
+  ram: 16,
+  gpuModules: 1,
+  wallTime: { hour: 1, minute: 0 },
+};
 
 export function ConfigGroup({
   title,

@@ -9,6 +9,7 @@ export function LyraStartInstructions({
   jobType,
   jobName = "",
   nodes,
+  wallTime,
   hardware,
   cpuVendor,
   cpuModel,
@@ -36,6 +37,16 @@ export function LyraStartInstructions({
     jobType !== "Interactive" && jobName !== "" ? ' -N "' + jobName + '"' : "",
   ];
 
+  const wallTimeStr =
+    jobType === "Interactive"
+      ? "01:00:00"
+      : (wallTime?.hour < 10 ? "0" : "") +
+        wallTime?.hour +
+        ":" +
+        (wallTime?.minute < 10 ? "0" : "") +
+        wallTime?.minute +
+        ":00";
+
   return (
     <>
       <InstructionHeading>Schedule a job</InstructionHeading>
@@ -44,7 +55,7 @@ export function LyraStartInstructions({
         {jobType.toLowerCase()} job:
       </InstructionText>
       <CopyBox>
-        {`qsub${jobParameters.join("")} -l walltime=1:00:00 -l ${resources.join(
+        {`qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(
           ":",
         )}`}
       </CopyBox>
