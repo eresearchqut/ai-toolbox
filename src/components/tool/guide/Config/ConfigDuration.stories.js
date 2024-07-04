@@ -1,7 +1,5 @@
 import { useArgs } from "@storybook/preview-api";
 
-import { useState } from "react";
-
 import ConfigDuration from "./ConfigDuration";
 
 export default {

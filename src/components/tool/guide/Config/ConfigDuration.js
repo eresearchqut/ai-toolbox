@@ -10,10 +10,9 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import InputNumberStepper from "../../../input/InputNumberStepper";
-import InputSlider from "../../../input/InputSlider";
 
 export default function ConfigDuration({
   title,
