@@ -129,6 +129,9 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
               value: config?.hardware,
               onChange: onChange("hardware"),
             }}
+            showAlert={config?.hardware === "IPU"}
+            alertType="warning"
+            alertMsg="IPUs are not available currently. Please contact eResearch if interested."
           />
         ),
         show: (config) => config?.service,
