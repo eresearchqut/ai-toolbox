@@ -1,4 +1,5 @@
-import { Heading } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { Heading, Link, Text } from "@chakra-ui/react";
 
 import { useState } from "react";
 
@@ -116,6 +117,23 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
           ["GPU", "Accelerated GPU"],
         ];
       }
+      const customAlertMsg = () => {
+        return (
+          <Text mb={0}>
+            IPUs are currently unavailable. Please
+            <Link
+              color="teal.500"
+              href="https://eresearchqut.atlassian.net/servicedesk/customer/portals"
+              isExternal
+            >
+              {" "}
+              contact eResearch if interested
+              <ExternalLinkIcon mx="2px" />
+            </Link>
+            .
+          </Text>
+        );
+      };
       return {
         element: (key, selected) => (
           <ConfigGroup
@@ -131,7 +149,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             }}
             showAlert={config?.hardware === "IPU"}
             alertType="warning"
-            alertMsg="IPUs are not available currently. Please contact eResearch if interested."
+            alertMsg={customAlertMsg}
           />
         ),
         show: (config) => config?.service,
