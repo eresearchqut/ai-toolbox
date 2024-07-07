@@ -26,7 +26,7 @@ export function ConfigGroup({
   showAlert = false,
   alertDismissible = true,
   alertType = "info",
-  alertMsg = "",
+  alertMsg = null,
 }) {
   const [alertDismissed, setAlertDismissed] = useState(false);
   const onClose = () => {
@@ -62,7 +62,9 @@ export function ConfigGroup({
             <Box w="100%">
               <Alert display="flex" status={alertType}>
                 <AlertIcon />
-                {alertMsg}
+                {alertMsg && typeof alertMsg === "function"
+                  ? alertMsg()
+                  : `${alertMsg}`}
                 {alertDismissible && (
                   <CloseButton
                     size="sm"
