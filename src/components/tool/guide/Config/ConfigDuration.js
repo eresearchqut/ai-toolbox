@@ -50,8 +50,9 @@ export default function ConfigDuration({
           </Tooltip>
         </Box>
         <Square size="10px" />
-        <Flex direction="row" style={{ minWidth: "calc(100% - 130px)" }}>
+        <Flex>
           <InputNumberStepper
+            w="100px"
             label={value?.hour > 1 ? "hours" : "hour"}
             value={value?.hour}
             onChange={(newValue) => {
@@ -63,6 +64,7 @@ export default function ConfigDuration({
             {...inputPropsHour}
           />
           <InputNumberStepper
+            w="100px"
             label={value?.minute > 1 ? "minutes" : "minute"}
             value={value?.minute}
             onChange={(newValue) => {
