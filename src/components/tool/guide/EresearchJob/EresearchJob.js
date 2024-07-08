@@ -87,6 +87,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             type="slider"
             selected={selected}
             inputProps={{
+              label: config?.nodes > 1 ? "nodes" : "node",
               value: config?.nodes,
               min: 1,
               max: 100,
