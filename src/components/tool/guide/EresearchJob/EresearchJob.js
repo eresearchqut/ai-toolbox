@@ -20,6 +20,7 @@ import {
   isLyra,
   isValidChoice,
 } from "../Config";
+import ConfigDuration from "../Config/ConfigDuration";
 import { Guide, GuideHeader } from "../Guide";
 import { EresearchInstructions } from "./EresearchInstructions";
 
@@ -102,6 +103,33 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
         show: (config) =>
           config?.service === "Lyra" && config?.jobType === "Batch",
         selected: (config) => config?.nodes > 0,
+      };
+    },
+    wallTime: () => {
+      return {
+        element: (key, selected) => (
+          <ConfigDuration
+            key={key}
+            title="Walltime"
+            description="The estimated total time for the job."
+            selected={selected}
+            onChange={onChange("wallTime")}
+            value={config?.wallTime}
+            inputPropsHour={{
+              min: 0,
+              step: 1,
+            }}
+            inputPropsMinute={{
+              min: config?.wallTime?.hour < 1 ? 1 : 0,
+              max: 59,
+              step: 1,
+            }}
+          />
+        ),
+        show: (config) =>
+          config?.service === "Lyra" && config?.jobType === "Batch",
+        selected: (config) =>
+          config?.wallTime.hour > 0 || config?.wallTime.minute > 0,
       };
     },
     hardware: () => {
