@@ -20,7 +20,9 @@ export default function CopyBox({ children, editable = false }) {
 
   const Wrapper = editable ? Editable : Box;
 
-  const text = Array.isArray(children) ? children.join("") : children;
+  const [text, setText] = useState(
+    Array.isArray(children) ? children.join("") : children,
+  );
   return (
     <Wrapper
       as="pre"
@@ -41,7 +43,7 @@ export default function CopyBox({ children, editable = false }) {
       {editable ? (
         <>
           <EditablePreview />
-          <EditableTextarea />
+          <EditableTextarea onChange={(e) => setText(e.target.value)} />
         </>
       ) : (
         text
