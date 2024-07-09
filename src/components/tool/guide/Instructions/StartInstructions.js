@@ -1,7 +1,7 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Box, Checkbox, Code, Flex, Input, Link } from "@chakra-ui/react";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import CopyBox from "../../../output/CopyBox";
 import InstructionHeading from "./components/InstructionHeading";
