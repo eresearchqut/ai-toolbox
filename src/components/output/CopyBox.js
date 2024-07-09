@@ -9,9 +9,13 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function CopyBox({ children, editable = false }) {
+export default function CopyBox({
+  children,
+  editable = false,
+  defaultRows = 10,
+}) {
   const [hover, setHover] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -23,6 +27,11 @@ export default function CopyBox({ children, editable = false }) {
   const [text, setText] = useState(
     Array.isArray(children) ? children.join("") : children,
   );
+
+  useEffect(() => {
+    setText(Array.isArray(children) ? children.join("") : children);
+  }, [children]);
+
   return (
     <Wrapper
       as="pre"
@@ -39,11 +48,13 @@ export default function CopyBox({ children, editable = false }) {
       onMouseOut={() => setHover(false)}
       position="relative"
       defaultValue={text}
+      key={text}
+      onSubmit={(e) => setText(e)}
     >
       {editable ? (
         <>
           <EditablePreview />
-          <EditableTextarea onChange={(e) => setText(e.target.value)} />
+          <EditableTextarea rows={defaultRows} />
         </>
       ) : (
         text

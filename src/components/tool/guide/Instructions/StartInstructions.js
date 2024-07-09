@@ -1,5 +1,7 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Code, Link } from "@chakra-ui/react";
+import { Box, Checkbox, Code, Flex, Input, Link } from "@chakra-ui/react";
+
+import { useEffect, useState } from "react";
 
 import CopyBox from "../../../output/CopyBox";
 import InstructionHeading from "./components/InstructionHeading";
@@ -53,6 +55,13 @@ export function LyraStartInstructions({
     "echo \"Running job '$PBS_JOBNAME' ($PBS_JOBID) in the following directory: $PWD\"",
   ];
 
+  const [hasScript, setHasScript] = useState(false);
+  const [scriptPath, setScriptPath] = useState("");
+
+  const cmdText = `qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(
+    ":",
+  )}${hasScript ? " " + scriptPath : ""}`;
+
   return (
     <>
       {jobType === "Batch" && (
@@ -101,11 +110,25 @@ export function LyraStartInstructions({
         In the ssh session, run the following command to schedule the{" "}
         {jobType.toLowerCase()} job:
       </InstructionText>
-      <CopyBox>
-        {`qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(
-          ":",
-        )}`}
-      </CopyBox>
+      <Flex>
+        <Box minWidth="20%">
+          <Checkbox
+            isChecked={hasScript}
+            onChange={(e) => setHasScript(e.target.checked)}
+          >
+            I have a script to specify
+          </Checkbox>
+        </Box>
+        {hasScript && (
+          <Input
+            size="xs"
+            placeholder={"full/path/to/your_script.sh"}
+            value={scriptPath}
+            onChange={(e) => setScriptPath(e.target.value)}
+          ></Input>
+        )}
+      </Flex>
+      <CopyBox>{cmdText}</CopyBox>
       {jobType === "Interactive" && (
         <>
           <InstructionText>
