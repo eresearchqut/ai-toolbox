@@ -79,6 +79,22 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       };
     },
     nodes: () => {
+      const mpiAlertMsg = () => {
+        return (
+          <Text mb={0}>
+            Only use more than 1 node if you are using{" "}
+            <Link
+              color="teal.500"
+              href="https://hpc-wiki.info/hpc/MPI"
+              isExternal
+            >
+              MPI
+              <ExternalLinkIcon mx="2px" />
+            </Link>
+            -type software.
+          </Text>
+        );
+      };
       return {
         element: (key, selected) => (
           <ConfigGroup
@@ -97,7 +113,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             }}
             showAlert={config?.nodes > 1}
             alertType="warning"
-            alertMsg="Only use more than 1 node if you are using MPI-type software."
+            alertMsg={mpiAlertMsg}
           />
         ),
         show: (config) =>
