@@ -42,8 +42,15 @@ function LyraInstructions({ username }) {
             </Text>
           </Alert>
           <InstructionText>
-            In Windows Terminal, Powershell, or cmd.exe, run the following
-            command to connect to Lyra:
+            In{" "}
+            <Link href="https://aka.ms/terminal" isExternal color="blue.500">
+              Windows Terminal
+            </Link>
+            , Powershell,{" "}
+            <Link href="https://www.putty.org/" isExternal color="blue.500">
+              PuTTY
+            </Link>
+            , or cmd.exe, run the following command to connect to Lyra:
           </InstructionText>
         </Box>
         <Box>
