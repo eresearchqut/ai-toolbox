@@ -1,5 +1,7 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Code, Link } from "@chakra-ui/react";
+import { Box, Checkbox, Code, Flex, Input, Link } from "@chakra-ui/react";
+
+import { useState } from "react";
 
 import CopyBox from "../../../output/CopyBox";
 import InstructionHeading from "./components/InstructionHeading";
@@ -47,18 +49,86 @@ export function LyraStartInstructions({
         wallTime?.minute +
         ":00";
 
+  const batchJobScript = [
+    "#!/bin/bash",
+    "",
+    "echo \"Running job '$PBS_JOBNAME' ($PBS_JOBID) in the following directory: $PWD\"",
+  ];
+
+  const [hasScript, setHasScript] = useState(false);
+  const [scriptPath, setScriptPath] = useState("");
+
+  const cmdText = `qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(
+    ":",
+  )}${hasScript ? " " + scriptPath : ""}`;
+
   return (
     <>
+      {jobType === "Batch" && (
+        <>
+          <InstructionHeading>Creating a batch job script</InstructionHeading>
+          <InstructionText>
+            Before scheduling a batch job, you need to create a job script first
+            (Click to edit):
+            <CopyBox editable={true}>{batchJobScript.join("\n")}</CopyBox>
+          </InstructionText>
+          <InstructionText>
+            You can either edit and copy the above content, use{" "}
+            <Code>qsub</Code> command submitting a job, paste it to standard
+            input to run it.
+          </InstructionText>
+          <InstructionText>
+            (Note: When submitting a job without specifying your script, you
+            will see{" "}
+            <Code>
+              Job script will be read from standard input. Submit with CTRL+D.
+            </Code>{" "}
+            which indicates standard input mode.)
+          </InstructionText>
+          <InstructionText>
+            Alternatively, save your script as a file, and use it as a
+            command-line argument.
+          </InstructionText>
+          <InstructionText>
+            Pick your favourite text editor (e.g.: <Code>nano</Code>,{" "}
+            <Code>vim</Code> or <Code>gedit</Code>). If you do not know how to
+            use text editors, please{" "}
+            <Link
+              color="teal.500"
+              href="https://qutvirtual4.qut.edu.au/group/staff/research/conducting/facilities/advanced-research-computing-storage/supercomputing/using-linux"
+              isExternal
+            >
+              refer here
+              <ExternalLinkIcon mx="2px" />
+            </Link>
+            .
+          </InstructionText>
+        </>
+      )}
       <InstructionHeading>Schedule a job</InstructionHeading>
       <InstructionText>
         In the ssh session, run the following command to schedule the{" "}
         {jobType.toLowerCase()} job:
       </InstructionText>
-      <CopyBox>
-        {`qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(
-          ":",
-        )}`}
-      </CopyBox>
+      <Flex>
+        <Box minWidth="20%">
+          <Checkbox
+            isChecked={hasScript}
+            onChange={(e) => setHasScript(e.target.checked)}
+          >
+            I have a script to specify
+          </Checkbox>
+        </Box>
+        {hasScript && (
+          <Input
+            size="xs"
+            placeholder={"full/path/to/your_script.sh"}
+            value={scriptPath}
+            onChange={(e) => setScriptPath(e.target.value)}
+          ></Input>
+        )}
+      </Flex>
+      <CopyBox>{cmdText}</CopyBox>
       {jobType === "Interactive" && (
         <>
           <InstructionText>

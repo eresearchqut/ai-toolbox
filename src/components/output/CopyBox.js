@@ -1,18 +1,39 @@
 import { CopyIcon } from "@chakra-ui/icons";
-import { Box, Button, Tooltip, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Tooltip,
+  Editable,
+  EditableTextarea,
+  EditablePreview,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function CopyBox({ children }) {
+export default function CopyBox({
+  children,
+  editable = false,
+  defaultRows = 10,
+}) {
   const [hover, setHover] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const borderColor = useColorModeValue("gray.200", "gray.500");
   const bg = useColorModeValue("gray.50", "gray.800");
 
-  const text = Array.isArray(children) ? children.join("") : children;
+  const Wrapper = editable ? Editable : Box;
+
+  const [text, setText] = useState(
+    Array.isArray(children) ? children.join("") : children,
+  );
+
+  useEffect(() => {
+    setText(Array.isArray(children) ? children.join("") : children);
+  }, [children]);
+
   return (
-    <Box
+    <Wrapper
       as="pre"
       p="4"
       rounded="md"
@@ -26,8 +47,18 @@ export default function CopyBox({ children }) {
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
       position="relative"
+      defaultValue={text}
+      key={text}
+      onSubmit={(e) => setText(e)}
     >
-      {text}
+      {editable ? (
+        <>
+          <EditablePreview />
+          <EditableTextarea rows={defaultRows} />
+        </>
+      ) : (
+        text
+      )}
       {hover && (
         <Tooltip
           label={copied ? "Copied!" : "Copy to clipboard"}
@@ -50,6 +81,6 @@ export default function CopyBox({ children }) {
           </Button>
         </Tooltip>
       )}
-    </Box>
+    </Wrapper>
   );
 }
