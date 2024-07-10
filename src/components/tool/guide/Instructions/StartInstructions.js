@@ -33,7 +33,7 @@ export function LyraStartInstructions({
   }
 
   const jobParameters = [
-    jobType === "Interactive" ? " -I" : "",
+    jobType === "Interactive" ? " -I -S /bin/bash" : "",
     jobType !== "Interactive" && jobName !== "" ? ' -N "' + jobName + '"' : "",
   ];
 
