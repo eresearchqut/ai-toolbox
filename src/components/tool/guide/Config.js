@@ -21,6 +21,8 @@ export const DEFAULT_CONFIG = {
   ram: 16,
   gpuModules: 1,
   wallTime: { hour: 1, minute: 0 },
+  isArrayJob: "No",
+  arrayJobConfig: { firstIndex: 1, upperBound: 1, stepper: 1 },
 };
 
 export function ConfigGroup({

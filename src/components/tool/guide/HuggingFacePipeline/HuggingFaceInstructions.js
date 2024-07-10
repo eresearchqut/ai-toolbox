@@ -58,6 +58,8 @@ export function HuggingFaceInstructions({ task, model, config, port }) {
             gpuModel={config.gpuModel}
             gpuModules={config.gpuModules}
             wallTime={config.wallTime}
+            isArrayJob={config.isArrayJob}
+            arrayJobConfig={config.arrayJobConfig}
           />
           <InstructionInput
             label="Node name"

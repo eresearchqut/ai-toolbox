@@ -21,6 +21,7 @@ import {
   isValidChoice,
 } from "../Config";
 import ConfigDuration from "../Config/ConfigDuration";
+import ConfigMultipleNumbers from "../Config/ConfigMultipleNumbers";
 import { Guide, GuideHeader } from "../Guide";
 import { EresearchInstructions } from "./EresearchInstructions";
 
@@ -119,6 +120,60 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
         show: (config) =>
           config?.service === "Lyra" && config?.jobType === "Batch",
         selected: (config) => config?.nodes > 0,
+      };
+    },
+    isArrayJob: () => {
+      const arrayJobEnabled = [
+        ["Yes", "Sets job's array attribute to True"],
+        ["No", "Sets job's array attribute to False"],
+      ];
+      return {
+        element: (key, selected) => (
+          <ConfigGroup
+            key={key}
+            title="Array Job"
+            description="Make this job an array job"
+            type="picker"
+            selected={selected}
+            inputProps={{
+              choices: arrayJobEnabled,
+              value: config?.isArrayJob,
+              onChange: onChange("isArrayJob"),
+            }}
+            showAlert={config?.isArrayJob === "Yes"}
+            alertType="info"
+            alertMsg="Please make sure you understand what is an array job."
+          />
+        ),
+        show: (config) =>
+          config?.service === "Lyra" && config?.jobType === "Batch",
+        selected: (config) =>
+          isValidChoice(arrayJobEnabled, config?.isArrayJob),
+      };
+    },
+    arrayJobConfig: () => {
+      return {
+        element: (key, selected) => (
+          <ConfigMultipleNumbers
+            key={key}
+            title="Array Job Config"
+            description="Array job Settings"
+            selected={selected}
+            value={config?.arrayJobConfig}
+            onChange={onChange("arrayJobConfig")}
+            inputProps={{
+              min: 1,
+            }}
+          />
+        ),
+        show: (config) => config?.isArrayJob === "Yes",
+        selected: (config) =>
+          config?.arrayJobConfig.stepper >= 1 &&
+          config?.arrayJobConfig.upperBound >=
+            config?.arrayJobConfig.firstIndex &&
+          config?.arrayJobConfig.upperBound > config?.arrayJobConfig.stepper &&
+          config?.arrayJobConfig.upperBound >=
+            config?.arrayJobConfig.firstIndex + config?.arrayJobConfig.stepper,
       };
     },
     wallTime: () => {
