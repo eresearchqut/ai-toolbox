@@ -12,6 +12,7 @@ import { useGuideContext } from "../tool/guide/Guide";
 
 export default function InputNumberStepper({
   value = 1,
+  allowMouseWheel = true,
   label,
   onChange = () => {},
   ...props
@@ -23,6 +24,7 @@ export default function InputNumberStepper({
       <InputGroup>
         <NumberInput
           defaultValue={value}
+          allowMouseWheel={allowMouseWheel}
           onChange={onChange}
           colorScheme={colorScheme}
           {...props}
