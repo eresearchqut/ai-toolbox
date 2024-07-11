@@ -54,7 +54,7 @@ export default function ConfigMultipleNumbers({
         </Box>
         <Square size="10px" />
         <Flex>
-          {Object.keys(value).map((key) => (
+          {Object.keys(value).map((key, index) => (
             <InputNumberStepper
               key={key}
               w="100px"
@@ -66,7 +66,7 @@ export default function ConfigMultipleNumbers({
                   [key]: newValue,
                 });
               }}
-              {...inputProps}
+              {...(Array.isArray(inputProps) ? inputProps[index] : inputProps)}
             />
           ))}
         </Flex>
