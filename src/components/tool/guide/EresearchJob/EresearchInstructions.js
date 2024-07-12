@@ -70,7 +70,7 @@ export function EresearchInstructions({ config }) {
               nodes={config.nodes}
               wallTime={config.wallTime}
               isArrayJob={config.isArrayJob}
-              arrayJobConfig={config.arrayJobConfig}
+              jobInstances={config.jobInstances}
             />
           )}
         </>

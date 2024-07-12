@@ -21,7 +21,7 @@ export function LyraStartInstructions({
   gpuModel,
   gpuModules,
   isArrayJob,
-  arrayJobConfig,
+  jobInstances,
 }) {
   const resources = [
     `select=${jobType === "Interactive" ? 1 : nodes}`,
@@ -39,11 +39,11 @@ export function LyraStartInstructions({
   const jobParameters = [
     jobType === "Interactive" ? " -I -S /bin/bash" : "",
     jobType !== "Interactive" && jobName !== "" ? ' -N "' + jobName + '"' : "",
-    jobType === "Batch" && isArrayJob === "Yes"
-      ? " -J " + arrayJobConfig?.firstIndex + "-" + arrayJobConfig?.upperBound
+    jobType === "Batch" && isArrayJob === "Array"
+      ? " -J " + jobInstances?.firstIndex + "-" + jobInstances?.upperBound
       : "",
-    jobType === "Batch" && isArrayJob === "Yes" && arrayJobConfig?.stepper > 1
-      ? ":" + arrayJobConfig?.stepper
+    jobType === "Batch" && isArrayJob === "Array" && jobInstances?.step > 1
+      ? ":" + jobInstances?.step
       : "",
   ];
 

@@ -124,14 +124,14 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
     },
     isArrayJob: () => {
       const arrayJobEnabled = [
-        ["Yes", "Sets job's array attribute to True"],
-        ["No", "Sets job's array attribute to False"],
+        ["Standalone", "Sets job's array attribute to False"],
+        ["Array", "Sets job's array attribute to True"],
       ];
       return {
         element: (key, selected) => (
           <ConfigGroup
             key={key}
-            title="Array Job"
+            title="Job Instances"
             description="Make this job an array job"
             type="picker"
             selected={selected}
@@ -140,9 +140,6 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
               value: config?.isArrayJob,
               onChange: onChange("isArrayJob"),
             }}
-            showAlert={config?.isArrayJob === "Yes"}
-            alertType="info"
-            alertMsg="Please make sure you understand what is an array job."
           />
         ),
         show: (config) =>
@@ -151,29 +148,31 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
           isValidChoice(arrayJobEnabled, config?.isArrayJob),
       };
     },
-    arrayJobConfig: () => {
+    jobInstances: () => {
       return {
         element: (key, selected) => (
           <ConfigMultipleNumbers
             key={key}
-            title="Array Job Config"
-            description="Array job Settings"
+            title="Instances Config"
+            description="Run a single instance, or many instances of the job."
             selected={selected}
-            value={config?.arrayJobConfig}
-            onChange={onChange("arrayJobConfig")}
+            value={config?.jobInstances}
+            onChange={onChange("jobInstances")}
             inputProps={{
-              min: 1,
+              min: 0,
             }}
           />
         ),
-        show: (config) => config?.isArrayJob === "Yes",
+        show: (config) =>
+          config?.service === "Lyra" &&
+          config?.jobType === "Batch" &&
+          config?.isArrayJob === "Array",
         selected: (config) =>
-          config?.arrayJobConfig.stepper >= 1 &&
-          config?.arrayJobConfig.upperBound >=
-            config?.arrayJobConfig.firstIndex &&
-          config?.arrayJobConfig.upperBound > config?.arrayJobConfig.stepper &&
-          config?.arrayJobConfig.upperBound >=
-            config?.arrayJobConfig.firstIndex + config?.arrayJobConfig.stepper,
+          config?.jobInstances.stepper >= 1 &&
+          config?.jobInstances.upperBound >= config?.jobInstances.firstIndex &&
+          config?.jobInstances.upperBound > config?.jobInstances.stepper &&
+          config?.jobInstances.upperBound >=
+            config?.jobInstances.firstIndex + config?.jobInstances.stepper,
       };
     },
     wallTime: () => {
