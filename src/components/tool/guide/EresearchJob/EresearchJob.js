@@ -132,7 +132,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
           <ConfigGroup
             key={key}
             title="Job Instances"
-            description="Make this job an array job"
+            description="Run a single instance, or many instances of the job."
             type="picker"
             selected={selected}
             inputProps={{
@@ -153,7 +153,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
           <ConfigMultipleNumbers
             key={key}
             title="Instances Config"
-            description="Run a single instance, or many instances of the job."
+            description="Array job settings"
             selected={selected}
             value={config?.jobInstances}
             onChange={onChange("jobInstances")}
