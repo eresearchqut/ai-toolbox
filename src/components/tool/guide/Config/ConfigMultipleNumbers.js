@@ -63,7 +63,7 @@ export default function ConfigMultipleNumbers({
               onChange={(newValue) => {
                 onChange({
                   ...value,
-                  [key]: newValue,
+                  [key]: parseInt(newValue),
                 });
               }}
               {...(Array.isArray(inputProps) ? inputProps[index] : inputProps)}

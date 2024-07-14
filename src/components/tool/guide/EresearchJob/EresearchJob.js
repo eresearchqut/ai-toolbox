@@ -123,9 +123,9 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       };
     },
     isArrayJob: () => {
-      const arrayJobEnabled = [
-        ["Standalone", "Sets job's array attribute to False"],
-        ["Array", "Sets job's array attribute to True"],
+      const jobInstances = [
+        ["Standalone", "Run a single instance of the job"],
+        ["Array", "Run many instances of the job in parallel"],
       ];
       return {
         element: (key, selected) => (
@@ -136,7 +136,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             type="picker"
             selected={selected}
             inputProps={{
-              choices: arrayJobEnabled,
+              choices: jobInstances,
               value: config?.isArrayJob,
               onChange: onChange("isArrayJob"),
             }}
@@ -144,8 +144,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
         ),
         show: (config) =>
           config?.service === "Lyra" && config?.jobType === "Batch",
-        selected: (config) =>
-          isValidChoice(arrayJobEnabled, config?.isArrayJob),
+        selected: (config) => isValidChoice(jobInstances, config?.isArrayJob),
       };
     },
     jobInstances: () => {
@@ -168,11 +167,11 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
           config?.jobType === "Batch" &&
           config?.isArrayJob === "Array",
         selected: (config) =>
-          config?.jobInstances.stepper >= 1 &&
+          config?.jobInstances.step >= 1 &&
           config?.jobInstances.upperBound >= config?.jobInstances.firstIndex &&
-          config?.jobInstances.upperBound > config?.jobInstances.stepper &&
+          config?.jobInstances.upperBound > config?.jobInstances.step &&
           config?.jobInstances.upperBound >=
-            config?.jobInstances.firstIndex + config?.jobInstances.stepper,
+            config?.jobInstances.firstIndex + config?.jobInstances.step,
       };
     },
     wallTime: () => {
