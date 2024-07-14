@@ -69,6 +69,8 @@ export function EresearchInstructions({ config }) {
               gpuModules={config.gpuModules}
               nodes={config.nodes}
               wallTime={config.wallTime}
+              isArrayJob={config.isArrayJob}
+              jobInstances={config.jobInstances}
             />
           )}
         </>

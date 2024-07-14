@@ -21,6 +21,7 @@ import {
   isValidChoice,
 } from "../Config";
 import ConfigDuration from "../Config/ConfigDuration";
+import ConfigMultipleNumbers from "../Config/ConfigMultipleNumbers";
 import { Guide, GuideHeader } from "../Guide";
 import { EresearchInstructions } from "./EresearchInstructions";
 
@@ -119,6 +120,58 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
         show: (config) =>
           config?.service === "Lyra" && config?.jobType === "Batch",
         selected: (config) => config?.nodes > 0,
+      };
+    },
+    isArrayJob: () => {
+      const jobInstances = [
+        ["Standalone", "Run a single instance of the job"],
+        ["Array", "Run many instances of the job in parallel"],
+      ];
+      return {
+        element: (key, selected) => (
+          <ConfigGroup
+            key={key}
+            title="Job Instances"
+            description="Run a single instance, or many instances of the job."
+            type="picker"
+            selected={selected}
+            inputProps={{
+              choices: jobInstances,
+              value: config?.isArrayJob,
+              onChange: onChange("isArrayJob"),
+            }}
+          />
+        ),
+        show: (config) =>
+          config?.service === "Lyra" && config?.jobType === "Batch",
+        selected: (config) => isValidChoice(jobInstances, config?.isArrayJob),
+      };
+    },
+    jobInstances: () => {
+      return {
+        element: (key, selected) => (
+          <ConfigMultipleNumbers
+            key={key}
+            title="Instances Config"
+            description="Array job settings"
+            selected={selected}
+            value={config?.jobInstances}
+            onChange={onChange("jobInstances")}
+            inputProps={{
+              min: 0,
+            }}
+          />
+        ),
+        show: (config) =>
+          config?.service === "Lyra" &&
+          config?.jobType === "Batch" &&
+          config?.isArrayJob === "Array",
+        selected: (config) =>
+          config?.jobInstances.step >= 1 &&
+          config?.jobInstances.upperBound >= config?.jobInstances.firstIndex &&
+          config?.jobInstances.upperBound > config?.jobInstances.step &&
+          config?.jobInstances.upperBound >=
+            config?.jobInstances.firstIndex + config?.jobInstances.step,
       };
     },
     wallTime: () => {
