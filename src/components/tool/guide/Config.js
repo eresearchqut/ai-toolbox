@@ -159,7 +159,7 @@ export const getCpuVendor = (config, onChange) => () => {
 export const getCpuModel = (config, onChange) => () => {
   let cpuModels = [];
   if (config?.cpuVendor === "AMD") {
-    cpuModels = ["7702", "7713", "75F3"];
+    cpuModels = ["7702", "7713"];
   } else if (config?.cpuVendor === "Intel") {
     cpuModels = ["6140", "6248", "8260", "E7-8890v4"];
   }
@@ -192,8 +192,6 @@ export const getCpuCores = (config, onChange) => () => {
     cpuCores = 128;
   } else if (config?.cpuModel === "7713") {
     cpuCores = 128;
-  } else if (config?.cpuModel === "75F3") {
-    cpuCores = 64;
   } else if (config?.cpuModel === "6140") {
     cpuCores = 36;
   } else if (config?.cpuModel === "6248") {
@@ -236,8 +234,6 @@ export const getRam = (config, onChange) => () => {
     ram = 1006;
   } else if (config?.cpuModel === "7713") {
     ram = 1006;
-  } else if (config?.cpuModel === "75F3") {
-    ram = 503;
   } else if (config?.cpuModel === "6140") {
     ram = 186;
   } else if (config?.cpuModel === "6248") {
