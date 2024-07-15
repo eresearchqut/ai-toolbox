@@ -20,7 +20,6 @@ import {
   isLyra,
   isValidChoice,
 } from "../Config";
-import ConfigDuration from "../Config/ConfigDuration";
 import ConfigMultipleNumbers from "../Config/ConfigMultipleNumbers";
 import { Guide, GuideHeader } from "../Guide";
 import { EresearchInstructions } from "./EresearchInstructions";
@@ -177,22 +176,24 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
     wallTime: () => {
       return {
         element: (key, selected) => (
-          <ConfigDuration
+          <ConfigMultipleNumbers
             key={key}
             title="Walltime"
             description="The estimated total time for the job."
             selected={selected}
             onChange={onChange("wallTime")}
             value={config?.wallTime}
-            inputPropsHour={{
-              min: 0,
-              step: 1,
-            }}
-            inputPropsMinute={{
-              min: config?.wallTime?.hour < 1 ? 1 : 0,
-              max: 59,
-              step: 1,
-            }}
+            inputProps={[
+              {
+                min: 0,
+                step: 1,
+              },
+              {
+                min: config?.wallTime?.hour < 1 ? 1 : 0,
+                max: 59,
+                step: 1,
+              },
+            ]}
           />
         ),
         show: (config) =>
