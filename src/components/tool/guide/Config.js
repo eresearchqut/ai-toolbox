@@ -462,7 +462,7 @@ export const getTool = (config, onChange) => () => {
 
 export function Config({ config, onConfigChange, getConfigGroups }) {
   return (
-    <Grid templateColumns="auto 1fr" gridColumnGap={2}>
+    <Grid templateColumns="auto 1fr" gridColumnGap={2} alignItems="center">
       {Object.entries(getConfigGroups(config, onConfigChange))
         .map(([key, configGroup]) => [key, configGroup()])
         .filter(([_, configGroup]) => configGroup.show(config))
