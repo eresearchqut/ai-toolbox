@@ -1,7 +1,7 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Heading, Link, Text } from "@chakra-ui/react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import QUTLogo from "../../../../../static/img/qut.png";
 import {
@@ -266,8 +266,15 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
   };
 };
 
-export default function EresearchJob({ showHeader = true }) {
-  const [config, setConfig] = useState(DEFAULT_CONFIG);
+export default function EresearchJob({
+  initialConfig = DEFAULT_CONFIG,
+  showHeader = true,
+}) {
+  const [config, setConfig] = useState(initialConfig);
+
+  useEffect(() => {
+    setConfig(initialConfig);
+  }, [initialConfig]);
 
   const isConfigComplete = configComplete(config, getConfigGroups);
 
