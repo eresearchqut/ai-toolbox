@@ -1,9 +1,9 @@
-import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Heading, Link, Text } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 
 import { useEffect, useState } from "react";
 
 import QUTLogo from "../../../../../static/img/qut.png";
+import TextWithLink from "../../../navigation/TextWithLink";
 import {
   Config,
   configComplete,
@@ -81,18 +81,16 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
     nodes: () => {
       const mpiAlertMsg = () => {
         return (
-          <Text mb={0}>
-            Only use more than 1 node if you are using{" "}
-            <Link
-              color="teal.500"
-              href="https://hpc-wiki.info/hpc/MPI"
-              isExternal
-            >
-              MPI
-              <ExternalLinkIcon mx="2px" />
-            </Link>
-            -type software.
-          </Text>
+          <TextWithLink
+            textBeforeLink={"Only use more than 1 node if you are using "}
+            link={{
+              href: "https://hpc-wiki.info/hpc/MPI",
+              text: "MPI",
+              isExternal: true,
+            }}
+            hasExternalIcon={true}
+            textAfterLink={"-type software."}
+          />
         );
       };
       return {
@@ -218,19 +216,16 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       }
       const customAlertMsg = () => {
         return (
-          <Text mb={0}>
-            IPUs are currently unavailable. Please
-            <Link
-              color="teal.500"
-              href="https://eresearchqut.atlassian.net/servicedesk/customer/portals"
-              isExternal
-            >
-              {" "}
-              contact eResearch if interested
-              <ExternalLinkIcon mx="2px" />
-            </Link>
-            .
-          </Text>
+          <TextWithLink
+            textBeforeLink={"IPUs are currently unavailable. Please "}
+            link={{
+              href: "https://eresearchqut.atlassian.net/servicedesk/customer/portals",
+              text: "contact eResearch if interested",
+              isExternal: true,
+            }}
+            hasExternalIcon={true}
+            textAfterLink={"."}
+          />
         );
       };
       return {
