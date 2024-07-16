@@ -21,7 +21,7 @@ export default function InputNumberStepper({
 
   return (
     <>
-      <InputGroup>
+      <InputGroup size="sm" width="unset">
         <NumberInput
           defaultValue={value}
           allowMouseWheel={allowMouseWheel}
