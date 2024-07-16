@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   Input,
   InputGroup,
   InputRightAddon,
@@ -21,7 +22,7 @@ export default function InputSlider({
   const { colorScheme } = useGuideContext();
 
   return (
-    <>
+    <Flex>
       <Box width="120px">
         <InputGroup size="sm">
           <Input
@@ -51,6 +52,6 @@ export default function InputSlider({
 
         <SliderThumb />
       </Slider>
-    </>
+    </Flex>
   );
 }

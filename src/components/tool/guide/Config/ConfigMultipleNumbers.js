@@ -36,63 +36,60 @@ export default function ConfigMultipleNumbers({
       .replace(/^./, (char) => char.toUpperCase()); // Capitalize the first letter
   };
   return (
-    <Box>
-      <Flex direction="row" width="100%" align="center">
-        <Box w="120px">
-          {selected ? (
-            <CheckCircleIcon color="green.500" />
-          ) : (
-            <Tooltip label="Pick an option">
-              <WarningIcon color="orange.500" />
-            </Tooltip>
-          )}
-          <Tooltip label={description} placement="top" hasArrow>
-            <Heading size="xs" mb="0" display="inline" ml="2">
-              {title}
-            </Heading>
+    <>
+      <Box>
+        {selected ? (
+          <CheckCircleIcon color="green.500" />
+        ) : (
+          <Tooltip label="Pick an option">
+            <WarningIcon color="orange.500" />
           </Tooltip>
-        </Box>
-        <Square size="10px" />
-        <Flex>
-          {Object.keys(value).map((key, index) => (
-            <InputNumberStepper
-              key={key}
-              w="100px"
-              label={keyToReadable(key)}
-              value={value[key]}
-              onChange={(newValue) => {
-                onChange({
-                  ...value,
-                  [key]: parseInt(newValue),
-                });
-              }}
-              {...(Array.isArray(inputProps) ? inputProps[index] : inputProps)}
-            />
-          ))}
-        </Flex>
-        {showAlert && !alertDismissed && (
-          <Flex direction="row" align="center">
-            <Box minWidth="120px" />
-            <Square size="10px"></Square>
-            <Box w="100%">
-              <Alert display="flex" status={alertType}>
-                <AlertIcon />
-                {alertMsg}
-                {alertDismissible && (
-                  <CloseButton
-                    size="sm"
-                    style={{ marginLeft: "auto" }}
-                    position="relative"
-                    right="0"
-                    top="0"
-                    onClick={onClose}
-                  />
-                )}
-              </Alert>
-            </Box>
-          </Flex>
         )}
+        <Tooltip label={description} placement="top" hasArrow>
+          <Heading size="xs" mb="0" display="inline" ml="2">
+            {title}
+          </Heading>
+        </Tooltip>
+      </Box>
+      <Flex justifyContent="flex-start">
+        {Object.keys(value).map((key, index) => (
+          <InputNumberStepper
+            key={key}
+            w="100px"
+            label={keyToReadable(key)}
+            value={value[key]}
+            onChange={(newValue) => {
+              onChange({
+                ...value,
+                [key]: parseInt(newValue),
+              });
+            }}
+            {...(Array.isArray(inputProps) ? inputProps[index] : inputProps)}
+          />
+        ))}
       </Flex>
-    </Box>
+      {showAlert && !alertDismissed && (
+        <Flex direction="row" align="center">
+          <Box minWidth="120px" />
+          <Square size="10px"></Square>
+          <Box w="100%">
+            <Alert display="flex" status={alertType}>
+              <AlertIcon />
+              {alertMsg}
+              {alertDismissible && (
+                <CloseButton
+                  size="sm"
+                  style={{ marginLeft: "auto" }}
+                  position="relative"
+                  right="0"
+                  top="0"
+                  onClick={onClose}
+                />
+              )}
+            </Alert>
+          </Box>
+        </Flex>
+      )}
+    </>
   );
 }

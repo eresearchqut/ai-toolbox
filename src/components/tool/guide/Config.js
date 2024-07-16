@@ -6,8 +6,8 @@ import {
   Box,
   Flex,
   Heading,
-  Square,
   Tooltip,
+  Grid,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
@@ -42,31 +42,29 @@ export function ConfigGroup({
   };
 
   return (
-    <Box>
-      <Flex direction="column" width="100%">
-        <Flex direction="row" align="center">
-          <Box w="120px">
-            {selected ? (
-              <CheckCircleIcon color="green.500" />
-            ) : (
-              <Tooltip label="Pick an option">
-                <WarningIcon color="orange.500" />
-              </Tooltip>
-            )}
-            <Tooltip label={description} placement="top" hasArrow>
-              <Heading size="xs" mb="0" display="inline" ml="2">
-                {title}
-              </Heading>
+    <>
+      <>
+        <Box>
+          {selected ? (
+            <CheckCircleIcon color="green.500" />
+          ) : (
+            <Tooltip label="Pick an option">
+              <WarningIcon color="orange.500" />
             </Tooltip>
-          </Box>
-          <Square size="10px" />
-          {type === "picker" && <InputPicker {...inputProps} />}
-          {type === "slider" && <InputSlider {...inputProps} />}
-        </Flex>
-        {showAlert && !alertDismissed && (
+          )}
+          <Tooltip label={description} placement="top" hasArrow>
+            <Heading size="xs" mb="0" display="inline" ml="2">
+              {title}
+            </Heading>
+          </Tooltip>
+        </Box>
+        {type === "picker" && <InputPicker {...inputProps} />}
+        {type === "slider" && <InputSlider {...inputProps} />}
+      </>
+      {showAlert && !alertDismissed && (
+        <>
+          <Box></Box>
           <Flex direction="row" align="center">
-            <Box minWidth="120px" />
-            <Square size="10px"></Square>
             <Box w="100%">
               <Alert display="flex" status={alertType}>
                 <AlertIcon />
@@ -86,9 +84,9 @@ export function ConfigGroup({
               </Alert>
             </Box>
           </Flex>
-        )}
-      </Flex>
-    </Box>
+        </>
+      )}
+    </>
   );
 }
 
@@ -464,14 +462,14 @@ export const getTool = (config, onChange) => () => {
 
 export function Config({ config, onConfigChange, getConfigGroups }) {
   return (
-    <Box>
+    <Grid templateColumns="auto 1fr" gridColumnGap={2}>
       {Object.entries(getConfigGroups(config, onConfigChange))
         .map(([key, configGroup]) => [key, configGroup()])
         .filter(([_, configGroup]) => configGroup.show(config))
         .map(([key, configGroup]) =>
           configGroup.element(key, configGroup.selected(config)),
         )}
-    </Box>
+    </Grid>
   );
 }
 
