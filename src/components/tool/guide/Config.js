@@ -1,6 +1,7 @@
 import { Grid } from "@chakra-ui/react";
 
 import ConfigPicker from "./Config/ConfigPicker";
+import ConfigSlider from "./Config/ConfigSlider";
 
 export const DEFAULT_CONFIG = {
   nodes: 1,
@@ -126,10 +127,9 @@ export const getCpuCores = (config, onChange) => () => {
 
   return {
     element: (key, selected) => (
-      <ConfigPicker
+      <ConfigSlider
         key={key}
         title="CPU"
-        type="slider"
         selected={selected}
         inputProps={{
           value: config?.cpuCores,
@@ -168,10 +168,9 @@ export const getRam = (config, onChange) => () => {
 
   return {
     element: (key, selected) => (
-      <ConfigPicker
+      <ConfigSlider
         key={key}
         title="RAM"
-        type="slider"
         selected={selected}
         inputProps={{
           value: config?.ram,
