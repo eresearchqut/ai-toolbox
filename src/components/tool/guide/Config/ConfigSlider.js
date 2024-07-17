@@ -6,7 +6,6 @@ import {
   CloseButton,
   Flex,
   Heading,
-  Square,
   Tooltip,
 } from "@chakra-ui/react";
 
