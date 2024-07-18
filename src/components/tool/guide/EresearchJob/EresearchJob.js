@@ -7,7 +7,6 @@ import TextWithLink from "../../../navigation/TextWithLink";
 import {
   Config,
   configComplete,
-  ConfigGroup,
   DEFAULT_CONFIG,
   getCpuCores,
   getCpuModel,
@@ -21,6 +20,8 @@ import {
   isValidChoice,
 } from "../Config";
 import ConfigMultipleNumbers from "../Config/ConfigMultipleNumbers";
+import ConfigPicker from "../Config/ConfigPicker";
+import ConfigSlider from "../Config/ConfigSlider";
 import { Guide, GuideHeader } from "../Guide";
 import { EresearchInstructions } from "./EresearchInstructions";
 
@@ -37,11 +38,10 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       ];
       return {
         element: (key, selected) => (
-          <ConfigGroup
+          <ConfigPicker
             key={key}
             title="Service"
             description="The service to use for running the job."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: services,
@@ -61,11 +61,10 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       ];
       return {
         element: (key, selected) => (
-          <ConfigGroup
+          <ConfigPicker
             key={key}
             title="Job Type"
             description="The type of PBS job to run."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: jobTypes,
@@ -95,11 +94,10 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       };
       return {
         element: (key, selected) => (
-          <ConfigGroup
+          <ConfigSlider
             key={key}
             title="Nodes"
             description="The number of nodes to use for the job."
-            type="slider"
             selected={selected}
             inputProps={{
               label: config?.nodes > 1 ? "nodes" : "node",
@@ -126,11 +124,10 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       ];
       return {
         element: (key, selected) => (
-          <ConfigGroup
+          <ConfigPicker
             key={key}
             title="Job Instances"
             description="Run a single instance, or many instances of the job."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: jobInstances,
@@ -230,11 +227,10 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       };
       return {
         element: (key, selected) => (
-          <ConfigGroup
+          <ConfigPicker
             key={key}
             title="Hardware"
             description="The hardware to use for running the job."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: hardware,

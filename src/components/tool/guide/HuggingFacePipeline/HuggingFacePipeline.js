@@ -18,7 +18,6 @@ import ChoiceScreen from "../../../layout/ChoiceScreen";
 import {
   Config,
   configComplete,
-  ConfigGroup,
   DEFAULT_CONFIG,
   getCpuCores,
   getCpuModel,
@@ -34,6 +33,7 @@ import {
   isLyra,
   isValidChoice,
 } from "../Config";
+import ConfigPicker from "../Config/ConfigPicker";
 import { Guide, GuideHeader } from "../Guide";
 import { HuggingFaceInstructions } from "./HuggingFaceInstructions";
 import { Model } from "./Model";
@@ -93,11 +93,10 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       ];
       return {
         element: (key, selected) => (
-          <ConfigGroup
+          <ConfigPicker
             key={key}
             title="Service"
             description="The service to use for running the model."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: services,
@@ -127,11 +126,10 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       }
       return {
         element: (key, selected) => (
-          <ConfigGroup
+          <ConfigPicker
             key={key}
             title="Hardware"
             description="The hardware to use for running the model."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: hardware,

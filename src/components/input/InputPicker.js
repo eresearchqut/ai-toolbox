@@ -7,7 +7,7 @@ export default function InputPicker({ choices, value, onChange = () => {} }) {
 
   return (
     <Flex flexGrow="1">
-      {choices.map((choice) => {
+      {choices?.map((choice) => {
         const { label, description } = Array.isArray(choice)
           ? { label: choice[0], description: choice[1] }
           : { label: choice, description: "" };

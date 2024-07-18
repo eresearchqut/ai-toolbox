@@ -1,18 +1,10 @@
-import { CheckCircleIcon, WarningIcon } from "@chakra-ui/icons";
-import {
-  Alert,
-  AlertIcon,
-  Box,
-  CloseButton,
-  Flex,
-  Heading,
-  Square,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 import { useState } from "react";
 
 import InputNumberStepper from "../../../input/InputNumberStepper";
+import AlertHelper from "./AlertHelper";
+import ConfigHeader from "./ConfigHeader";
 
 export default function ConfigMultipleNumbers({
   title,
@@ -37,20 +29,11 @@ export default function ConfigMultipleNumbers({
   };
   return (
     <>
-      <Box>
-        {selected ? (
-          <CheckCircleIcon color="green.500" />
-        ) : (
-          <Tooltip label="Pick an option">
-            <WarningIcon color="orange.500" />
-          </Tooltip>
-        )}
-        <Tooltip label={description} placement="top" hasArrow>
-          <Heading size="xs" mb="0" display="inline" ml="2">
-            {title}
-          </Heading>
-        </Tooltip>
-      </Box>
+      <ConfigHeader
+        title={title}
+        description={description}
+        selected={selected}
+      />
       <Flex justifyContent="flex-start">
         {Object.keys(value).map((key, index) => (
           <InputNumberStepper
@@ -69,26 +52,12 @@ export default function ConfigMultipleNumbers({
         ))}
       </Flex>
       {showAlert && !alertDismissed && (
-        <Flex direction="row" align="center">
-          <Box minWidth="120px" />
-          <Square size="10px"></Square>
-          <Box w="100%">
-            <Alert display="flex" status={alertType}>
-              <AlertIcon />
-              {alertMsg}
-              {alertDismissible && (
-                <CloseButton
-                  size="sm"
-                  style={{ marginLeft: "auto" }}
-                  position="relative"
-                  right="0"
-                  top="0"
-                  onClick={onClose}
-                />
-              )}
-            </Alert>
-          </Box>
-        </Flex>
+        <AlertHelper
+          alertDismissible={alertDismissible}
+          alertType={alertType}
+          alertMsg={alertMsg}
+          onClose={onClose}
+        />
       )}
     </>
   );

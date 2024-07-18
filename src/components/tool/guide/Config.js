@@ -1,19 +1,7 @@
-import { CheckCircleIcon, WarningIcon } from "@chakra-ui/icons";
-import {
-  Alert,
-  AlertIcon,
-  CloseButton,
-  Box,
-  Flex,
-  Heading,
-  Tooltip,
-  Grid,
-} from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 
-import { useState } from "react";
-
-import InputPicker from "../../input/InputPicker";
-import InputSlider from "../../input/InputSlider";
+import ConfigPicker from "./Config/ConfigPicker";
+import ConfigSlider from "./Config/ConfigSlider";
 
 export const DEFAULT_CONFIG = {
   nodes: 1,
@@ -24,71 +12,6 @@ export const DEFAULT_CONFIG = {
   isArrayJob: "Standalone",
   jobInstances: { firstIndex: 1, upperBound: 10, step: 1 },
 };
-
-export function ConfigGroup({
-  title,
-  description,
-  type,
-  selected,
-  inputProps,
-  showAlert = false,
-  alertDismissible = true,
-  alertType = "info",
-  alertMsg = null,
-}) {
-  const [alertDismissed, setAlertDismissed] = useState(false);
-  const onClose = () => {
-    setAlertDismissed(true);
-  };
-
-  return (
-    <>
-      <>
-        <Box>
-          {selected ? (
-            <CheckCircleIcon color="green.500" />
-          ) : (
-            <Tooltip label="Pick an option">
-              <WarningIcon color="orange.500" />
-            </Tooltip>
-          )}
-          <Tooltip label={description} placement="top" hasArrow>
-            <Heading size="xs" mb="0" display="inline" ml="2">
-              {title}
-            </Heading>
-          </Tooltip>
-        </Box>
-        {type === "picker" && <InputPicker {...inputProps} />}
-        {type === "slider" && <InputSlider {...inputProps} />}
-      </>
-      {showAlert && !alertDismissed && (
-        <>
-          <Box></Box>
-          <Flex direction="row" align="center">
-            <Box w="100%">
-              <Alert display="flex" status={alertType}>
-                <AlertIcon />
-                {alertMsg && typeof alertMsg === "function"
-                  ? alertMsg()
-                  : `${alertMsg}`}
-                {alertDismissible && (
-                  <CloseButton
-                    size="sm"
-                    style={{ marginLeft: "auto" }}
-                    position="relative"
-                    right="0"
-                    top="0"
-                    onClick={onClose}
-                  />
-                )}
-              </Alert>
-            </Box>
-          </Flex>
-        </>
-      )}
-    </>
-  );
-}
 
 export const isValidChoice = (choices, value) => {
   if (choices.length === 0) return false;
@@ -115,11 +38,10 @@ export const getOs = (config, onChange) => () => {
 
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigPicker
         key={key}
         title="OS"
         description="The operating system to use for running the model."
-        type="picker"
         selected={selected}
         inputProps={{
           choices: operatingSystems,
@@ -137,10 +59,9 @@ export const getCpuVendor = (config, onChange) => () => {
   const cpuVendors = ["Any", "AMD", "Intel"];
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigPicker
         key={key}
         title="CPU Vendor"
-        type="picker"
         selected={selected}
         inputProps={{
           choices: cpuVendors,
@@ -164,10 +85,9 @@ export const getCpuModel = (config, onChange) => () => {
 
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigPicker
         key={key}
         title="CPU Model"
-        type="picker"
         selected={selected}
         inputProps={{
           choices: cpuModels,
@@ -204,10 +124,9 @@ export const getCpuCores = (config, onChange) => () => {
 
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigSlider
         key={key}
         title="CPU"
-        type="slider"
         selected={selected}
         inputProps={{
           value: config?.cpuCores,
@@ -246,10 +165,9 @@ export const getRam = (config, onChange) => () => {
 
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigSlider
         key={key}
         title="RAM"
-        type="slider"
         selected={selected}
         inputProps={{
           value: config?.ram,
@@ -283,10 +201,9 @@ export const getJobProfile = (config, onChange) => () => {
   }
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigPicker
         key={key}
         title="Job Profile"
-        type="picker"
         selected={selected}
         inputProps={{
           choices: profiles,
@@ -306,10 +223,9 @@ export const getGpuVendor = (config, onChange) => () => {
   return {
     element: (key, selected) => {
       return (
-        <ConfigGroup
+        <ConfigPicker
           key={key}
           title="GPU Vendor"
-          type="picker"
           selected={selected}
           inputProps={{
             choices: gpuVendors,
@@ -341,10 +257,9 @@ export const getGpuModel = (config, onChange) => () => {
   }
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigPicker
         key={key}
         title="GPU Model"
-        type="picker"
         selected={selected}
         inputProps={{
           choices: gpuModels,
@@ -365,10 +280,9 @@ export const getGpuModel = (config, onChange) => () => {
 export const getGpuModules = (config, onChange) => () => {
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigSlider
         key={key}
         title="GPU"
-        type="slider"
         selected={selected}
         inputProps={{
           value: config?.gpuModules,
@@ -407,11 +321,10 @@ export const getEnvironment = (config, onChange) => () => {
 
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigPicker
         key={key}
         title="Environment"
         description="The Python package management system."
-        type="picker"
         selected={selected}
         inputProps={{
           choices: environments,
@@ -442,11 +355,10 @@ export const getTool = (config, onChange) => () => {
 
   return {
     element: (key, selected) => (
-      <ConfigGroup
+      <ConfigPicker
         key={key}
         title="Tool"
         description="The interface to use for running the model."
-        type="picker"
         selected={selected}
         inputProps={{
           choices: tools,
