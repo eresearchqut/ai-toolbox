@@ -97,7 +97,6 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             key={key}
             title="Service"
             description="The service to use for running the model."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: services,
@@ -131,7 +130,6 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             key={key}
             title="Hardware"
             description="The hardware to use for running the model."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: hardware,

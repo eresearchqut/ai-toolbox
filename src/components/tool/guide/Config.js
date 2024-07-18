@@ -42,7 +42,6 @@ export const getOs = (config, onChange) => () => {
         key={key}
         title="OS"
         description="The operating system to use for running the model."
-        type="picker"
         selected={selected}
         inputProps={{
           choices: operatingSystems,
@@ -63,7 +62,6 @@ export const getCpuVendor = (config, onChange) => () => {
       <ConfigPicker
         key={key}
         title="CPU Vendor"
-        type="picker"
         selected={selected}
         inputProps={{
           choices: cpuVendors,
@@ -90,7 +88,6 @@ export const getCpuModel = (config, onChange) => () => {
       <ConfigPicker
         key={key}
         title="CPU Model"
-        type="picker"
         selected={selected}
         inputProps={{
           choices: cpuModels,
@@ -207,7 +204,6 @@ export const getJobProfile = (config, onChange) => () => {
       <ConfigPicker
         key={key}
         title="Job Profile"
-        type="picker"
         selected={selected}
         inputProps={{
           choices: profiles,
@@ -230,7 +226,6 @@ export const getGpuVendor = (config, onChange) => () => {
         <ConfigPicker
           key={key}
           title="GPU Vendor"
-          type="picker"
           selected={selected}
           inputProps={{
             choices: gpuVendors,
@@ -265,7 +260,6 @@ export const getGpuModel = (config, onChange) => () => {
       <ConfigPicker
         key={key}
         title="GPU Model"
-        type="picker"
         selected={selected}
         inputProps={{
           choices: gpuModels,
@@ -286,10 +280,9 @@ export const getGpuModel = (config, onChange) => () => {
 export const getGpuModules = (config, onChange) => () => {
   return {
     element: (key, selected) => (
-      <ConfigPicker
+      <ConfigSlider
         key={key}
         title="GPU"
-        type="slider"
         selected={selected}
         inputProps={{
           value: config?.gpuModules,
@@ -332,7 +325,6 @@ export const getEnvironment = (config, onChange) => () => {
         key={key}
         title="Environment"
         description="The Python package management system."
-        type="picker"
         selected={selected}
         inputProps={{
           choices: environments,
@@ -367,7 +359,6 @@ export const getTool = (config, onChange) => () => {
         key={key}
         title="Tool"
         description="The interface to use for running the model."
-        type="picker"
         selected={selected}
         inputProps={{
           choices: tools,

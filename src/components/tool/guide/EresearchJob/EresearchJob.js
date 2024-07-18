@@ -42,7 +42,6 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             key={key}
             title="Service"
             description="The service to use for running the job."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: services,
@@ -66,7 +65,6 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             key={key}
             title="Job Type"
             description="The type of PBS job to run."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: jobTypes,
@@ -130,7 +128,6 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             key={key}
             title="Job Instances"
             description="Run a single instance, or many instances of the job."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: jobInstances,
@@ -234,7 +231,6 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             key={key}
             title="Hardware"
             description="The hardware to use for running the job."
-            type="picker"
             selected={selected}
             inputProps={{
               choices: hardware,
