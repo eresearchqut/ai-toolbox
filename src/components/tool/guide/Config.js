@@ -286,7 +286,7 @@ export const getGpuModules = (config, onChange) => () => {
         selected={selected}
         inputProps={{
           value: config?.gpuModules,
-          label: "modules",
+          label: config?.gpuModules > 1 ? "GPUs" : "GPU",
           min: 1,
           max: 8,
           step: 1,
