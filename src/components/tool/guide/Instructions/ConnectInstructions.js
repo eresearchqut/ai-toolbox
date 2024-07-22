@@ -69,7 +69,7 @@ function LyraInstructions({ username }) {
       {username === "" && (
         <InstructionText>
           <i>
-            Enter <Code>username</Code> with your QUT username.
+            Replace <Code>username</Code> with your QUT username.
           </i>
         </InstructionText>
       )}
