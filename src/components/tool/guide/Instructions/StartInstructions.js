@@ -58,7 +58,7 @@ export function LyraStartInstructions({
         ":00";
 
   const batchJobScript = [
-    "#!/bin/bash",
+    "#!/bin/bash -l",
     "",
     "echo \"Running job '$PBS_JOBNAME' ($PBS_JOBID) in the following directory: $PWD\"",
   ];
