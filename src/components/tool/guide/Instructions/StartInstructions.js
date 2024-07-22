@@ -68,7 +68,7 @@ export function LyraStartInstructions({
 
   const cmdText = `qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(
     ":",
-  )}${hasScript ? " " + scriptPath : ""}`;
+  )}${jobType === "Batch" && hasScript ? " " + scriptPath : ""}`;
 
   return (
     <>
@@ -118,24 +118,26 @@ export function LyraStartInstructions({
         In the ssh session, run the following command to schedule the{" "}
         {jobType.toLowerCase()} job:
       </InstructionText>
-      <Flex>
-        <Box minWidth="20%">
-          <Checkbox
-            isChecked={hasScript}
-            onChange={(e) => setHasScript(e.target.checked)}
-          >
-            I have a script to specify
-          </Checkbox>
-        </Box>
-        {hasScript && (
-          <Input
-            size="xs"
-            placeholder={"full/path/to/your_script.sh"}
-            value={scriptPath}
-            onChange={(e) => setScriptPath(e.target.value)}
-          ></Input>
-        )}
-      </Flex>
+      {jobType === "Batch" && (
+        <Flex>
+          <Box minWidth="20%">
+            <Checkbox
+              isChecked={hasScript}
+              onChange={(e) => setHasScript(e.target.checked)}
+            >
+              I have a script to specify
+            </Checkbox>
+          </Box>
+          {hasScript && (
+            <Input
+              size="xs"
+              placeholder={"full/path/to/your_script.sh"}
+              value={scriptPath}
+              onChange={(e) => setScriptPath(e.target.value)}
+            ></Input>
+          )}
+        </Flex>
+      )}
       <CopyBox>{cmdText}</CopyBox>
       {jobType === "Interactive" && (
         <>
