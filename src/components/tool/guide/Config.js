@@ -286,12 +286,17 @@ export const getGpuModules = (config, onChange) => () => {
         selected={selected}
         inputProps={{
           value: config?.gpuModules,
-          label: "modules",
+          label: config?.gpuModules > 1 ? "GPUs" : "GPU",
           min: 1,
           max: 8,
           step: 1,
           onChange: onChange("gpuModules"),
         }}
+        showAlert={config?.gpuModules > 1}
+        alertType={"warning"}
+        alertMsg={
+          "Only use more than 1 GPU if your job is capable of utilising multiple GPUs simultaneously."
+        }
       />
     ),
     show: (config) => isLyra(config) && isGPU(config),
