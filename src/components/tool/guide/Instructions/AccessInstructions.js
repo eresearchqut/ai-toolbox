@@ -17,7 +17,7 @@ export function AccessInstructions({ service, port, node, username }) {
           {username === "" && (
             <InstructionText>
               <i>
-                Replace <Code>qutusername</Code> with your QUT username.
+                Replace <Code>username</Code> with your QUT username.
               </i>
             </InstructionText>
           )}
@@ -30,7 +30,7 @@ export function AccessInstructions({ service, port, node, username }) {
             </InstructionText>
           )}
           <CopyBox>
-            ssh -L {port}:{node || "node"}:{port} {username || "qutusername"}
+            ssh -L {port}:{node || "node"}:{port} {username || "username"}
             @lyra.qut.edu.au
           </CopyBox>
         </>

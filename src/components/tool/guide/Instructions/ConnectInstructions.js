@@ -69,11 +69,11 @@ function LyraInstructions({ username }) {
       {username === "" && (
         <InstructionText>
           <i>
-            Replace <Code>qutusername</Code> with your QUT username.
+            Replace <Code>username</Code> with your QUT username.
           </i>
         </InstructionText>
       )}
-      <CopyBox>ssh {username || "qutusername"}@lyra.qut.edu.au</CopyBox>
+      <CopyBox>ssh {username || "username"}@lyra.qut.edu.au</CopyBox>
     </>
   );
 }
