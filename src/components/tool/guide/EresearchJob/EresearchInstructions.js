@@ -15,10 +15,7 @@ const TEXT_PATTERN = /^[a-z0-9]*$/;
 const JOB_NAME_PATTERN = /^(?=.*[A-Za-z0-9._+-])[A-Za-z0-9._+-]+$/;
 
 export function EresearchInstructions({ config }) {
-  const [username, setUsername] = useLocalStorageState(
-    "qutUsername",
-    "qutusername",
-  );
+  const [username, setUsername] = useLocalStorageState("qutUsername", "");
   const [batchJobName, setBatchJobName] = useLocalStorageState(
     "qutBatchJobName",
     "Batch-job-name",
