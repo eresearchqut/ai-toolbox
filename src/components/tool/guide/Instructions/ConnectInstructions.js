@@ -1,56 +1,78 @@
-import { Alert, AlertIcon, Box, Code, Link, Text } from "@chakra-ui/react";
+import { Box, Code, Flex } from "@chakra-ui/react";
 
+import TextWithLink from "../../../navigation/TextWithLink";
 import CopyBox from "../../../output/CopyBox";
+import AlertHelper from "../Config/AlertHelper";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 import { OperatingSystemTabs } from "./components/OperatingSystemTabs";
 
 function LyraInstructions({ username }) {
+  const enableSSHText = () => {
+    return (
+      <TextWithLink
+        textBeforeLink={"You may need to enable the "}
+        link={{
+          href: "https://learn.microsoft.com/en-us/windows/terminal/tutorials/ssh",
+          text: "ssh feature",
+          isExternal: true,
+        }}
+        hasExternalIcon={false}
+        textAfterLink={" in Windows."}
+      />
+    );
+  };
   return (
     <>
       <InstructionHeading>Connect to Lyra</InstructionHeading>
-      <Alert status="info">
-        <AlertIcon />
-        If you are off-campus, you will first need to connect to the QUT network
-        using the VPN.
-      </Alert>
+      <AlertHelper
+        alertType="info"
+        alertMsg="If you are off-campus, you will first need to connect to the QUT network using the VPN."
+        alertDismissible={false}
+      />
       <InstructionText>
-        See the instructions{" "}
-        <Link
-          href="https://qutvirtual4.qut.edu.au/group/research-students/conducting-research/specialty-research-facilities/advanced-research-computing-storage/supercomputing/getting-started-with-hpc"
-          isExternal
-          color="blue.500"
-        >
-          here
-        </Link>{" "}
-        for more information about how to use Lyra.
+        <TextWithLink
+          textBeforeLink={"See the instructions "}
+          link={{
+            href: "https://qutvirtual4.qut.edu.au/group/research-students/conducting-research/specialty-research-facilities/advanced-research-computing-storage/supercomputing/getting-started-with-hpc",
+            text: "here",
+            color: "blue.500",
+            isExternal: true,
+          }}
+          textAfterLink={" for more information about how to use Lyra."}
+        />
       </InstructionText>
       <OperatingSystemTabs>
         <Box>
-          <Alert status="info">
-            <AlertIcon />
-            <Text mb="0">
-              You may need to enable the{" "}
-              <Link
-                href="https://learn.microsoft.com/en-us/windows/terminal/tutorials/ssh"
-                isExternal
-                color="blue.500"
-              >
-                ssh feature
-              </Link>{" "}
-              in Windows.
-            </Text>
-          </Alert>
+          <AlertHelper
+            alertType={"info"}
+            alertMsg={enableSSHText}
+            alertDismissible={false}
+          />
           <InstructionText>
-            In{" "}
-            <Link href="https://aka.ms/terminal" isExternal color="blue.500">
-              Windows Terminal
-            </Link>
-            , Powershell,{" "}
-            <Link href="https://www.putty.org/" isExternal color="blue.500">
-              PuTTY
-            </Link>
-            , or cmd.exe, run the following command to connect to Lyra:
+            <Flex alignItems={"center"}>
+              <TextWithLink
+                textBeforeLink={"In "}
+                link={{
+                  href: "https://aka.ms/terminal",
+                  text: "Windows Terminal",
+                  color: "blue.500",
+                  isExternal: true,
+                }}
+              />
+              <TextWithLink
+                textBeforeLink={", Powershell, "}
+                link={{
+                  href: "https://www.putty.org/",
+                  text: "PuTTY",
+                  color: "blue.500",
+                  isExternal: true,
+                }}
+                textAfterLink={
+                  ", or cmd.exe, run the following command to connect to Lyra:"
+                }
+              />
+            </Flex>
           </InstructionText>
         </Box>
         <Box>
@@ -83,15 +105,16 @@ function JupyterHubInstructions() {
     <>
       <InstructionHeading>Connect to JupyterHub</InstructionHeading>
       <InstructionText>
-        Visit{" "}
-        <Link
-          href="https://jupyterhub.eres.qut.edu.au"
-          isExternal
-          color="blue.500"
-        >
-          https://jupyterhub.eres.qut.edu.au
-        </Link>{" "}
-        and log in with your QUT username and password.
+        <TextWithLink
+          textBeforeLink={"Visit "}
+          link={{
+            href: "https://jupyterhub.eres.qut.edu.au",
+            text: "https://jupyterhub.eres.qut.edu.au",
+            color: "blue.500",
+            isExternal: true,
+          }}
+          textAfterLink={" and log in with your QUT username and password."}
+        />
       </InstructionText>
     </>
   );
@@ -102,30 +125,42 @@ function RvdiInstructions() {
     <>
       <InstructionHeading>Connect to rVDI</InstructionHeading>
       <InstructionText>
-        See the instructions{" "}
-        <Link
-          href="https://qutvirtual4.qut.edu.au/group/research-students/conducting-research/specialty-research-facilities/advanced-research-computing-storage/virtual-workstations"
-          isExternal
-          color="blue.500"
-        >
-          here
-        </Link>{" "}
-        for more information.
+        <TextWithLink
+          textBeforeLink={"See the instructions "}
+          link={{
+            href: "https://qutvirtual4.qut.edu.au/group/research-students/conducting-research/specialty-research-facilities/advanced-research-computing-storage/virtual-workstations",
+            text: "here",
+            color: "blue.500",
+            isExternal: true,
+          }}
+          textAfterLink={" for more information."}
+        />
       </InstructionText>
       <InstructionText>
-        If you have not already, download and install the VMware Horizon client
-        from{" "}
-        <Link href="https://rvdi.qut.edu.au" isExternal color="blue.500">
-          https://rvdi.qut.edu.au
-        </Link>
-        .
+        <TextWithLink
+          textBeforeLink={
+            "If you have not already, download and install the VMware Horizon client from "
+          }
+          link={{
+            href: "https://rvdi.qut.edu.au",
+            text: "https://rvdi.qut.edu.au",
+            color: "blue.500",
+            isExternal: true,
+          }}
+          textAfterLink={"."}
+        />
       </InstructionText>
       <InstructionText>
-        In the VMware Horizon client, connect to{" "}
-        <Link href="https://rvdi.qut.edu.au" isExternal color="blue.500">
-          rvdi.qut.edu.au
-        </Link>{" "}
-        and log in with your QUT username and password.
+        <TextWithLink
+          textBeforeLink={"In the VMware Horizon client, connect to "}
+          link={{
+            href: "https://rvdi.qut.edu.au",
+            text: "https://rvdi.qut.edu.au",
+            color: "blue.500",
+            isExternal: true,
+          }}
+          textAfterLink={" and log in with your QUT username and password."}
+        />
       </InstructionText>
     </>
   );

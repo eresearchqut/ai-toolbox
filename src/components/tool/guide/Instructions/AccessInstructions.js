@@ -1,5 +1,6 @@
-import { Code, Link } from "@chakra-ui/react";
+import { Code } from "@chakra-ui/react";
 
+import TextWithLink from "../../../navigation/TextWithLink";
 import CopyBox from "../../../output/CopyBox";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -37,10 +38,17 @@ export function AccessInstructions({ service, port, node, username }) {
       )}
       <InstructionHeading>Access the tool</InstructionHeading>
       <InstructionText>
-        In your web browser, navigate to the following address:{" "}
-        <Link href={`http://localhost:${port}`} isExternal color="blue.500">
-          http://localhost:{port}
-        </Link>
+        <TextWithLink
+          textBeforeLink={
+            "In your web browser, navigate to the following address: "
+          }
+          link={{
+            href: `http://localhost:${port}`,
+            text: `http://localhost:${port}`,
+            color: "blue.500",
+            isExternal: true,
+          }}
+        />
       </InstructionText>
       <CopyBox>http://localhost:{port}</CopyBox>
     </>

@@ -1,8 +1,8 @@
-import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Box, Checkbox, Code, Flex, Input, Link } from "@chakra-ui/react";
+import { Box, Checkbox, Code, Flex, Input } from "@chakra-ui/react";
 
 import { useState } from "react";
 
+import TextWithLink from "../../../navigation/TextWithLink";
 import CopyBox from "../../../output/CopyBox";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -100,18 +100,23 @@ export function LyraStartInstructions({
             command-line argument.
           </InstructionText>
           <InstructionText>
-            Pick your favourite text editor (e.g.: <Code>nano</Code>,{" "}
-            <Code>vim</Code> or <Code>gedit</Code>). If you do not know how to
-            use text editors, please{" "}
-            <Link
-              color="teal.500"
-              href="https://qutvirtual4.qut.edu.au/group/staff/research/conducting/facilities/advanced-research-computing-storage/supercomputing/using-linux"
-              isExternal
-            >
-              refer here
-              <ExternalLinkIcon mx="2px" />
-            </Link>
-            .
+            <Flex alignItems={"center"}>
+              Pick your favourite text editor (e.g.: <Code>nano</Code>,{" "}
+              <Code>vim</Code> or <Code>gedit</Code>).
+              <TextWithLink
+                textBeforeLink={
+                  "If you do not know how to use text editors, please "
+                }
+                link={{
+                  href: "https://qutvirtual4.qut.edu.au/group/staff/research/conducting/facilities/advanced-research-computing-storage/supercomputing/using-linux",
+                  text: "refer here",
+                  color: "blue.500",
+                  isExternal: true,
+                }}
+                hasExternalIcon={true}
+                textAfterLink={"."}
+              />
+            </Flex>
           </InstructionText>
         </>
       )}
@@ -186,17 +191,19 @@ export function JupyterHubStartInstructions({ jobProfile }) {
       </InstructionText>
       <InstructionText>Wait for the to be redirected.</InstructionText>
       <InstructionText>
-        It may take up to 10 minutes for your job to be queued and for the
-        server to start. If it fails to start, please raise an incident in the{" "}
-        <Link
-          color="teal.500"
-          href="https://eresearchqut.atlassian.net/servicedesk/customer/portals"
-          isExternal
-        >
-          eResearch help centre
-          <ExternalLinkIcon mx="2px" />
-        </Link>
-        .
+        <TextWithLink
+          textBeforeLink={
+            "It may take up to 10 minutes for your job to be queued and for the server to start. If it fails to start, please raise an incident in the "
+          }
+          link={{
+            href: "https://eresearchqut.atlassian.net/servicedesk/customer/portals",
+            text: "eResearch help centre",
+            color: "blue.500",
+            isExternal: true,
+          }}
+          hasExternalIcon={true}
+          textAfterLink={"."}
+        />
       </InstructionText>
     </>
   );

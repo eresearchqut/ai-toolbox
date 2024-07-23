@@ -1,15 +1,8 @@
-import {
-  Alert,
-  AlertIcon,
-  Link,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from "@chakra-ui/react";
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 
+import TextWithLink from "../../../navigation/TextWithLink";
 import CopyBox from "../../../output/CopyBox";
+import AlertHelper from "../Config/AlertHelper";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 import { singularityContainerName } from "./utils";
@@ -77,15 +70,16 @@ export function InstallInstructions({
                 Install Singularity (if it has not been installed)
               </InstructionHeading>
               <InstructionText>
-                Follow the instructions{" "}
-                <Link
-                  href="https://sylabs.io/docs/"
-                  isExternal
-                  color="blue.500"
-                >
-                  here
-                </Link>{" "}
-                to install singularity.
+                <TextWithLink
+                  textBeforeLink={"Follow the instructions "}
+                  link={{
+                    href: "https://sylabs.io/docs/",
+                    text: "here",
+                    color: "blue.500",
+                    isExternal: true,
+                  }}
+                  textAfterLink={" to install singularity."}
+                />
               </InstructionText>
               <InstructionHeading>Set up the container</InstructionHeading>
               <InstructionText>Build the container:</InstructionText>
@@ -144,11 +138,13 @@ export function InstallInstructions({
                     <CopyBox>source ~/.bashrc</CopyBox>
                   </TabPanel>
                   <TabPanel>
-                    <Alert status="warning">
-                      <AlertIcon />
-                      Packages take a long time to install with conda. We
-                      recommend using mamba instead.
-                    </Alert>
+                    <AlertHelper
+                      alertType="warning"
+                      alertMsg={
+                        "Packages take a long time to install with conda. We recommend using mamba instead."
+                      }
+                      alertDismissible={false}
+                    />
                     <InstructionText>
                       Download the latest version of miniconda:
                     </InstructionText>
@@ -201,15 +197,16 @@ export function InstallInstructions({
                 Install Python (if it has not been installed)
               </InstructionHeading>
               <InstructionText>
-                Follow the instructions{" "}
-                <Link
-                  href="https://www.python.org/downloads/"
-                  isExternal
-                  color="blue.500"
-                >
-                  here
-                </Link>{" "}
-                to install python.
+                <TextWithLink
+                  textBeforeLink={"Follow the instructions "}
+                  link={{
+                    href: "https://www.python.org/downloads/",
+                    text: "here",
+                    color: "blue.500",
+                    isExternal: true,
+                  }}
+                  textAfterLink={" to install python."}
+                />
               </InstructionText>
             </>
           )}

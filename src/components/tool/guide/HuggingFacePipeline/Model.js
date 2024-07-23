@@ -1,6 +1,5 @@
 import { CloseIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import {
-  Alert,
   Box,
   Button,
   Flex,
@@ -26,6 +25,7 @@ import {
 } from "@choc-ui/chakra-autocomplete";
 
 import useData from "../../../hooks/useData";
+import AlertHelper from "../Config/AlertHelper";
 
 function ModelAutoComplete({ model, onModelChange, models }) {
   return (
@@ -238,9 +238,11 @@ export function Model({ model, onModelChange, task }) {
 
   if (modelsError) {
     return (
-      <Alert status="error">
-        Error retrieving models: {modelsError.message}
-      </Alert>
+      <AlertHelper
+        alertType={"error"}
+        alertMsg={`Error retrieving models: ${modelsError.message}`}
+        alertDismissible={false}
+      />
     );
   } else if (modelsLoading) {
     return <Progress colorScheme="yellow" isIndeterminate />;
