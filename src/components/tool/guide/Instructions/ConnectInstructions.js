@@ -8,20 +8,6 @@ import InstructionText from "./components/InstructionText";
 import { OperatingSystemTabs } from "./components/OperatingSystemTabs";
 
 function LyraInstructions({ username }) {
-  const enableSSHText = () => {
-    return (
-      <TextWithLink
-        textBeforeLink={"You may need to enable the "}
-        link={{
-          href: "https://learn.microsoft.com/en-us/windows/terminal/tutorials/ssh",
-          text: "ssh feature",
-          isExternal: true,
-        }}
-        hasExternalIcon={false}
-        textAfterLink={" in Windows."}
-      />
-    );
-  };
   return (
     <>
       <InstructionHeading>Connect to Lyra</InstructionHeading>
@@ -46,9 +32,21 @@ function LyraInstructions({ username }) {
         <Box>
           <AlertHelper
             alertType={"info"}
-            alertMsg={enableSSHText}
+            // alertMsg={enableSSHText}
             alertDismissible={false}
-          />
+          >
+            <TextWithLink
+              textBeforeLink={"You may need to enable the "}
+              link={{
+                href: "https://learn.microsoft.com/en-us/windows/terminal/tutorials/ssh",
+                text: "ssh feature",
+                color: "blue.500",
+                isExternal: true,
+              }}
+              hasExternalIcon={false}
+              textAfterLink={" in Windows."}
+            />
+          </AlertHelper>
           <InstructionText>
             <Flex alignItems={"center"}>
               <TextWithLink

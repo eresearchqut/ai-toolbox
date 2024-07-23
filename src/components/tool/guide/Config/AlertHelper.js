@@ -5,6 +5,7 @@ export default function AlertHelper({
   alertType = "info",
   alertMsg = null,
   onClose = {},
+  children = null,
 }) {
   return (
     <>
@@ -13,9 +14,11 @@ export default function AlertHelper({
         <Box w="100%">
           <Alert display="flex" status={alertType}>
             <AlertIcon />
-            {alertMsg && typeof alertMsg === "function"
-              ? alertMsg()
-              : `${alertMsg}`}
+            {children
+              ? children
+              : alertMsg && typeof alertMsg === "function"
+                ? alertMsg()
+                : `${alertMsg}`}
             {alertDismissible && (
               <CloseButton
                 size="sm"
