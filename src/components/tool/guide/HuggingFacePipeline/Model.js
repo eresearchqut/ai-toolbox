@@ -238,11 +238,9 @@ export function Model({ model, onModelChange, task }) {
 
   if (modelsError) {
     return (
-      <AlertHelper
-        alertType={"error"}
-        alertMsg={`Error retrieving models: ${modelsError.message}`}
-        alertDismissible={false}
-      />
+      <AlertHelper alertType={"error"} alertDismissible={false}>
+        {`Error retrieving models: ${modelsError.message}`}
+      </AlertHelper>
     );
   } else if (modelsLoading) {
     return <Progress colorScheme="yellow" isIndeterminate />;

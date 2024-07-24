@@ -34,9 +34,10 @@ export default function ConfigSlider({
         <AlertHelper
           alertDismissible={alertDismissible}
           alertType={alertType}
-          alertMsg={alertMsg}
           onClose={onClose}
-        />
+        >
+          {alertMsg}
+        </AlertHelper>
       )}
     </>
   );

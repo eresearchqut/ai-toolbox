@@ -55,9 +55,10 @@ export default function ConfigMultipleNumbers({
         <AlertHelper
           alertDismissible={alertDismissible}
           alertType={alertType}
-          alertMsg={alertMsg}
           onClose={onClose}
-        />
+        >
+          {alertMsg}
+        </AlertHelper>
       )}
     </>
   );

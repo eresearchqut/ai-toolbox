@@ -34,9 +34,10 @@ export default function ConfigPicker({
         <AlertHelper
           alertDismissible={alertDismissible}
           alertType={alertType}
-          alertMsg={alertMsg}
           onClose={onClose}
-        />
+        >
+          {alertMsg}
+        </AlertHelper>
       )}
     </>
   );

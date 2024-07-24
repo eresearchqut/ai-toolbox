@@ -11,11 +11,11 @@ function LyraInstructions({ username }) {
   return (
     <>
       <InstructionHeading>Connect to Lyra</InstructionHeading>
-      <AlertHelper
-        alertType="info"
-        alertMsg="If you are off-campus, you will first need to connect to the QUT network using the VPN."
-        alertDismissible={false}
-      />
+      <AlertHelper alertType="info" alertDismissible={false}>
+        {
+          "If you are off-campus, you will first need to connect to the QUT network using the VPN."
+        }
+      </AlertHelper>
       <InstructionText>
         <TextWithLink
           textBeforeLink={"See the instructions "}
@@ -30,11 +30,7 @@ function LyraInstructions({ username }) {
       </InstructionText>
       <OperatingSystemTabs>
         <Box>
-          <AlertHelper
-            alertType={"info"}
-            // alertMsg={enableSSHText}
-            alertDismissible={false}
-          >
+          <AlertHelper alertType={"info"} alertDismissible={false}>
             <TextWithLink
               textBeforeLink={"You may need to enable the "}
               link={{

@@ -15,13 +15,9 @@ export function TeardownInstructions({
     <>
       {service === "Lyra" && (
         <>
-          <AlertHelper
-            alertType="warning"
-            alertMsg={
-              "Lyra is a shared resource, only request the resources you need."
-            }
-            alertDismissible={false}
-          />
+          <AlertHelper alertType="warning" alertDismissible={false}>
+            {"Lyra is a shared resource, only request the resources you need."}
+          </AlertHelper>
         </>
       )}
       {usingTool && (

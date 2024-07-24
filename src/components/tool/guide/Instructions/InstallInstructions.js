@@ -138,13 +138,11 @@ export function InstallInstructions({
                     <CopyBox>source ~/.bashrc</CopyBox>
                   </TabPanel>
                   <TabPanel>
-                    <AlertHelper
-                      alertType="warning"
-                      alertMsg={
+                    <AlertHelper alertType="warning" alertDismissible={false}>
+                      {
                         "Packages take a long time to install with conda. We recommend using mamba instead."
                       }
-                      alertDismissible={false}
-                    />
+                    </AlertHelper>
                     <InstructionText>
                       Download the latest version of miniconda:
                     </InstructionText>

@@ -1,9 +1,10 @@
 import { Alert, AlertIcon, Box, CloseButton, Flex } from "@chakra-ui/react";
 
+import React from "react";
+
 export default function AlertHelper({
   alertDismissible = true,
   alertType = "info",
-  alertMsg = null,
   onClose = {},
   children = null,
 }) {
@@ -14,11 +15,9 @@ export default function AlertHelper({
         <Box w="100%">
           <Alert display="flex" status={alertType}>
             <AlertIcon />
-            {children
-              ? children
-              : alertMsg && typeof alertMsg === "function"
-                ? alertMsg()
-                : `${alertMsg}`}
+            {children && typeof children === "string"
+              ? `${children}`
+              : React.isValidElement(children) && children}
             {alertDismissible && (
               <CloseButton
                 size="sm"
