@@ -1,6 +1,7 @@
-import { Alert, AlertIcon, Code, Kbd } from "@chakra-ui/react";
+import { Code, Kbd } from "@chakra-ui/react";
 
 import CopyBox from "../../../output/CopyBox";
+import AlertHelper from "../Config/AlertHelper";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 
@@ -14,10 +15,9 @@ export function TeardownInstructions({
     <>
       {service === "Lyra" && (
         <>
-          <Alert status="warning" variant="left-accent">
-            <AlertIcon />
-            Lyra is a shared resource, only request the resources you need.
-          </Alert>
+          <AlertHelper alertType="warning" alertDismissible={false}>
+            {"Lyra is a shared resource, only request the resources you need."}
+          </AlertHelper>
         </>
       )}
       {usingTool && (

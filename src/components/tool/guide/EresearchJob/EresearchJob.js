@@ -78,20 +78,6 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       };
     },
     nodes: () => {
-      const mpiAlertMsg = () => {
-        return (
-          <TextWithLink
-            textBeforeLink={"Only use more than 1 node if you are using "}
-            link={{
-              href: "https://hpc-wiki.info/hpc/MPI",
-              text: "MPI",
-              isExternal: true,
-            }}
-            hasExternalIcon={true}
-            textAfterLink={"-type software."}
-          />
-        );
-      };
       return {
         element: (key, selected) => (
           <ConfigSlider
@@ -109,7 +95,18 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             }}
             showAlert={config?.nodes > 1}
             alertType="warning"
-            alertMsg={mpiAlertMsg}
+            alertMsg={
+              <TextWithLink
+                textBeforeLink={"Only use more than 1 node if you are using "}
+                link={{
+                  href: "https://hpc-wiki.info/hpc/MPI",
+                  text: "MPI",
+                  isExternal: true,
+                }}
+                hasExternalIcon={true}
+                textAfterLink={"-type software."}
+              />
+            }
           />
         ),
         show: (config) =>
@@ -211,20 +208,6 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
           ["GPU", "Accelerated GPU"],
         ];
       }
-      const customAlertMsg = () => {
-        return (
-          <TextWithLink
-            textBeforeLink={"IPUs are currently unavailable. Please "}
-            link={{
-              href: "https://eresearchqut.atlassian.net/servicedesk/customer/portals",
-              text: "contact eResearch if interested",
-              isExternal: true,
-            }}
-            hasExternalIcon={true}
-            textAfterLink={"."}
-          />
-        );
-      };
       return {
         element: (key, selected) => (
           <ConfigPicker
@@ -239,7 +222,18 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             }}
             showAlert={config?.hardware === "IPU"}
             alertType="warning"
-            alertMsg={customAlertMsg}
+            alertMsg={
+              <TextWithLink
+                textBeforeLink={"IPUs are currently unavailable. Please "}
+                link={{
+                  href: "https://eresearchqut.atlassian.net/servicedesk/customer/portals",
+                  text: "contact eResearch if interested",
+                  isExternal: true,
+                }}
+                hasExternalIcon={true}
+                textAfterLink={"."}
+              />
+            }
           />
         ),
         show: (config) => config?.service,
