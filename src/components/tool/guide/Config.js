@@ -9,8 +9,8 @@ export const DEFAULT_CONFIG = {
   ram: 16,
   gpuModules: 1,
   wallTime: { hour: 1, minute: 0 },
-  isArrayJob: "Standalone",
-  jobInstances: { firstIndex: 1, upperBound: 10, step: 1 },
+  jobInstanceType: "Standalone",
+  arrayConfig: { firstIndex: 1, upperBound: 10, step: 1 },
 };
 
 export const isValidChoice = (choices, value) => {

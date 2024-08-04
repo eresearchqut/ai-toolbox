@@ -114,40 +114,41 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
         selected: (config) => config?.nodes > 0,
       };
     },
-    isArrayJob: () => {
-      const jobInstances = [
+    jobInstanceType: () => {
+      const arrayConfig = [
         ["Standalone", "Run a single instance of the job"],
-        ["Array", "Run many instances of the job in parallel"],
+        ["Array", "Run many instances of the job"],
       ];
       return {
         element: (key, selected) => (
           <ConfigPicker
             key={key}
-            title="Job Instances"
+            title="Job instances"
             description="Run a single instance, or many instances of the job."
             selected={selected}
             inputProps={{
-              choices: jobInstances,
-              value: config?.isArrayJob,
-              onChange: onChange("isArrayJob"),
+              choices: arrayConfig,
+              value: config?.jobInstanceType,
+              onChange: onChange("jobInstanceType"),
             }}
           />
         ),
         show: (config) =>
           config?.service === "Lyra" && config?.jobType === "Batch",
-        selected: (config) => isValidChoice(jobInstances, config?.isArrayJob),
+        selected: (config) =>
+          isValidChoice(arrayConfig, config?.jobInstanceType),
       };
     },
-    jobInstances: () => {
+    arrayConfig: () => {
       return {
         element: (key, selected) => (
           <ConfigMultipleNumbers
             key={key}
-            title="Instances Config"
-            description="Array job settings"
+            title="Array range"
+            description="Array sub-job range indexes. The first index is the starting index, the upper bound is the last index, and the step is the increment between indexes."
             selected={selected}
-            value={config?.jobInstances}
-            onChange={onChange("jobInstances")}
+            value={config?.arrayConfig}
+            onChange={onChange("arrayConfig")}
             inputProps={{
               min: 0,
             }}
@@ -156,13 +157,13 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
         show: (config) =>
           config?.service === "Lyra" &&
           config?.jobType === "Batch" &&
-          config?.isArrayJob === "Array",
+          config?.jobInstanceType === "Array",
         selected: (config) =>
-          config?.jobInstances.step >= 1 &&
-          config?.jobInstances.upperBound >= config?.jobInstances.firstIndex &&
-          config?.jobInstances.upperBound > config?.jobInstances.step &&
-          config?.jobInstances.upperBound >=
-            config?.jobInstances.firstIndex + config?.jobInstances.step,
+          config?.arrayConfig.step >= 1 &&
+          config?.arrayConfig.upperBound >= config?.arrayConfig.firstIndex &&
+          config?.arrayConfig.upperBound > config?.arrayConfig.step &&
+          config?.arrayConfig.upperBound >=
+            config?.arrayConfig.firstIndex + config?.arrayConfig.step,
       };
     },
     wallTime: () => {
