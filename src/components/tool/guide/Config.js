@@ -130,7 +130,7 @@ export const getCpuCores = (config, onChange) => () => {
         selected={selected}
         inputProps={{
           value: config?.cpuCores,
-          label: "cores",
+          label: config?.cpuCores > 1 ? "cores" : "core",
           min: 1,
           max: cpuCores,
           step: 1,
