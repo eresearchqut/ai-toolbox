@@ -61,7 +61,7 @@ export const getCpuVendor = (config, onChange) => () => {
     element: (key, selected) => (
       <ConfigPicker
         key={key}
-        title="CPU Vendor"
+        title="CPU vendor"
         selected={selected}
         inputProps={{
           choices: cpuVendors,
@@ -87,7 +87,7 @@ export const getCpuModel = (config, onChange) => () => {
     element: (key, selected) => (
       <ConfigPicker
         key={key}
-        title="CPU Model"
+        title="CPU model"
         selected={selected}
         inputProps={{
           choices: cpuModels,
@@ -225,7 +225,7 @@ export const getGpuVendor = (config, onChange) => () => {
       return (
         <ConfigPicker
           key={key}
-          title="GPU Vendor"
+          title="GPU vendor"
           selected={selected}
           inputProps={{
             choices: gpuVendors,
@@ -259,7 +259,7 @@ export const getGpuModel = (config, onChange) => () => {
     element: (key, selected) => (
       <ConfigPicker
         key={key}
-        title="GPU Model"
+        title="GPU model"
         selected={selected}
         inputProps={{
           choices: gpuModels,

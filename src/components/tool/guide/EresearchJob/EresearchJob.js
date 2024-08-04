@@ -63,7 +63,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
         element: (key, selected) => (
           <ConfigPicker
             key={key}
-            title="Job Type"
+            title="Job type"
             description="The type of PBS job to run."
             selected={selected}
             inputProps={{
