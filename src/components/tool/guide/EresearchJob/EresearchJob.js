@@ -27,7 +27,7 @@ import { EresearchInstructions } from "./EresearchInstructions";
 
 const getConfigGroups = (config, onConfigChange = () => {}) => {
   const onChange = (key) => (value) =>
-    onConfigChange({ ...config, [key]: value });
+    onConfigChange((prev) => ({ ...prev, [key]: value }));
 
   return {
     service: () => {
