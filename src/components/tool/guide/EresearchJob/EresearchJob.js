@@ -25,6 +25,29 @@ import ConfigSlider from "../Config/ConfigSlider";
 import { Guide, GuideHeader } from "../Guide";
 import { EresearchInstructions } from "./EresearchInstructions";
 
+const summarizeIndexes = (start, upper, step, max = 6) => {
+  const indexes = [];
+  const count = Math.floor((upper - start + step) / step);
+  const half = Math.floor(max / 2);
+
+  if (count <= max) {
+    for (let i = 0; i < count; i++) {
+      indexes.push(start + i * step);
+    }
+  } else {
+    for (let i = 0; i < half; i++) {
+      indexes.push(start + i * step);
+    }
+    indexes.push("...");
+    const lastStart = start + (count - half) * step;
+    for (let i = 0; i < half; i++) {
+      indexes.push(lastStart + i * step);
+    }
+  }
+
+  return indexes;
+};
+
 const getConfigGroups = (config, onConfigChange = () => {}) => {
   const onChange = (key) => (value) =>
     onConfigChange((prev) => ({ ...prev, [key]: value }));
@@ -140,6 +163,11 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
       };
     },
     arrayConfig: () => {
+      const indexes = summarizeIndexes(
+        config?.arrayConfig?.firstIndex,
+        config?.arrayConfig?.upperBound,
+        config?.arrayConfig?.step,
+      );
       return {
         element: (key, selected) => (
           <ConfigMultipleNumbers
@@ -152,6 +180,9 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             inputProps={{
               min: 0,
             }}
+            showAlert={selected}
+            alertType="info"
+            alertMsg={`Indexes: ${indexes.join(", ")}`}
           />
         ),
         show: (config) =>
