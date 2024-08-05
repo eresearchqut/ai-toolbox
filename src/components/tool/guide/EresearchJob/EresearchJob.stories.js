@@ -25,7 +25,7 @@ export const LyraBatch = {
       hardware: "CPU",
       cpuVendor: "Any",
       cpuCores: 4,
-      ram: 16,
+      ram: 32,
     },
   },
 };
@@ -39,7 +39,7 @@ export const LyraInteractive = {
       hardware: "CPU",
       cpuVendor: "Any",
       cpuCores: 4,
-      ram: 16,
+      ram: 32,
     },
   },
 };
@@ -71,7 +71,7 @@ export const LyraMultiNode = {
       hardware: "CPU",
       cpuVendor: "Any",
       cpuCores: 4,
-      ram: 16,
+      ram: 32,
       nodes: 2,
     },
   },
@@ -88,7 +88,7 @@ export const LyraArray = {
       hardware: "CPU",
       cpuVendor: "Any",
       cpuCores: 4,
-      ram: 16,
+      ram: 32,
     },
   },
 };
