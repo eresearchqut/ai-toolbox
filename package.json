@@ -39,7 +39,7 @@
   "devDependencies": {
     "@chakra-ui/storybook-addon": "^5.1.0",
     "@docusaurus/module-type-aliases": "3.4.0",
-    "@eslint/js": "^9.6.0",
+    "@eslint/js": "^9.8.0",
     "@storybook/addon-essentials": "^8.2.7",
     "@storybook/addon-interactions": "^8.2.7",
     "@storybook/addon-links": "^8.2.7",
@@ -50,10 +50,10 @@
     "@storybook/react-webpack5": "^8.2.7",
     "@storybook/test": "^8.2.7",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "eslint": "8.x",
-    "eslint-plugin-react": "^7.34.3",
+    "eslint": "^9.8.0",
+    "eslint-plugin-react": "^7.35.0",
     "globals": "^15.9.0",
-    "prettier": "^3.3.2",
+    "prettier": "^3.3.3",
     "prop-types": "^15.8.1",
     "storybook": "^8.2.7"
   },
