@@ -9,8 +9,8 @@ export const DEFAULT_CONFIG = {
   ram: 16,
   gpuModules: 1,
   wallTime: { hour: 1, minute: 0 },
-  isArrayJob: "Standalone",
-  jobInstances: { firstIndex: 1, upperBound: 10, step: 1 },
+  jobInstanceType: "Standalone",
+  arrayConfig: { firstIndex: 1, upperBound: 10, step: 1 },
 };
 
 export const isValidChoice = (choices, value) => {
@@ -61,7 +61,7 @@ export const getCpuVendor = (config, onChange) => () => {
     element: (key, selected) => (
       <ConfigPicker
         key={key}
-        title="CPU Vendor"
+        title="CPU vendor"
         selected={selected}
         inputProps={{
           choices: cpuVendors,
@@ -87,7 +87,7 @@ export const getCpuModel = (config, onChange) => () => {
     element: (key, selected) => (
       <ConfigPicker
         key={key}
-        title="CPU Model"
+        title="CPU model"
         selected={selected}
         inputProps={{
           choices: cpuModels,
@@ -225,7 +225,7 @@ export const getGpuVendor = (config, onChange) => () => {
       return (
         <ConfigPicker
           key={key}
-          title="GPU Vendor"
+          title="GPU vendor"
           selected={selected}
           inputProps={{
             choices: gpuVendors,
@@ -259,7 +259,7 @@ export const getGpuModel = (config, onChange) => () => {
     element: (key, selected) => (
       <ConfigPicker
         key={key}
-        title="GPU Model"
+        title="GPU model"
         selected={selected}
         inputProps={{
           choices: gpuModels,
