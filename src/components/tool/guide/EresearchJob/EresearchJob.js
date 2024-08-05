@@ -56,8 +56,8 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
     },
     jobType: () => {
       const jobTypes = [
-        ["Interactive", "Run the job in an interactive shell"],
         ["Batch", "Submit the job to the queue to run in the background"],
+        ["Interactive", "Run the job in an interactive shell"],
       ];
       return {
         element: (key, selected) => (
