@@ -238,7 +238,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
           />
         ),
         show: (config) => config?.service,
-        selected: (config) => isValidChoice(hardware, config?.hardware),
+        selected: (config) => isValidChoice(["CPU", "GPU"], config?.hardware),
       };
     },
     cpuVendor: getCpuVendor(config, onChange),
