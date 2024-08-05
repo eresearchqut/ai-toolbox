@@ -16,6 +16,20 @@ export const NoHeader = {
   },
 };
 
+export const LyraBatch = {
+  args: {
+    initialConfig: {
+      ...DEFAULT_CONFIG,
+      service: "Lyra",
+      jobType: "Batch",
+      hardware: "CPU",
+      cpuVendor: "Any",
+      cpuCores: 4,
+      ram: 16,
+    },
+  },
+};
+
 export const LyraInteractive = {
   args: {
     initialConfig: {
@@ -35,7 +49,7 @@ export const LyraCustomHardware = {
     initialConfig: {
       ...DEFAULT_CONFIG,
       service: "Lyra",
-      jobType: "Interactive",
+      jobType: "Batch",
       hardware: "GPU",
       cpuVendor: "Intel",
       cpuModel: "8260",
@@ -44,20 +58,6 @@ export const LyraCustomHardware = {
       gpuModules: 8,
       cpuCores: 32,
       ram: 128,
-    },
-  },
-};
-
-export const LyraBatch = {
-  args: {
-    initialConfig: {
-      ...DEFAULT_CONFIG,
-      service: "Lyra",
-      jobType: "Batch",
-      hardware: "CPU",
-      cpuVendor: "Any",
-      cpuCores: 4,
-      ram: 16,
     },
   },
 };
