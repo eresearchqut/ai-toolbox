@@ -6,7 +6,7 @@ import ConfigSlider from "./Config/ConfigSlider";
 export const DEFAULT_CONFIG = {
   nodes: 1,
   cpuCores: 4,
-  ram: 16,
+  ram: 32,
   gpuModules: 1,
   wallTime: { hour: 1, minute: 0 },
   jobInstanceType: "Standalone",
@@ -134,7 +134,10 @@ export const getCpuCores = (config, onChange) => () => {
           min: 1,
           max: cpuCores,
           step: 1,
-          onChange: onChange("cpuCores"),
+          onChange: (value) => {
+            onChange("cpuCores")(value);
+            onChange("ram")(value * 8);
+          },
         }}
       />
     ),
@@ -177,6 +180,9 @@ export const getRam = (config, onChange) => () => {
           step: 8,
           onChange: onChange("ram"),
         }}
+        showAlert={config?.ram !== config?.cpuCores * 8}
+        alertType={"warning"}
+        alertMsg={"The recommended RAM is 8GB per core."}
       />
     ),
     show: (config) => isLyra(config),
