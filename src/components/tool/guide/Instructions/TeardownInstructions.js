@@ -1,7 +1,14 @@
-import { Code, Kbd } from "@chakra-ui/react";
+import {
+  AbsoluteCenter,
+  Box,
+  Code,
+  Divider,
+  Heading,
+  Kbd,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 import CopyBox from "../../../output/CopyBox";
-import AlertHelper from "../Config/AlertHelper";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 
@@ -13,13 +20,14 @@ export function TeardownInstructions({
 }) {
   return (
     <>
-      {service === "Lyra" && (
-        <>
-          <AlertHelper alertType="warning" alertDismissible={false}>
-            {"Lyra is a shared resource, only request the resources you need."}
-          </AlertHelper>
-        </>
-      )}
+      <Box position="relative" padding="10">
+        <Divider />
+        <AbsoluteCenter bg={useColorModeValue("white", "gray.700")} px="4">
+          <Heading as="h2" size="md" my={2}>
+            Teardown steps
+          </Heading>
+        </AbsoluteCenter>
+      </Box>
       {usingTool && (
         <>
           <InstructionHeading>Stop the server</InstructionHeading>
