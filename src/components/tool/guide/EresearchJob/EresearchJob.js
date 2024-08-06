@@ -213,7 +213,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
                 step: 1,
               },
               {
-                min: config?.wallTime?.hour < 1 ? 1 : 0,
+                min: config?.wallTime?.hours < 1 ? 1 : 0,
                 max: 59,
                 step: 1,
               },
@@ -223,7 +223,7 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
         show: (config) =>
           config?.service === "Lyra" && config?.jobType === "Batch",
         selected: (config) =>
-          config?.wallTime.hour > 0 || config?.wallTime.minute > 0,
+          config?.wallTime.hours > 0 || config?.wallTime.minutes > 0,
       };
     },
     hardware: () => {

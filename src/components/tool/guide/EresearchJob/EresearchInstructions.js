@@ -41,7 +41,7 @@ export function EresearchInstructions({ config }) {
               value={batchJobName}
               onChange={setBatchJobName}
               pattern={JOB_NAME_PATTERN}
-              helperText="Please enter your batch job name so that it can be pre-populated in the commands below."
+              helperText="Enter a name for your batch job so that it can be pre-populated in the commands below."
               errorText="Job name must only contain alphanumerics or '-', '_', '+', '.' and must not be empty."
             />
           )}

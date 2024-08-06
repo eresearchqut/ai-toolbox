@@ -1,10 +1,4 @@
-import {
-  AbsoluteCenter,
-  Box,
-  Divider,
-  Heading,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import { useState } from "react";
 
@@ -101,14 +95,6 @@ export function HuggingFaceInstructions({ task, model, config, port }) {
         node={node}
         username={username}
       />
-      <Box position="relative" padding="10">
-        <Divider />
-        <AbsoluteCenter bg={useColorModeValue("white", "gray.700")} px="4">
-          <Heading as="h2" size="md" my={4}>
-            Teardown steps
-          </Heading>
-        </AbsoluteCenter>
-      </Box>
       <TeardownInstructions
         service={config.service}
         environment={config.environment}
