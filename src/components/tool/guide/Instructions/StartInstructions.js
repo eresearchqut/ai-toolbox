@@ -165,9 +165,47 @@ export function LyraStartInstructions({
       {jobType === "Batch" && (
         <>
           <InstructionText>
-            You can check the status of your jobs by running the following:
+            You can check the status of your jobs by running the following
+            command:
           </InstructionText>
-          <CopyBox>qstat -u $USER</CopyBox>
+          <CopyBox>qstat -xu $USER</CopyBox>
+          <InstructionText>
+            The output will look similar to the following:
+          </InstructionText>
+          <CopyBox>
+            {`pbs: 
+                                                                 Req'd  Req'd   Elap
+Job ID               Username Queue    Jobname  SessID NDS TSK Memory Time  S Time
+-------------------- -------- -------- -------- ------ --- --- ------ ----- - -----
+1234567.pbs          username quick    job-name    --    1   4   32gb 01:00 Q   --`}
+          </CopyBox>
+          <InstructionText>
+            The job status will be shown in the <Code>S</Code> column. Possible
+            values are:
+            <UnorderedList>
+              <ListItem>
+                <Code>Q</Code> - Queued
+              </ListItem>
+              <ListItem>
+                <Code>R</Code> - Running
+              </ListItem>
+              <ListItem>
+                <Code>B</Code> - Array job has at least one subjob running
+              </ListItem>
+              <ListItem>
+                <Code>H</Code> - Held
+              </ListItem>
+              <ListItem>
+                <Code>S</Code> - Suspended
+              </ListItem>
+              <ListItem>
+                <Code>E</Code> - Exiting
+              </ListItem>
+              <ListItem>
+                <Code>F</Code> - Finished
+              </ListItem>
+            </UnorderedList>
+          </InstructionText>
         </>
       )}
     </>
