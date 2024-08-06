@@ -18,7 +18,7 @@ export default function InstructionInput({
   placeholder,
   value,
   onChange,
-  pattern,
+  pattern = /.*/,
   helperText,
   errorText,
 }) {

@@ -1,9 +1,18 @@
-import { Box, Checkbox, Code, Flex, Input } from "@chakra-ui/react";
+import {
+  Code,
+  Flex,
+  Kbd,
+  ListItem,
+  Radio,
+  RadioGroup,
+  UnorderedList,
+} from "@chakra-ui/react";
 
 import { useState } from "react";
 
 import TextWithLink from "../../../navigation/TextWithLink";
 import CopyBox from "../../../output/CopyBox";
+import InstructionInput from "./InstructionInput";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 
@@ -65,87 +74,86 @@ export function LyraStartInstructions({
     "echo \"Running job '$PBS_JOBNAME' ($PBS_JOBID) in the following directory: $PWD\"",
   ];
 
-  const [hasScript, setHasScript] = useState(false);
-  const [scriptPath, setScriptPath] = useState("");
+  const [scriptInput, setScriptInput] = useState("file");
+  const [scriptPath, setScriptPath] = useState();
 
   const cmdText = `qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(
     ":",
-  )}${jobType === "Batch" && hasScript ? " " + scriptPath : ""}`;
+  )}${jobType === "Batch" && scriptInput === "file" ? " " + (scriptPath || `${jobName}.sh`) : ""}`;
 
   return (
     <>
       {jobType === "Batch" && (
         <>
-          <InstructionHeading>Creating a batch job script</InstructionHeading>
+          <InstructionHeading>Create the batch job script</InstructionHeading>
           <InstructionText>
-            Before scheduling a batch job, you need to create a job script first
-            (Click to edit):
-            <CopyBox editable={true}>{batchJobScript.join("\n")}</CopyBox>
+            A job script contains the commands you want to run as part of the
+            job.
           </InstructionText>
           <InstructionText>
-            You can either edit and copy the above content, use{" "}
-            <Code>qsub</Code> command submitting a job, paste it to standard
-            input to run it.
+            Click the example script below to edit it, or copy it into your
+            preferred text editor.
           </InstructionText>
           <InstructionText>
-            (Note: When submitting a job without specifying your script, you
-            will see{" "}
-            <Code>
-              Job script will be read from standard input. Submit with CTRL+D.
-            </Code>{" "}
-            which indicates standard input mode.)
+            <TextWithLink
+              textBeforeLink={
+                "To use a text editor such as nano or vim on Lyra, refer to the tutorial on "
+              }
+              link={{
+                href: "https://qutvirtual4.qut.edu.au/group/staff/research/conducting/facilities/advanced-research-computing-storage/supercomputing/using-linux",
+                text: "this page",
+                color: "blue.500",
+                isExternal: true,
+              }}
+              hasExternalIcon={true}
+              textAfterLink={"."}
+            />
           </InstructionText>
+          <CopyBox editable={true}>{batchJobScript.join("\n")}</CopyBox>
           <InstructionText>
-            Alternatively, save your script as a file, and use it as a
-            command-line argument.
-          </InstructionText>
-          <InstructionText>
-            <Flex alignItems={"center"}>
-              Pick your favourite text editor (e.g.: <Code>nano</Code>,{" "}
-              <Code>vim</Code> or <Code>gedit</Code>).
-              <TextWithLink
-                textBeforeLink={
-                  "If you do not know how to use text editors, please "
-                }
-                link={{
-                  href: "https://qutvirtual4.qut.edu.au/group/staff/research/conducting/facilities/advanced-research-computing-storage/supercomputing/using-linux",
-                  text: "refer here",
-                  color: "blue.500",
-                  isExternal: true,
-                }}
-                hasExternalIcon={true}
-                textAfterLink={"."}
-              />
-            </Flex>
+            You may either:
+            <RadioGroup defaultValue="file" onChange={setScriptInput}>
+              <Flex direction="column">
+                <Radio value="file">
+                  Save the script as a file on Lyra (eg.{" "}
+                  <Code>{jobName}.sh</Code>)
+                </Radio>
+                <Radio value="stdin">
+                  Run the command below, then paste the script into the
+                  command&apos;s input
+                </Radio>
+              </Flex>
+            </RadioGroup>
           </InstructionText>
         </>
       )}
+      {jobType === "Batch" && scriptInput === "file" && (
+        <InstructionInput
+          label="Script Path"
+          placeholder={`${jobName}.sh`}
+          value={scriptPath}
+          onChange={setScriptPath}
+          helperText="Enter the path of the script on Lyra."
+        />
+      )}
+
       <InstructionHeading>Schedule a job</InstructionHeading>
       <InstructionText>
         In the ssh session, run the following command to schedule the{" "}
         {jobType.toLowerCase()} job:
       </InstructionText>
-      {jobType === "Batch" && (
-        <Flex>
-          <Box minWidth="20%">
-            <Checkbox
-              isChecked={hasScript}
-              onChange={(e) => setHasScript(e.target.checked)}
-            >
-              I have a script to specify
-            </Checkbox>
-          </Box>
-          {hasScript && (
-            <Input
-              size="xs"
-              placeholder={"full/path/to/your_script.sh"}
-              value={scriptPath}
-              onChange={(e) => setScriptPath(e.target.value)}
-            ></Input>
-          )}
-        </Flex>
-      )}
       <CopyBox>{cmdText}</CopyBox>
+      {scriptInput === "stdin" && (
+        <InstructionText>
+          Paste the batch job script above into the command&apos;s input, then
+          press <Kbd>Ctrl</Kbd> + <Kbd>D</Kbd> to submit the job.
+        </InstructionText>
+      )}
+      <InstructionHeading>Job status</InstructionHeading>
+      <InstructionText>
+        The job has been scheduled and will start running when resources are
+        available.
+      </InstructionText>
       {jobType === "Interactive" && (
         <>
           <InstructionText>
