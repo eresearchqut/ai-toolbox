@@ -8,7 +8,7 @@ export const DEFAULT_CONFIG = {
   cpuCores: 4,
   ram: 32,
   gpuModules: 1,
-  wallTime: { hour: 1, minute: 0 },
+  wallTime: { hours: 1, minutes: 0 },
   jobInstanceType: "Standalone",
   arrayConfig: { firstIndex: 1, upperBound: 10, step: 1 },
 };

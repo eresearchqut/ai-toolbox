@@ -59,11 +59,11 @@ export function LyraStartInstructions({
   const wallTimeStr =
     jobType === "Interactive"
       ? "01:00:00"
-      : (wallTime?.hour < 10 ? "0" : "") +
-        wallTime?.hour +
+      : (wallTime?.hours < 10 ? "0" : "") +
+        wallTime?.hours +
         ":" +
-        (wallTime?.minute < 10 ? "0" : "") +
-        wallTime?.minute +
+        (wallTime?.minutes < 10 ? "0" : "") +
+        wallTime?.minutes +
         ":00";
 
   const batchJobScript = [
