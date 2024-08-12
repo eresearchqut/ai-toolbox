@@ -37,7 +37,10 @@ export function LyraStartInstructions({
     `ncpus=${cpuCores}`,
     `mem=${ram}gb`,
   ];
-  if (cpuVendor !== "Any" && cpuModel) resources.push(`cputype=${cpuModel}`);
+  if (cpuVendor !== "Any") {
+    if (cpuModel !== "Any") resources.push(`cputype=${cpuModel}`);
+    else resources.push(cpuVendor === "AMD" ? "cpuarch=amd" : "cpuarch=avx512");
+  }
   if (hardware === "GPU") {
     resources.push(`ngpus=${gpuModules}`);
     if (gpuVendor !== "Any" && gpuModel) {

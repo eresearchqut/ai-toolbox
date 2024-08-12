@@ -78,9 +78,9 @@ export const getCpuVendor = (config, onChange) => () => {
 export const getCpuModel = (config, onChange) => () => {
   let cpuModels = [];
   if (config?.cpuVendor === "AMD") {
-    cpuModels = ["7702", "7713"];
+    cpuModels = ["Any", "7702", "7713"];
   } else if (config?.cpuVendor === "Intel") {
-    cpuModels = ["6140", "6248", "8260", "E7-8890v4"];
+    cpuModels = ["Any", "6140", "6248", "8260", "E7-8890v4"];
   }
 
   return {
