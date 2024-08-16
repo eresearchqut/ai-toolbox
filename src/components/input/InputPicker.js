@@ -6,7 +6,7 @@ export default function InputPicker({ choices, value, onChange = (_) => {} }) {
   const { colorScheme } = useGuideContext();
 
   return (
-    <Flex flexGrow="1">
+    <Flex flexGrow="1" flexWrap="wrap">
       {choices?.map((choice) => {
         const { label, description } = Array.isArray(choice)
           ? { label: choice[0], description: choice[1] }
@@ -14,15 +14,9 @@ export default function InputPicker({ choices, value, onChange = (_) => {} }) {
         const selected = label === value;
 
         return (
-          <Tooltip
-            key={label}
-            label={description}
-            flexGrow="1"
-            placement="top"
-            hasArrow
-          >
+          <Tooltip key={label} label={description} placement="top" hasArrow>
             <Button
-              flex="1"
+              flexGrow="1"
               variant={selected ? "solid" : "outline"}
               size="sm"
               borderRadius="0"
