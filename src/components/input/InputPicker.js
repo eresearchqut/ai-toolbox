@@ -2,7 +2,7 @@ import { Button, Flex, Tooltip } from "@chakra-ui/react";
 
 import { useGuideContext } from "../tool/guide/Guide";
 
-export default function InputPicker({ choices, value, onChange = () => {} }) {
+export default function InputPicker({ choices, value, onChange = (_) => {} }) {
   const { colorScheme } = useGuideContext();
 
   return (
@@ -30,7 +30,6 @@ export default function InputPicker({ choices, value, onChange = () => {} }) {
               p="0"
               onClick={() => onChange(label)}
               colorScheme={selected ? colorScheme : "gray"}
-              // textShadow={selected ? '1px 1px 2px white' : 'none'}
             >
               {label}
             </Button>
