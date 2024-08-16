@@ -112,7 +112,9 @@ export function LyraStartInstructions({
               textAfterLink={"."}
             />
           </InstructionText>
-          <CopyBox editable={true}>{batchJobScript.join("\n")}</CopyBox>
+          <CopyBox editable={true} wrap={false}>
+            {batchJobScript.join("\n")}
+          </CopyBox>
           <InstructionText>
             You may either:
             <RadioGroup defaultValue="file" onChange={setScriptInput}>
@@ -175,12 +177,12 @@ export function LyraStartInstructions({
           <InstructionText>
             The output will look similar to the following:
           </InstructionText>
-          <CopyBox>
+          <CopyBox wrap={false}>
             {`pbs: 
-                                                                 Req'd  Req'd   Elap
-Job ID               Username Queue    Jobname  SessID NDS TSK Memory Time  S Time
--------------------- -------- -------- -------- ------ --- --- ------ ----- - -----
-1234567.pbs          username quick    job-name    --    1   4   32gb 01:00 Q   --`}
+                                                   Req'd  Req'd   Elap
+Job ID      Username Queue Jobname  SessID NDS TSK Memory Time  S Time
+----------- -------- ----- -------- ------ --- --- ------ ----- - -----
+1234567.pbs username quick job-name    --    1   4   32gb 01:00 Q   --`}
           </CopyBox>
           <InstructionText>
             The job status will be shown in the <Code>S</Code> column. Possible
