@@ -1,0 +1,12 @@
+server {
+    listen 80;
+    server_name localhost;
+    absolute_redirect off;
+
+    location /ai-toolbox/ {
+        alias /usr/share/nginx/html/;
+        index index.html;
+        include  /etc/nginx/mime.types;
+        add_header Content-Security-Policy "frame-ancestors 'self' ${ALLOWED_DOMAINS};";
+    }
+}

@@ -1,4 +1,7 @@
-FROM nginx:1.25.5
+FROM nginx:1.27.1
+
+COPY containers/default.conf.template /etc/nginx/templates/default.conf.template
 
 COPY build/ /usr/share/nginx/html
-COPY containers/nginx.conf /etc/nginx/nginx.conf
+
+ENV ALLOWED_DOMAINS="localhost"
