@@ -34,7 +34,7 @@ export default function ConfigMultipleNumbers({
         description={description}
         selected={selected}
       />
-      <Flex justifyContent="flex-start">
+      <Flex justifyContent="flex-start" flexWrap="wrap">
         {Object.keys(value).map((key, index) => (
           <InputNumberStepper
             key={key}
