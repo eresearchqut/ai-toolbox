@@ -1,4 +1,4 @@
-import { Box, Code, Flex } from "@chakra-ui/react";
+import { Box, Code } from "@chakra-ui/react";
 
 import TextWithLink from "../../../navigation/TextWithLink";
 import CopyBox from "../../../output/CopyBox";
@@ -44,29 +44,27 @@ function LyraInstructions({ username }) {
             />
           </AlertHelper>
           <InstructionText>
-            <Flex alignItems={"center"}>
-              <TextWithLink
-                textBeforeLink={"In "}
-                link={{
-                  href: "https://aka.ms/terminal",
-                  text: "Windows Terminal",
-                  color: "blue.500",
-                  isExternal: true,
-                }}
-              />
-              <TextWithLink
-                textBeforeLink={", Powershell, "}
-                link={{
-                  href: "https://www.putty.org/",
-                  text: "PuTTY",
-                  color: "blue.500",
-                  isExternal: true,
-                }}
-                textAfterLink={
-                  ", or cmd.exe, run the following command to connect to Lyra:"
-                }
-              />
-            </Flex>
+            <TextWithLink
+              textBeforeLink={"In "}
+              link={{
+                href: "https://aka.ms/terminal",
+                text: "Windows Terminal",
+                color: "blue.500",
+                isExternal: true,
+              }}
+            />
+            <TextWithLink
+              textBeforeLink={", Powershell, "}
+              link={{
+                href: "https://www.putty.org/",
+                text: "PuTTY",
+                color: "blue.500",
+                isExternal: true,
+              }}
+              textAfterLink={
+                ", or cmd.exe, run the following command to connect to Lyra:"
+              }
+            />
           </InstructionText>
         </Box>
         <Box>

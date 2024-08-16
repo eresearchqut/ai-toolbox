@@ -1,5 +1,5 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Link, Text } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 
 export default function TextWithLink({
   textBeforeLink = "",
@@ -13,7 +13,7 @@ export default function TextWithLink({
   textAfterLink = "",
 }) {
   return (
-    <Text mb={0}>
+    <>
       {textBeforeLink}
       <Link
         color={link?.color ? link.color : "teal.500"}
@@ -24,6 +24,6 @@ export default function TextWithLink({
         {hasExternalIcon && <ExternalLinkIcon mx="2px" />}
       </Link>
       {textAfterLink}
-    </Text>
+    </>
   );
 }
