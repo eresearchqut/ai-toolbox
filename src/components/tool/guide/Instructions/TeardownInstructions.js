@@ -23,8 +23,8 @@ export function TeardownInstructions({
       <Box position="relative" padding="10">
         <Divider />
         <AbsoluteCenter bg={useColorModeValue("white", "gray.700")} px="4">
-          <Heading as="h2" size="md" my={2}>
-            Teardown steps
+          <Heading as="h2" size="md" my={2} textAlign="center">
+            Teardown
           </Heading>
         </AbsoluteCenter>
       </Box>
