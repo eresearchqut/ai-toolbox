@@ -2,10 +2,14 @@ import {
   Code,
   Flex,
   Kbd,
-  ListItem,
   Radio,
   RadioGroup,
-  UnorderedList,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
@@ -185,31 +189,59 @@ Job ID      Username Queue Jobname  SessID NDS TSK Memory Time  S Time
 1234567.pbs username quick job-name    --    1   4   32gb 01:00 Q   --`}
           </CopyBox>
           <InstructionText>
-            The job status will be shown in the <Code>S</Code> column. Possible
-            values are:
-            <UnorderedList>
-              <ListItem>
-                <Code>Q</Code> - Queued
-              </ListItem>
-              <ListItem>
-                <Code>R</Code> - Running
-              </ListItem>
-              <ListItem>
-                <Code>B</Code> - Array job has at least one subjob running
-              </ListItem>
-              <ListItem>
-                <Code>H</Code> - Held
-              </ListItem>
-              <ListItem>
-                <Code>S</Code> - Suspended
-              </ListItem>
-              <ListItem>
-                <Code>E</Code> - Exiting
-              </ListItem>
-              <ListItem>
-                <Code>F</Code> - Finished
-              </ListItem>
-            </UnorderedList>
+            The job status will be shown in the <Code>S</Code> column.
+            <Table size="sm">
+              <Thead>
+                <Tr>
+                  <Th>Status</Th>
+                  <Th>Description</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  <Td>
+                    <Code>Q</Code>
+                  </Td>
+                  <Td>Queued</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <Code>R</Code>
+                  </Td>
+                  <Td>Running</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <Code>B</Code>
+                  </Td>
+                  <Td>Array job has at least one subjob running</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <Code>H</Code>
+                  </Td>
+                  <Td>Held</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <Code>S</Code>
+                  </Td>
+                  <Td>Suspended</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <Code>E</Code>
+                  </Td>
+                  <Td>Exiting</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <Code>F</Code>
+                  </Td>
+                  <Td>Finished</Td>
+                </Tr>
+              </Tbody>
+            </Table>
           </InstructionText>
         </>
       )}
