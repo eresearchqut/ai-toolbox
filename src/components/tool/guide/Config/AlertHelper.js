@@ -1,7 +1,5 @@
 import { Alert, AlertIcon, Box, CloseButton, Flex } from "@chakra-ui/react";
 
-import React from "react";
-
 export default function AlertHelper({
   alertDismissible = true,
   alertType = "info",
@@ -11,26 +9,20 @@ export default function AlertHelper({
   return (
     <>
       <Box></Box>
-      <Flex direction="row" align="center">
-        <Box w="100%">
-          <Alert display="flex" status={alertType}>
-            <AlertIcon />
-            {children && typeof children === "string"
-              ? `${children}`
-              : React.isValidElement(children) && children}
-            {alertDismissible && (
-              <CloseButton
-                size="sm"
-                style={{ marginLeft: "auto" }}
-                position="relative"
-                right="0"
-                top="0"
-                onClick={onClose}
-              />
-            )}
-          </Alert>
-        </Box>
-      </Flex>
+      <Alert display="flex" status={alertType}>
+        <AlertIcon />
+        <Box flex="1">{children}</Box>
+        {alertDismissible && (
+          <CloseButton
+            size="sm"
+            style={{ marginLeft: "auto" }}
+            position="relative"
+            right="0"
+            top="0"
+            onClick={onClose}
+          />
+        )}
+      </Alert>
     </>
   );
 }
