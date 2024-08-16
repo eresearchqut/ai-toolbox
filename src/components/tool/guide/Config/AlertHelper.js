@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box, CloseButton, Flex } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, CloseButton } from "@chakra-ui/react";
 
 export default function AlertHelper({
   alertDismissible = true,
