@@ -112,7 +112,9 @@ export function LyraStartInstructions({
               textAfterLink={"."}
             />
           </InstructionText>
-          <CopyBox editable={true}>{batchJobScript.join("\n")}</CopyBox>
+          <CopyBox editable={true} wrap={false}>
+            {batchJobScript.join("\n")}
+          </CopyBox>
           <InstructionText>
             You may either:
             <RadioGroup defaultValue="file" onChange={setScriptInput}>
