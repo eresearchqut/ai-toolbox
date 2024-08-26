@@ -17,11 +17,13 @@ export default function InputPicker({ choices, value, onChange = (_) => {} }) {
           <Tooltip key={label} label={description} placement="top" hasArrow>
             <Button
               flexGrow="1"
+              flexBasis="0"
+              minW=""
               variant={selected ? "solid" : "outline"}
               size="sm"
               borderRadius="0"
               m="0"
-              p="0"
+              p="2"
               onClick={() => onChange(label)}
               colorScheme={selected ? colorScheme : "gray"}
             >
