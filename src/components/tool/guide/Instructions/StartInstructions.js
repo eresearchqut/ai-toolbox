@@ -1,16 +1,4 @@
-import {
-  Code,
-  Flex,
-  Kbd,
-  Radio,
-  RadioGroup,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
+import { Code, Flex, Kbd, Radio, RadioGroup } from "@chakra-ui/react";
 
 import { useState } from "react";
 
@@ -157,93 +145,6 @@ export function LyraStartInstructions({
           Paste the batch job script above into the command&apos;s input, then
           press <Kbd>Ctrl</Kbd> + <Kbd>D</Kbd> to submit the job.
         </InstructionText>
-      )}
-      <InstructionHeading>Job status</InstructionHeading>
-      <InstructionText>
-        The job has been scheduled and will start running when resources are
-        available.
-      </InstructionText>
-      {jobType === "Interactive" && (
-        <>
-          <InstructionText>
-            Wait for the job to start, and take note of the node you are on (eg.{" "}
-            <Code>cl5n042</Code>).
-          </InstructionText>
-        </>
-      )}
-      {jobType === "Batch" && (
-        <>
-          <InstructionText>
-            You can check the status of your jobs by running the following
-            command:
-          </InstructionText>
-          <CopyBox>qstat -xu $USER</CopyBox>
-          <InstructionText>
-            The output will look similar to the following:
-          </InstructionText>
-          <CopyBox wrap={false}>
-            {`pbs: 
-                                                   Req'd  Req'd   Elap
-Job ID      Username Queue Jobname  SessID NDS TSK Memory Time  S Time
------------ -------- ----- -------- ------ --- --- ------ ----- - -----
-1234567.pbs username quick job-name    --    1   4   32gb 01:00 Q   --`}
-          </CopyBox>
-          <InstructionText>
-            The job status will be shown in the <Code>S</Code> column.
-            <Table size="sm">
-              <Thead>
-                <Tr>
-                  <Th>Status</Th>
-                  <Th>Description</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td>
-                    <Code>Q</Code>
-                  </Td>
-                  <Td>Queued</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Code>R</Code>
-                  </Td>
-                  <Td>Running</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Code>B</Code>
-                  </Td>
-                  <Td>Array job has at least one subjob running</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Code>H</Code>
-                  </Td>
-                  <Td>Held</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Code>S</Code>
-                  </Td>
-                  <Td>Suspended</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Code>E</Code>
-                  </Td>
-                  <Td>Exiting</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Code>F</Code>
-                  </Td>
-                  <Td>Finished</Td>
-                </Tr>
-              </Tbody>
-            </Table>
-          </InstructionText>
-        </>
       )}
     </>
   );

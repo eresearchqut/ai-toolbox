@@ -9,6 +9,7 @@ import {
   LyraStartInstructions,
   RvdiStartInstructions,
 } from "../Instructions/StartInstructions";
+import { LyraStatusInstructions } from "../Instructions/StatusInstructions";
 import { TeardownInstructions } from "../Instructions/TeardownInstructions";
 
 const TEXT_PATTERN = /^[a-z0-9]*$/;
@@ -53,22 +54,28 @@ export function EresearchInstructions({ config }) {
       {config.service === "Lyra" && (
         <>
           {batchJobName && (
-            <LyraStartInstructions
-              jobType={config.jobType}
-              jobName={batchJobName}
-              hardware={config.hardware}
-              cpuVendor={config.cpuVendor}
-              cpuModel={config.cpuModel}
-              cpuCores={config.cpuCores}
-              ram={config.ram}
-              gpuVendor={config.gpuVendor}
-              gpuModel={config.gpuModel}
-              gpuModules={config.gpuModules}
-              nodes={config.nodes}
-              wallTime={config.wallTime}
-              jobInstanceType={config.jobInstanceType}
-              arrayConfig={config.arrayConfig}
-            />
+            <>
+              <LyraStartInstructions
+                jobType={config.jobType}
+                jobName={batchJobName}
+                hardware={config.hardware}
+                cpuVendor={config.cpuVendor}
+                cpuModel={config.cpuModel}
+                cpuCores={config.cpuCores}
+                ram={config.ram}
+                gpuVendor={config.gpuVendor}
+                gpuModel={config.gpuModel}
+                gpuModules={config.gpuModules}
+                nodes={config.nodes}
+                wallTime={config.wallTime}
+                jobInstanceType={config.jobInstanceType}
+                arrayConfig={config.arrayConfig}
+              />
+              <LyraStatusInstructions
+                jobType={config.jobType}
+                jobName={batchJobName}
+              />
+            </>
           )}
         </>
       )}

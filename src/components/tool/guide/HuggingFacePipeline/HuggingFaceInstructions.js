@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Code } from "@chakra-ui/react";
 
 import { useState } from "react";
 
@@ -15,6 +15,7 @@ import {
   RvdiStartInstructions,
 } from "../Instructions/StartInstructions";
 import { TeardownInstructions } from "../Instructions/TeardownInstructions";
+import InstructionText from "../Instructions/components/InstructionText";
 
 const TEXT_PATTERN = /^[a-z0-9]*$/;
 
@@ -55,6 +56,10 @@ export function HuggingFaceInstructions({ task, model, config, port }) {
             jobInstanceType={config.jobInstanceType}
             arrayConfig={config.arrayConfig}
           />
+          <InstructionText>
+            Wait for the job to start, and take note of the node you are on (eg.{" "}
+            <Code>cl5n042</Code>).
+          </InstructionText>
           <InstructionInput
             label="Node name"
             placeholder="node"
