@@ -75,6 +75,11 @@ export function EresearchInstructions({ config }) {
                 jobType={config.jobType}
                 jobName={batchJobName}
               />
+              <TeardownInstructions
+                service={config.service}
+                jobType={config.jobType}
+                environment={config.environment}
+              />
             </>
           )}
         </>
@@ -87,13 +92,6 @@ export function EresearchInstructions({ config }) {
       )}
       {config.service === "Local" && (
         <LocalStartInstructions hardware={config.hardware} os={config.os} />
-      )}
-      {batchJobName && (
-        <TeardownInstructions
-          service={config.service}
-          jobType={config.jobType}
-          environment={config.environment}
-        />
       )}
     </Box>
   );
