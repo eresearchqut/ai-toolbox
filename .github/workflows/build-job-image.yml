@@ -37,5 +37,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.QUT_SERVICE_ACCOUNT_TOKEN }}
-          repository: "eresearchqut/${{ matrix.registry }}"
+          repository: "eresearchqut/ai-toolbox-images"
           event-type: build_job_images
