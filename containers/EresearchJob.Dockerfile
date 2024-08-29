@@ -1,7 +1,7 @@
-FROM nginx:1.27.1
+FROM nginxinc/nginx-unprivileged:mainline
 
-COPY containers/default.conf.template /etc/nginx/templates/default.conf.template
+COPY --chown=nginx:nginx containers/default.conf.template /etc/nginx/templates/default.conf.template
 
-COPY build/ /usr/share/nginx/html
+COPY --chown=nginx:nginx build/ /usr/share/nginx/html
 
 ENV ALLOWED_DOMAINS="localhost"
