@@ -74,7 +74,7 @@ export function LyraStartInstructions({
 
   const cmdText = `qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(
     ":",
-  )}${jobType === "Batch" && scriptInput === "file" ? " " + (scriptPath || `${jobName}.sh`) : ""}`;
+  )}${jobType === "Batch" && scriptInput === "file" ? " " + (scriptPath || `${jobName}.pbs`) : ""}`;
 
   return (
     <>
@@ -113,7 +113,7 @@ export function LyraStartInstructions({
               <Flex direction="column">
                 <Radio value="file">
                   Save the script as a file on Lyra (eg.{" "}
-                  <Code>{jobName}.sh</Code>)
+                  <Code>{jobName}.pbs</Code>)
                 </Radio>
                 <Radio value="stdin">
                   Run the command below, then paste the script into the
@@ -127,7 +127,7 @@ export function LyraStartInstructions({
       {jobType === "Batch" && scriptInput === "file" && (
         <InstructionInput
           label="Script Path"
-          placeholder={`${jobName}.sh`}
+          placeholder={`${jobName}.pbs`}
           value={scriptPath}
           onChange={setScriptPath}
           helperText="Enter the path of the script on Lyra."
