@@ -190,7 +190,7 @@ Job Id: ${jobIdOrPlaceholder}.pbs
                 <Td>
                   <Text as="b">walltime</Text>
                 </Td>
-                <Td>Actual time the job was running.</Td>
+                <Td>The time it took to run the job.</Td>
               </Tr>
             </Tbody>
           </Table>
