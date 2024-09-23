@@ -16,7 +16,7 @@ export function LyraStartInstructions({
   hardware,
   cpuVendor,
   cpuModel,
-  cpuCores,
+  cpus,
   ram,
   gpuVendor,
   gpuModel,
@@ -26,7 +26,7 @@ export function LyraStartInstructions({
 }) {
   const resources = [
     `select=${jobType === "Interactive" ? 1 : nodes}`,
-    `ncpus=${cpuCores}`,
+    `ncpus=${cpus}`,
     `mem=${ram}gb`,
   ];
   if (cpuVendor !== "Any") {

@@ -61,7 +61,7 @@ export function EresearchInstructions({ config }) {
                 hardware={config.hardware}
                 cpuVendor={config.cpuVendor}
                 cpuModel={config.cpuModel}
-                cpuCores={config.cpuCores}
+                cpus={config.cpus}
                 ram={config.ram}
                 gpuVendor={config.gpuVendor}
                 gpuModel={config.gpuModel}

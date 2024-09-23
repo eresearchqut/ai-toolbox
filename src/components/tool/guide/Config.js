@@ -5,7 +5,7 @@ import ConfigSlider from "./Config/ConfigSlider";
 
 export const DEFAULT_CONFIG = {
   nodes: 1,
-  cpuCores: 4,
+  cpus: 4,
   ram: 32,
   gpuModules: 1,
   wallTime: { hours: 1, minutes: 0 },
@@ -102,24 +102,24 @@ export const getCpuModel = (config, onChange) => () => {
   };
 };
 
-export const getCpuCores = (config, onChange) => () => {
-  let cpuCores;
+export const getCpus = (config, onChange) => () => {
+  let cpus;
   if (config?.cpuModel === "Any") {
-    cpuCores = 128;
+    cpus = 128;
   } else if (config?.cpuModel === "7702") {
-    cpuCores = 128;
+    cpus = 128;
   } else if (config?.cpuModel === "7713") {
-    cpuCores = 128;
+    cpus = 128;
   } else if (config?.cpuModel === "6140") {
-    cpuCores = 36;
+    cpus = 36;
   } else if (config?.cpuModel === "6248") {
-    cpuCores = 40;
+    cpus = 40;
   } else if (config?.cpuModel === "8260") {
-    cpuCores = 48;
+    cpus = 48;
   } else if (config?.cpuModel === "E7-8890v4") {
-    cpuCores = 96;
+    cpus = 96;
   } else {
-    cpuCores = 128;
+    cpus = 128;
   }
 
   return {
@@ -129,13 +129,13 @@ export const getCpuCores = (config, onChange) => () => {
         title="CPU"
         selected={selected}
         inputProps={{
-          value: config?.cpuCores,
-          label: config?.cpuCores > 1 ? "cores" : "core",
+          value: config?.cpus,
+          label: config?.cpus > 1 ? "cpus" : "cpu",
           min: 1,
-          max: cpuCores,
+          max: cpus,
           step: 1,
           onChange: (value) => {
-            onChange("cpuCores")(value);
+            onChange("cpus")(value);
             onChange("ram")(value * 8);
           },
         }}
@@ -180,9 +180,9 @@ export const getRam = (config, onChange) => () => {
           step: 8,
           onChange: onChange("ram"),
         }}
-        showAlert={config?.ram !== config?.cpuCores * 8}
+        showAlert={config?.ram !== config?.cpus * 8}
         alertType={"warning"}
-        alertMsg={"The recommended RAM is 8GB per core."}
+        alertMsg={"The recommended RAM is 8GB per CPU."}
       />
     ),
     show: (config) => isLyra(config),
