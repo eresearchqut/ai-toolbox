@@ -155,8 +155,8 @@ Job Id: ${jobIdOrPlaceholder}.pbs
                   <Text as="b">cpupercent</Text>
                 </Td>
                 <Td>
-                  Sum of the percentage of CPU time used by each requested core.
-                  (eg. 75% of each of 4 cores = 300)
+                  Sum of the percentage of CPU time used by each requested cpu.
+                  (eg. 75% of each of 4 cpus = 300)
                 </Td>
               </Tr>
               <Tr>
@@ -165,7 +165,7 @@ Job Id: ${jobIdOrPlaceholder}.pbs
                 </Td>
                 <Td>
                   Sum of the CPU time used by each requested core. (eg. 1 hour
-                  using 4 cores = 04:00:00)
+                  using 4 cpus = 04:00:00)
                 </Td>
               </Tr>
               <Tr>
@@ -178,7 +178,7 @@ Job Id: ${jobIdOrPlaceholder}.pbs
                 <Td>
                   <Text as="b">ncpus</Text>
                 </Td>
-                <Td>Number of cores used by the job.</Td>
+                <Td>Number of cpus used by the job.</Td>
               </Tr>
               <Tr>
                 <Td>

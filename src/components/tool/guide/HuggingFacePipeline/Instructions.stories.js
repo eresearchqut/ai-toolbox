@@ -13,7 +13,7 @@ export const LyraGPU = {
       service: "Lyra",
       hardware: "GPU",
       cpuVendor: "Any",
-      cpuCores: 8,
+      cpus: 8,
       ram: 32,
       gpuVendor: "NVIDIA",
       gpuModel: "A100",
