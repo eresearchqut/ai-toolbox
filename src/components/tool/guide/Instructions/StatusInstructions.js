@@ -2,7 +2,7 @@ import { Code, Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 
 import { useState } from "react";
 
-import CopyBox from "../../../output/CopyBox";
+import PreformattedBox from "../../../output/PreformattedBox";
 import InstructionInput from "./InstructionInput";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -32,17 +32,14 @@ export function LyraStatusInstructions({ jobType, jobName }) {
             You can check the status of your jobs by running the following
             command:
           </InstructionText>
-          <CopyBox>qstat -xu $USER</CopyBox>
-          <InstructionText>
-            The output will look similar to the following:
-          </InstructionText>
-          <CopyBox wrap={false}>
+          <PreformattedBox>qstat -xu $USER</PreformattedBox>
+          <PreformattedBox wrap={false} type="output">
             {`pbs: 
                                                    Req'd  Req'd   Elap
 Job ID      Username Queue Jobname  SessID NDS TSK Memory Time  S Time
 ----------- -------- ----- -------- ------ --- --- ------ ----- - -----
 1234567.pbs username quick job-name    --    1   4   32gb 01:00 Q   --`}
-          </CopyBox>
+          </PreformattedBox>
           <InstructionText>
             The job status will be shown in the <Code>S</Code> column.
           </InstructionText>
@@ -106,33 +103,37 @@ Job ID      Username Queue Jobname  SessID NDS TSK Memory Time  S Time
             </Code>{" "}
             in the same directory that the job was submitted from.
           </InstructionText>
-          <CopyBox wrap={false}>
-            {`$ ls
-${jobName}.e${jobIdOrPlaceholder}  ${jobName}.o${jobIdOrPlaceholder}
-
-$ cat ${jobName}.o${jobIdOrPlaceholder}
-Hello, world!
+          <InstructionText>
+            Run the following command to see the output files:
+          </InstructionText>
+          <PreformattedBox>{`ls -lh ${jobName}.*`}</PreformattedBox>
+          <PreformattedBox wrap={false} type="output">
+            {`-rw------- 1 username default 100 Jan 01 00:00 ${jobName}.e${jobIdOrPlaceholder}
+-rw------- 1 username default  80 Jan 01 00:00 ${jobName}.o${jobIdOrPlaceholder}`}
+          </PreformattedBox>
+          <InstructionText>
+            Run the following command to see the output of the job:
+          </InstructionText>
+          <PreformattedBox>{`cat ${jobName}.o${jobIdOrPlaceholder}`}</PreformattedBox>
+          <PreformattedBox type="output">
+            {`Hello, world!
 PBS Job ${jobIdOrPlaceholder}.pbs
 CPU time  : 00:00:00
 Wall time : 00:00:01
-Mem usage : 0b
-
-$ cat ${jobName}.e${jobIdOrPlaceholder}
-Data written to stderr`}
-          </CopyBox>
+Mem usage : 0b`}
+          </PreformattedBox>
+          <InstructionText>
+            Run the following command to see the error output of the job:
+          </InstructionText>
+          <PreformattedBox>{`cat ${jobName}.e${jobIdOrPlaceholder}`}</PreformattedBox>
+          <PreformattedBox type="output">{`Data written to stderr`}</PreformattedBox>
           <InstructionText>
             Use the following command to get more detailed information about the
             job, including resource usage.
           </InstructionText>
-          <CopyBox>{`qstat -fx ${jobIdOrPlaceholder}`}</CopyBox>
-          <InstructionText>
-            Observe the resource usage of the job and adjust the requested
-            resources in future job submissions accordingly. The output will
-            look similar to the following:
-          </InstructionText>
-          <CopyBox wrap={false}>
-            {`$ qstat -fx ${jobIdOrPlaceholder}
-Job Id: ${jobIdOrPlaceholder}.pbs
+          <PreformattedBox>{`qstat -fx ${jobIdOrPlaceholder}`}</PreformattedBox>
+          <PreformattedBox wrap={false} type="output">
+            {`Job Id: ${jobIdOrPlaceholder}.pbs
     ...
     resources_used.cpupercent = 99
     resources_used.cput = 00:39:22
@@ -141,7 +142,11 @@ Job Id: ${jobIdOrPlaceholder}.pbs
     resources_used.vmem = 2755392kb
     resources_used.walltime = 00:40:51
     ...`}
-          </CopyBox>
+          </PreformattedBox>
+          <InstructionText>
+            Observe the resource usage of the job and adjust the requested
+            resources in future job submissions accordingly
+          </InstructionText>
           <Table size="sm" my={4} variant="striped">
             <Thead>
               <Tr>

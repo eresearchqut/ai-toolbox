@@ -1,8 +1,8 @@
-import CopyBox from "./CopyBox";
+import PreformattedBox from "./PreformattedBox";
 
 export default {
-  title: "Outputs/CopyBox",
-  component: CopyBox,
+  title: "Outputs/PreformattedBox",
+  component: PreformattedBox,
 };
 
 export const Empty = {

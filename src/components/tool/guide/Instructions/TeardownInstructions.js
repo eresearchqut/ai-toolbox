@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import CopyBox from "../../../output/CopyBox";
+import PreformattedBox from "../../../output/PreformattedBox";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 
@@ -69,11 +69,11 @@ export function TeardownInstructions({
                 To stop the job early, you need to know your job id. You can
                 either note down your job id when you submit a batch job, or
                 find the job id using the check job status command:
-                <CopyBox>qstat -u $USER</CopyBox>
+                <PreformattedBox>qstat -u $USER</PreformattedBox>
               </InstructionText>
               <InstructionText>
                 To stop the job early, run the following:
-                <CopyBox>{`qdel {job_id}`}</CopyBox>
+                <PreformattedBox>{`qdel {job_id}`}</PreformattedBox>
               </InstructionText>
             </>
           )}

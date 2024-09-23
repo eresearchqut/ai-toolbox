@@ -3,7 +3,7 @@ import { Code, Flex, Kbd, Radio, RadioGroup } from "@chakra-ui/react";
 import { useState } from "react";
 
 import TextWithLink from "../../../navigation/TextWithLink";
-import CopyBox from "../../../output/CopyBox";
+import PreformattedBox from "../../../output/PreformattedBox";
 import InstructionInput from "./InstructionInput";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -67,6 +67,7 @@ export function LyraStartInstructions({
     "cd $PBS_O_WORKDIR",
     "",
     "echo \"Running job '$PBS_JOBNAME' ($PBS_JOBID) in the following directory: $PWD\"",
+    'echo "Data written to stderr" >&2',
   ];
 
   const [scriptInput, setScriptInput] = useState("file");
@@ -104,9 +105,9 @@ export function LyraStartInstructions({
               textAfterLink={"."}
             />
           </InstructionText>
-          <CopyBox editable={true} wrap={false}>
+          <PreformattedBox editable={true} wrap={false}>
             {batchJobScript.join("\n")}
-          </CopyBox>
+          </PreformattedBox>
           <InstructionText>
             You may either:
             <RadioGroup defaultValue="file" onChange={setScriptInput}>
@@ -139,7 +140,7 @@ export function LyraStartInstructions({
         In the ssh session, run the following command to schedule the{" "}
         {jobType.toLowerCase()} job:
       </InstructionText>
-      <CopyBox>{cmdText}</CopyBox>
+      <PreformattedBox>{cmdText}</PreformattedBox>
       {scriptInput === "stdin" && (
         <InstructionText>
           Paste the batch job script above into the command&apos;s input, then

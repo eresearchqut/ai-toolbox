@@ -1,7 +1,7 @@
 import { Code } from "@chakra-ui/react";
 
 import TextWithLink from "../../../navigation/TextWithLink";
-import CopyBox from "../../../output/CopyBox";
+import PreformattedBox from "../../../output/PreformattedBox";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 
@@ -30,10 +30,10 @@ export function AccessInstructions({ service, port, node, username }) {
               </i>
             </InstructionText>
           )}
-          <CopyBox>
+          <PreformattedBox>
             ssh -L {port}:{node || "node"}:{port} {username || "username"}
             @lyra.qut.edu.au
-          </CopyBox>
+          </PreformattedBox>
         </>
       )}
       <InstructionHeading>Access the tool</InstructionHeading>
@@ -50,7 +50,7 @@ export function AccessInstructions({ service, port, node, username }) {
           }}
         />
       </InstructionText>
-      <CopyBox>http://localhost:{port}</CopyBox>
+      <PreformattedBox>http://localhost:{port}</PreformattedBox>
     </>
   );
 }
