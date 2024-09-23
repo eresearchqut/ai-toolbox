@@ -11,9 +11,10 @@ import {
 
 import { useEffect, useState } from "react";
 
-export default function CopyBox({
+export default function PreformattedBox({
   children,
   editable = false,
+  type = "input",
   defaultRows = 10,
   wrap = true,
 }) {
@@ -21,7 +22,14 @@ export default function CopyBox({
   const [copied, setCopied] = useState(false);
 
   const borderColor = useColorModeValue("gray.200", "gray.500");
-  const bg = useColorModeValue("gray.50", "gray.800");
+  let bg;
+  if (type === "input") {
+    bg = useColorModeValue("gray.50", "gray.800");
+  } else if (type === "output") {
+    bg = useColorModeValue("gray.300", "gray.700");
+  } else {
+    bg = useColorModeValue("gray.50", "gray.800");
+  }
   const wrapStyle = { textWrap: wrap ? "wrap" : "nowrap" };
 
   const Content = editable ? Editable : Box;
@@ -66,7 +74,7 @@ export default function CopyBox({
           text
         )}
       </Content>
-      {hover && (
+      {type === "input" && hover && (
         <Tooltip
           label={copied ? "Copied!" : "Copy to clipboard"}
           placement="top"

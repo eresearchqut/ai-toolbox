@@ -1,7 +1,7 @@
 import { Box, Code } from "@chakra-ui/react";
 
 import TextWithLink from "../../../navigation/TextWithLink";
-import CopyBox from "../../../output/CopyBox";
+import PreformattedBox from "../../../output/PreformattedBox";
 import AlertHelper from "../Config/AlertHelper";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -87,7 +87,9 @@ function LyraInstructions({ username }) {
           </i>
         </InstructionText>
       )}
-      <CopyBox>ssh {username || "username"}@lyra.qut.edu.au</CopyBox>
+      <PreformattedBox>
+        ssh {username || "username"}@lyra.qut.edu.au
+      </PreformattedBox>
     </>
   );
 }

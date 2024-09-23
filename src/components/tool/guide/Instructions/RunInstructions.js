@@ -1,7 +1,7 @@
 // TODO: Different operating systems
 import { Code } from "@chakra-ui/react";
 
-import CopyBox from "../../../output/CopyBox";
+import PreformattedBox from "../../../output/PreformattedBox";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 
@@ -14,11 +14,11 @@ export function RunInstructions({ service, tool, task, model, port }) {
       {tool === "CLI" && (
         <>
           <InstructionText>Start the gradio server:</InstructionText>
-          <CopyBox>
+          <PreformattedBox>
             gradio pipeline {task} --model={model}{" "}
             --server-name=&quot;0.0.0.0&quot; --server-port={port}{" "}
             --device-map=&quot;auto&quot;
-          </CopyBox>
+          </PreformattedBox>
         </>
       )}
       {tool === "Script" && (
@@ -26,7 +26,7 @@ export function RunInstructions({ service, tool, task, model, port }) {
           <InstructionText>
             Save the following to a file named <Code>hf_pipeline.py</Code>
           </InstructionText>
-          <CopyBox>
+          <PreformattedBox>
             {`import gradio
 import transformers
 import sys
@@ -42,9 +42,9 @@ pipeline = transformers.pipeline(TASK, model=MODEL, device_map="auto")
 interface = gradio.Interface.from_pipeline(pipeline)
 interface.launch(server_name="0.0.0.0", server_port=PORT)
 `}
-          </CopyBox>
+          </PreformattedBox>
           <InstructionText>Run the script:</InstructionText>
-          <CopyBox>python hf_pipeline.py {port}</CopyBox>
+          <PreformattedBox>python hf_pipeline.py {port}</PreformattedBox>
         </>
       )}
       {tool === "Notebook" && (
@@ -54,7 +54,7 @@ interface.launch(server_name="0.0.0.0", server_port=PORT)
               <InstructionText>
                 Run the following command to start the server:
               </InstructionText>
-              <CopyBox>python -m jupyterlab</CopyBox>
+              <PreformattedBox>python -m jupyterlab</PreformattedBox>
               <InstructionText>
                 Open the link to the jupyter server in your browser, and create
                 a new notebook.
@@ -64,7 +64,7 @@ interface.launch(server_name="0.0.0.0", server_port=PORT)
           <InstructionText>
             Execute the following code in the notebook:
           </InstructionText>
-          <CopyBox>
+          <PreformattedBox>
             {`import gradio
 import transformers
 
@@ -76,7 +76,7 @@ pipeline = transformers.pipeline(TASK, model=MODEL, device_map="auto")
 interface = gradio.Interface.from_pipeline(pipeline)
 interface.launch(server_name="0.0.0.0", server_port=PORT)
 `}
-          </CopyBox>
+          </PreformattedBox>
         </>
       )}
     </>

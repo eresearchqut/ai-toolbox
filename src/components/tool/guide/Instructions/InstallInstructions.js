@@ -1,7 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 
 import TextWithLink from "../../../navigation/TextWithLink";
-import CopyBox from "../../../output/CopyBox";
+import PreformattedBox from "../../../output/PreformattedBox";
 import AlertHelper from "../Config/AlertHelper";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -18,10 +18,10 @@ function SingularityBuildInstructions({ hardware, gpuVendor }) {
     }
   }
   return (
-    <CopyBox>
+    <PreformattedBox>
       singularity build {containerName}{" "}
       docker://ghcr.io/eresearchqut/ai-toolbox/hf_pipeline:{containerTag}
-    </CopyBox>
+    </PreformattedBox>
   );
 }
 function SingularityRunInstructions({ hardware, gpuVendor, service }) {
@@ -42,11 +42,11 @@ function SingularityRunInstructions({ hardware, gpuVendor, service }) {
     service === "Lyra" ? "/work/ai-toolbox/containers/" : "";
   let containerName = singularityContainerName(hardware, gpuVendor);
   return (
-    <CopyBox>
+    <PreformattedBox>
       singularity run {argsString}
       {containerLocation}
       {containerName} bash
-    </CopyBox>
+    </PreformattedBox>
   );
 }
 
@@ -119,23 +119,25 @@ export function InstallInstructions({
                     <InstructionText>
                       Download the latest version of micromamba
                     </InstructionText>
-                    <CopyBox>
+                    <PreformattedBox>
                       wget
                       https://raw.githubusercontent.com/mamba-org/micromamba-releases/main/install.sh
-                    </CopyBox>
+                    </PreformattedBox>
                     <InstructionText>
                       Run the installer and follow the prompts to install
                       micromamba:
                     </InstructionText>
-                    <CopyBox>bash install.sh -p ~/micromamba</CopyBox>
+                    <PreformattedBox>
+                      bash install.sh -p ~/micromamba
+                    </PreformattedBox>
                     <InstructionText>
                       Create an alias for micromamba
                     </InstructionText>
-                    <CopyBox>
+                    <PreformattedBox>
                       {'echo "alias conda=micromamba" >> ~/.bashrc'}
-                    </CopyBox>
+                    </PreformattedBox>
                     <InstructionText>Refresh the shell:</InstructionText>
-                    <CopyBox>source ~/.bashrc</CopyBox>
+                    <PreformattedBox>source ~/.bashrc</PreformattedBox>
                   </TabPanel>
                   <TabPanel>
                     <AlertHelper alertType="warning" alertDismissible={false}>
@@ -146,16 +148,18 @@ export function InstallInstructions({
                     <InstructionText>
                       Download the latest version of miniconda:
                     </InstructionText>
-                    <CopyBox>
+                    <PreformattedBox>
                       wget
                       https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-                    </CopyBox>
+                    </PreformattedBox>
                     <InstructionText>
                       Run the installer and follow the prompts to install conda:
                     </InstructionText>
-                    <CopyBox>bash Miniconda3-latest-Linux-x86_64.sh</CopyBox>
+                    <PreformattedBox>
+                      bash Miniconda3-latest-Linux-x86_64.sh
+                    </PreformattedBox>
                     <InstructionText>Refresh the shell:</InstructionText>
-                    <CopyBox>source ~/.bashrc</CopyBox>
+                    <PreformattedBox>source ~/.bashrc</PreformattedBox>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
@@ -165,24 +169,26 @@ export function InstallInstructions({
           <InstructionText>
             Create the conda environment (if it doesn&apos;t exist):
           </InstructionText>
-          <CopyBox>conda create --name hf</CopyBox>
+          <PreformattedBox>conda create --name hf</PreformattedBox>
           <InstructionText>Activate the conda environment:</InstructionText>
-          <CopyBox>conda activate hf</CopyBox>
+          <PreformattedBox>conda activate hf</PreformattedBox>
           <InstructionText>Install the transformers package:</InstructionText>
-          <CopyBox>
+          <PreformattedBox>
             conda install -c huggingface -c conda-forge transformers
-          </CopyBox>
+          </PreformattedBox>
           <InstructionText>Install pytorch:</InstructionText>
-          <CopyBox>
+          <PreformattedBox>
             conda install -c pytorch -c nvidia -c conda-forge pytorch
             torchvision torchaudio pytorch-cuda=12.1
-          </CopyBox>
+          </PreformattedBox>
           <InstructionText>Install the gradio package:</InstructionText>
-          <CopyBox>conda install -c conda-forge gradio</CopyBox>
+          <PreformattedBox>conda install -c conda-forge gradio</PreformattedBox>
           {isWorkstationNotebook && (
             <>
               <InstructionText>Install JupyterLab:</InstructionText>
-              <CopyBox>conda install -c conda-forge jupyterlab</CopyBox>
+              <PreformattedBox>
+                conda install -c conda-forge jupyterlab
+              </PreformattedBox>
             </>
           )}
         </>
@@ -212,11 +218,15 @@ export function InstallInstructions({
             <>
               <InstructionHeading>Python module</InstructionHeading>
               <InstructionText>Source the module script:</InstructionText>
-              <CopyBox>source /etc/profile.d/modules.sh</CopyBox>
+              <PreformattedBox>
+                source /etc/profile.d/modules.sh
+              </PreformattedBox>
               <InstructionText>Load the python module:</InstructionText>
-              <CopyBox>module load python/3.10.8-gcccore-12.2.0-bare</CopyBox>
+              <PreformattedBox>
+                module load python/3.10.8-gcccore-12.2.0-bare
+              </PreformattedBox>
               <InstructionText>Check the python version</InstructionText>
-              <CopyBox>python --version</CopyBox>
+              <PreformattedBox>python --version</PreformattedBox>
             </>
           )}
           <InstructionHeading>
@@ -225,15 +235,17 @@ export function InstallInstructions({
           <InstructionText>
             Create the virtual environment (if it doesn&apos;t exist):
           </InstructionText>
-          <CopyBox>python -m venv hf-venv</CopyBox>
+          <PreformattedBox>python -m venv hf-venv</PreformattedBox>
           <InstructionText>Activate the virtual environment:</InstructionText>
-          <CopyBox>source hf-venv/bin/activate</CopyBox>
+          <PreformattedBox>source hf-venv/bin/activate</PreformattedBox>
           <InstructionText>Install the base dependencies:</InstructionText>
-          <CopyBox>pip install gradio &apos;transformers[torch]&apos;</CopyBox>
+          <PreformattedBox>
+            pip install gradio &apos;transformers[torch]&apos;
+          </PreformattedBox>
           {isWorkstationNotebook && (
             <>
               <InstructionText>Install JupyterLab:</InstructionText>
-              <CopyBox>pip install jupyterlab</CopyBox>
+              <PreformattedBox>pip install jupyterlab</PreformattedBox>
             </>
           )}
         </>
