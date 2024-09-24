@@ -1,9 +1,9 @@
-import { Code, Flex, Kbd, Radio, RadioGroup } from "@chakra-ui/react";
+import { Code } from "@chakra-ui/react";
 
 import { useState } from "react";
 
 import TextWithLink from "../../../navigation/TextWithLink";
-import PreformattedBox from "../../../output/PreformattedBox";
+import CommandBox from "../../../output/CommandBox";
 import InstructionInput from "./InstructionInput";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -63,6 +63,9 @@ export function LyraStartInstructions({
 
   const batchJobScript = [
     "#!/bin/bash -l",
+    `#PBS -N ${jobName}`,
+    `#PBS -l walltime=${wallTimeStr}`,
+    `#PBS -l ${resources.join(":")}`,
     "",
     "cd $PBS_O_WORKDIR",
     "",
@@ -70,12 +73,12 @@ export function LyraStartInstructions({
     'echo "Data written to stderr" >&2',
   ];
 
-  const [scriptInput, setScriptInput] = useState("file");
   const [scriptPath, setScriptPath] = useState();
 
-  const cmdText = `qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(
-    ":",
-  )}${jobType === "Batch" && scriptInput === "file" ? " " + (scriptPath || `${jobName}.pbs`) : ""}`;
+  const cmdText =
+    jobType === "Interactive"
+      ? `qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(":")}`
+      : `qsub ${scriptPath || `${jobName}.pbs`}`;
 
   return (
     <>
@@ -84,69 +87,41 @@ export function LyraStartInstructions({
           <InstructionHeading>Create the batch job script</InstructionHeading>
           <InstructionText>
             A job script contains the commands you want to run as part of the
-            job.
+            job. The script will be saved on the Lyra filesystem.
           </InstructionText>
+          <InstructionInput
+            label="Script Path"
+            placeholder={`${jobName}.pbs`}
+            value={scriptPath}
+            onChange={setScriptPath}
+            helperText="Enter the path where the script will be saved, or leave blank to use the default."
+          />
           <InstructionText>
-            Click the example script below to edit it, or copy it into your
-            preferred text editor.
+            Run the following command to create the batch job script:
           </InstructionText>
+          <CommandBox
+            command={[
+              `cat <<'EOF' > ${jobName}.pbs`,
+              ...batchJobScript,
+              "EOF",
+              "",
+            ].join("\n")}
+          />
           <InstructionText>
-            <TextWithLink
-              textBeforeLink={
-                "To use a text editor such as nano or vim on Lyra, refer to the tutorial on "
-              }
-              link={{
-                href: "https://qutvirtual4.qut.edu.au/group/staff/research/conducting/facilities/advanced-research-computing-storage/supercomputing/using-linux",
-                text: "this page",
-                color: "blue.500",
-                isExternal: true,
-              }}
-              hasExternalIcon={true}
-              textAfterLink={"."}
-            />
+            Run the following command to confirm the contents of the script:
           </InstructionText>
-          <PreformattedBox editable={true} wrap={false}>
-            {batchJobScript.join("\n")}
-          </PreformattedBox>
-          <InstructionText>
-            You may either:
-            <RadioGroup defaultValue="file" onChange={setScriptInput}>
-              <Flex direction="column">
-                <Radio value="file">
-                  Save the script as a file on Lyra (eg.{" "}
-                  <Code>{jobName}.pbs</Code>)
-                </Radio>
-                <Radio value="stdin">
-                  Run the command below, then paste the script into the
-                  command&apos;s input
-                </Radio>
-              </Flex>
-            </RadioGroup>
-          </InstructionText>
+          <CommandBox
+            command={`cat ${jobName}.pbs`}
+            output={batchJobScript.join("\n")}
+          />
         </>
-      )}
-      {jobType === "Batch" && scriptInput === "file" && (
-        <InstructionInput
-          label="Script Path"
-          placeholder={`${jobName}.pbs`}
-          value={scriptPath}
-          onChange={setScriptPath}
-          helperText="Enter the path of the script on Lyra."
-        />
       )}
 
       <InstructionHeading>Schedule a job</InstructionHeading>
       <InstructionText>
-        In the ssh session, run the following command to schedule the{" "}
-        {jobType.toLowerCase()} job:
+        Run the following command to schedule the {jobType.toLowerCase()} job:
       </InstructionText>
-      <PreformattedBox>{cmdText}</PreformattedBox>
-      {scriptInput === "stdin" && (
-        <InstructionText>
-          Paste the batch job script above into the command&apos;s input, then
-          press <Kbd>Ctrl</Kbd> + <Kbd>D</Kbd> to submit the job.
-        </InstructionText>
-      )}
+      <CommandBox command={cmdText} output="{jobId}.pbs" />
     </>
   );
 }
