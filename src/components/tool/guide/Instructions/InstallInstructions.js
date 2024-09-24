@@ -1,7 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 
 import TextWithLink from "../../../navigation/TextWithLink";
-import PreformattedBox from "../../../output/PreformattedBox";
+import CommandBox from "../../../output/CommandBox";
 import AlertHelper from "../Config/AlertHelper";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -18,10 +18,9 @@ function SingularityBuildInstructions({ hardware, gpuVendor }) {
     }
   }
   return (
-    <PreformattedBox>
-      singularity build {containerName}{" "}
-      docker://ghcr.io/eresearchqut/ai-toolbox/hf_pipeline:{containerTag}
-    </PreformattedBox>
+    <CommandBox
+      command={`singularity build ${containerName} docker://ghcr.io/eresearchqut/ai-toolbox/hf_pipeline:${containerTag}`}
+    />
   );
 }
 function SingularityRunInstructions({ hardware, gpuVendor, service }) {
@@ -42,11 +41,9 @@ function SingularityRunInstructions({ hardware, gpuVendor, service }) {
     service === "Lyra" ? "/work/ai-toolbox/containers/" : "";
   let containerName = singularityContainerName(hardware, gpuVendor);
   return (
-    <PreformattedBox>
-      singularity run {argsString}
-      {containerLocation}
-      {containerName} bash
-    </PreformattedBox>
+    <CommandBox
+      command={`singularity run ${argsString}${containerLocation}${containerName} bash`}
+    />
   );
 }
 
@@ -119,25 +116,24 @@ export function InstallInstructions({
                     <InstructionText>
                       Download the latest version of micromamba
                     </InstructionText>
-                    <PreformattedBox>
-                      wget
-                      https://raw.githubusercontent.com/mamba-org/micromamba-releases/main/install.sh
-                    </PreformattedBox>
+                    <CommandBox
+                      command={
+                        "wget https://raw.githubusercontent.com/mamba-org/micromamba-releases/main/install.sh"
+                      }
+                    />
                     <InstructionText>
                       Run the installer and follow the prompts to install
                       micromamba:
                     </InstructionText>
-                    <PreformattedBox>
-                      bash install.sh -p ~/micromamba
-                    </PreformattedBox>
+                    <CommandBox command={"bash install.sh -p ~/micromamba"} />
                     <InstructionText>
                       Create an alias for micromamba
                     </InstructionText>
-                    <PreformattedBox>
-                      {'echo "alias conda=micromamba" >> ~/.bashrc'}
-                    </PreformattedBox>
+                    <CommandBox
+                      command={"echo 'alias conda=micromamba' >> ~/.bashrc"}
+                    />
                     <InstructionText>Refresh the shell:</InstructionText>
-                    <PreformattedBox>source ~/.bashrc</PreformattedBox>
+                    <CommandBox command={"source ~/.bashrc"} />
                   </TabPanel>
                   <TabPanel>
                     <AlertHelper alertType="warning" alertDismissible={false}>
@@ -148,18 +144,19 @@ export function InstallInstructions({
                     <InstructionText>
                       Download the latest version of miniconda:
                     </InstructionText>
-                    <PreformattedBox>
-                      wget
-                      https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-                    </PreformattedBox>
+                    <CommandBox
+                      command={
+                        "wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+                      }
+                    />
                     <InstructionText>
                       Run the installer and follow the prompts to install conda:
                     </InstructionText>
-                    <PreformattedBox>
-                      bash Miniconda3-latest-Linux-x86_64.sh
-                    </PreformattedBox>
+                    <CommandBox
+                      command={"bash Miniconda3-latest-Linux-x86_64.sh"}
+                    />
                     <InstructionText>Refresh the shell:</InstructionText>
-                    <PreformattedBox>source ~/.bashrc</PreformattedBox>
+                    <CommandBox command={"source ~/.bashrc"} />
                   </TabPanel>
                 </TabPanels>
               </Tabs>
@@ -169,26 +166,26 @@ export function InstallInstructions({
           <InstructionText>
             Create the conda environment (if it doesn&apos;t exist):
           </InstructionText>
-          <PreformattedBox>conda create --name hf</PreformattedBox>
+          <InstructionText>Create the conda environment:</InstructionText>
+          <CommandBox command={"conda create --name hf"} />
           <InstructionText>Activate the conda environment:</InstructionText>
-          <PreformattedBox>conda activate hf</PreformattedBox>
+          <CommandBox command={"conda activate hf"} />
           <InstructionText>Install the transformers package:</InstructionText>
-          <PreformattedBox>
-            conda install -c huggingface -c conda-forge transformers
-          </PreformattedBox>
+          <CommandBox
+            command={"conda install -c huggingface -c conda-forge transformers"}
+          />
           <InstructionText>Install pytorch:</InstructionText>
-          <PreformattedBox>
-            conda install -c pytorch -c nvidia -c conda-forge pytorch
-            torchvision torchaudio pytorch-cuda=12.1
-          </PreformattedBox>
+          <CommandBox
+            command={
+              "conda install -c pytorch -c nvidia -c conda-forge pytorch torchvision torchaudio pytorch-cuda=12.1"
+            }
+          />
           <InstructionText>Install the gradio package:</InstructionText>
-          <PreformattedBox>conda install -c conda-forge gradio</PreformattedBox>
+          <CommandBox command={"conda install -c conda-forge gradio"} />
           {isWorkstationNotebook && (
             <>
               <InstructionText>Install JupyterLab:</InstructionText>
-              <PreformattedBox>
-                conda install -c conda-forge jupyterlab
-              </PreformattedBox>
+              <CommandBox command={"conda install -c conda-forge jupyterlab"} />
             </>
           )}
         </>
@@ -218,15 +215,13 @@ export function InstallInstructions({
             <>
               <InstructionHeading>Python module</InstructionHeading>
               <InstructionText>Source the module script:</InstructionText>
-              <PreformattedBox>
-                source /etc/profile.d/modules.sh
-              </PreformattedBox>
+              <CommandBox command={"source /etc/profile.d/modules.sh"} />
               <InstructionText>Load the python module:</InstructionText>
-              <PreformattedBox>
-                module load python/3.10.8-gcccore-12.2.0-bare
-              </PreformattedBox>
+              <CommandBox
+                command={"module load python/3.10.8-gcccore-12.2.0-bare"}
+              />
               <InstructionText>Check the python version</InstructionText>
-              <PreformattedBox>python --version</PreformattedBox>
+              <CommandBox command={"python --version"} />
             </>
           )}
           <InstructionHeading>
@@ -235,17 +230,15 @@ export function InstallInstructions({
           <InstructionText>
             Create the virtual environment (if it doesn&apos;t exist):
           </InstructionText>
-          <PreformattedBox>python -m venv hf-venv</PreformattedBox>
+          <CommandBox command={"python -m venv hf-venv"} />
           <InstructionText>Activate the virtual environment:</InstructionText>
-          <PreformattedBox>source hf-venv/bin/activate</PreformattedBox>
+          <CommandBox command={"source hf-venv/bin/activate"} />
           <InstructionText>Install the base dependencies:</InstructionText>
-          <PreformattedBox>
-            pip install gradio &apos;transformers[torch]&apos;
-          </PreformattedBox>
+          <CommandBox command={"pip install gradio 'transformers[torch]'"} />
           {isWorkstationNotebook && (
             <>
               <InstructionText>Install JupyterLab:</InstructionText>
-              <PreformattedBox>pip install jupyterlab</PreformattedBox>
+              <CommandBox command={"pip install jupyterlab"} />
             </>
           )}
         </>

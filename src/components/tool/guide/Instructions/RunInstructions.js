@@ -1,6 +1,7 @@
 // TODO: Different operating systems
 import { Code } from "@chakra-ui/react";
 
+import CommandBox from "../../../output/CommandBox";
 import PreformattedBox from "../../../output/PreformattedBox";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -14,11 +15,9 @@ export function RunInstructions({ service, tool, task, model, port }) {
       {tool === "CLI" && (
         <>
           <InstructionText>Start the gradio server:</InstructionText>
-          <PreformattedBox>
-            gradio pipeline {task} --model={model}{" "}
-            --server-name=&quot;0.0.0.0&quot; --server-port={port}{" "}
-            --device-map=&quot;auto&quot;
-          </PreformattedBox>
+          <CommandBox
+            command={`gradio pipeline ${task} --model=${model} --server-name="0.0.0.0" --server-port=${port} --device-map="auto"`}
+          />
         </>
       )}
       {tool === "Script" && (
@@ -44,7 +43,7 @@ interface.launch(server_name="0.0.0.0", server_port=PORT)
 `}
           </PreformattedBox>
           <InstructionText>Run the script:</InstructionText>
-          <PreformattedBox>python hf_pipeline.py {port}</PreformattedBox>
+          <CommandBox command={`python hf_pipeline.py ${port}`} />
         </>
       )}
       {tool === "Notebook" && (
@@ -54,7 +53,7 @@ interface.launch(server_name="0.0.0.0", server_port=PORT)
               <InstructionText>
                 Run the following command to start the server:
               </InstructionText>
-              <PreformattedBox>python -m jupyterlab</PreformattedBox>
+              <CommandBox command={`python -m jupyterlab`} />
               <InstructionText>
                 Open the link to the jupyter server in your browser, and create
                 a new notebook.

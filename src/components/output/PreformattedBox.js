@@ -17,6 +17,7 @@ export default function PreformattedBox({
   type = "input",
   defaultRows = 10,
   wrap = true,
+  contentProps,
 }) {
   const [hover, setHover] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -26,7 +27,7 @@ export default function PreformattedBox({
   if (type === "input") {
     bg = useColorModeValue("gray.50", "gray.800");
   } else if (type === "output") {
-    bg = useColorModeValue("gray.300", "gray.700");
+    bg = useColorModeValue("gray.200", "gray.700");
   } else {
     bg = useColorModeValue("gray.50", "gray.800");
   }
@@ -64,6 +65,7 @@ export default function PreformattedBox({
         key={text}
         onSubmit={(e) => setText(e)}
         sx={wrapStyle}
+        {...contentProps}
       >
         {editable ? (
           <>

@@ -2,7 +2,7 @@ import { Code, Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 
 import { useState } from "react";
 
-import PreformattedBox from "../../../output/PreformattedBox";
+import CommandBox from "../../../output/CommandBox";
 import InstructionInput from "./InstructionInput";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
@@ -29,17 +29,16 @@ export function LyraStatusInstructions({ jobType, jobName }) {
           />
           <InstructionHeading>Job status</InstructionHeading>
           <InstructionText>
-            You can check the status of your jobs by running the following
-            command:
+            Check the status of your jobs by running the following command:
           </InstructionText>
-          <PreformattedBox>qstat -xu $USER</PreformattedBox>
-          <PreformattedBox wrap={false} type="output">
-            {`pbs: 
+          <CommandBox
+            command="qstat -xu $USER"
+            output={`pbs:
                                                    Req'd  Req'd   Elap
 Job ID      Username Queue Jobname  SessID NDS TSK Memory Time  S Time
 ----------- -------- ----- -------- ------ --- --- ------ ----- - -----
-1234567.pbs username quick job-name    --    1   4   32gb 01:00 Q   --`}
-          </PreformattedBox>
+${jobIdOrPlaceholder}.pbs username quick job-name    --    1   4   32gb 01:00 Q   --`}
+          />
           <InstructionText>
             The job status will be shown in the <Code>S</Code> column.
           </InstructionText>
@@ -106,43 +105,50 @@ Job ID      Username Queue Jobname  SessID NDS TSK Memory Time  S Time
           <InstructionText>
             Run the following command to see the output files:
           </InstructionText>
-          <PreformattedBox>{`ls -lh ${jobName}.*`}</PreformattedBox>
-          <PreformattedBox wrap={false} type="output">
-            {`-rw------- 1 username default 100 Jan 01 00:00 ${jobName}.e${jobIdOrPlaceholder}
--rw------- 1 username default  80 Jan 01 00:00 ${jobName}.o${jobIdOrPlaceholder}`}
-          </PreformattedBox>
+          <CommandBox
+            command={`ls -lh ${jobName}.*`}
+            output={[
+              `-rw------- 1 username default 100 Jan 01 00:00 ${jobName}.e${jobIdOrPlaceholder}`,
+              `-rw------- 1 username default  80 Jan 01 00:00 ${jobName}.o${jobIdOrPlaceholder}`,
+            ].join("\n")}
+          />
           <InstructionText>
             Run the following command to see the output of the job:
           </InstructionText>
-          <PreformattedBox>{`cat ${jobName}.o${jobIdOrPlaceholder}`}</PreformattedBox>
-          <PreformattedBox type="output">
-            {`Hello, world!
-PBS Job ${jobIdOrPlaceholder}.pbs
-CPU time  : 00:00:00
-Wall time : 00:00:01
-Mem usage : 0b`}
-          </PreformattedBox>
+          <CommandBox
+            command={`cat ${jobName}.o${jobIdOrPlaceholder}`}
+            output={[
+              "Hello, world!",
+              `PBS Job ${jobIdOrPlaceholder}.pbs`,
+              "CPU time  : 00:00:00",
+              "Wall time : 00:00:01",
+              "Mem usage : 0b",
+            ].join("\n")}
+          />
           <InstructionText>
             Run the following command to see the error output of the job:
           </InstructionText>
-          <PreformattedBox>{`cat ${jobName}.e${jobIdOrPlaceholder}`}</PreformattedBox>
-          <PreformattedBox type="output">{`Data written to stderr`}</PreformattedBox>
+          <CommandBox
+            command={`cat ${jobName}.e${jobIdOrPlaceholder}`}
+            output={`Data written to stderr`}
+          />
           <InstructionText>
             Use the following command to get more detailed information about the
             job, including resource usage.
           </InstructionText>
-          <PreformattedBox>{`qstat -fx ${jobIdOrPlaceholder}`}</PreformattedBox>
-          <PreformattedBox wrap={false} type="output">
-            {`Job Id: ${jobIdOrPlaceholder}.pbs
-    ...
-    resources_used.cpupercent = 99
-    resources_used.cput = 00:39:22
-    resources_used.mem = 5671036kb
-    resources_used.ncpus = 1
-    resources_used.vmem = 2755392kb
-    resources_used.walltime = 00:40:51
-    ...`}
-          </PreformattedBox>
+          <CommandBox
+            command={`qstat -fx ${jobIdOrPlaceholder}`}
+            output={`Job Id: ${jobIdOrPlaceholder}.pbs
+  ...
+  resources_used.cpupercent = 99
+  resources_used.cput = 00:39:22
+  resources_used.mem = 5671036kb
+  resources_used.ncpus = 1
+  resources_used.vmem = 2755392kb
+  resources_used.walltime = 00:40:51
+  ...
+  `}
+          />
           <InstructionText>
             Observe the resource usage of the job and adjust the requested
             resources in future job submissions accordingly

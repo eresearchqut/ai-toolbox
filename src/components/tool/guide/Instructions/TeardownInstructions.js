@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import PreformattedBox from "../../../output/PreformattedBox";
+import CommandBox from "../../../output/CommandBox";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 
@@ -69,12 +69,12 @@ export function TeardownInstructions({
                 To stop the job early, you need to know your job id. You can
                 either note down your job id when you submit a batch job, or
                 find the job id using the check job status command:
-                <PreformattedBox>qstat -u $USER</PreformattedBox>
               </InstructionText>
+              <CommandBox command="qstat -u $USER" />
               <InstructionText>
-                To stop the job early, run the following:
-                <PreformattedBox>{`qdel {job_id}`}</PreformattedBox>
+                To stop the job early, run the following command:
               </InstructionText>
+              <CommandBox command="qdel {job_id}" />
             </>
           )}
           <InstructionHeading>Exit the ssh session</InstructionHeading>
