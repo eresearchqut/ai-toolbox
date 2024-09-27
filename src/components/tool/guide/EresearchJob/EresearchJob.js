@@ -259,11 +259,11 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
                 textBeforeLink={"IPUs are currently unavailable. Please "}
                 link={{
                   href: "https://eresearchqut.atlassian.net/servicedesk/customer/portals",
-                  text: "contact eResearch if interested",
+                  text: "contact eResearch",
                   isExternal: true,
                 }}
                 hasExternalIcon={true}
-                textAfterLink={"."}
+                textAfterLink={" if interested."}
               />
             }
           />

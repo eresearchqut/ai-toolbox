@@ -1,5 +1,6 @@
 import { Grid } from "@chakra-ui/react";
 
+import TextWithLink from "../../navigation/TextWithLink";
 import ConfigPicker from "./Config/ConfigPicker";
 import ConfigSlider from "./Config/ConfigSlider";
 
@@ -83,6 +84,13 @@ export const getCpuModel = (config, onChange) => () => {
     cpuModels = ["Any", "6140", "6248", "8260", "E7-8890v4"];
   }
 
+  let alertMsg;
+  if (config?.cpuModel === "E7-8890v4") {
+    alertMsg = "The E7-8890v4 CPU should only be used for large memory jobs.";
+  } else if (config?.cpuModel === "8260") {
+    alertMsg = "The 8260 CPU is reserved for the microbiome group.";
+  }
+
   return {
     element: (key, selected) => (
       <ConfigPicker
@@ -94,6 +102,9 @@ export const getCpuModel = (config, onChange) => () => {
           value: config?.cpuModel,
           onChange: onChange("cpuModel"),
         }}
+        showAlert={["E7-8890v4", "8260"].includes(config?.cpuModel)}
+        alertType={"warning"}
+        alertMsg={alertMsg}
       />
     ),
     show: (config) =>
@@ -238,6 +249,20 @@ export const getGpuVendor = (config, onChange) => () => {
             value: config?.gpuVendor,
             onChange: onChange("gpuVendor"),
           }}
+          showAlert={config?.gpuVendor === "AMD"}
+          alertType={"warning"}
+          alertMsg={
+            <TextWithLink
+              textBeforeLink={"AMD GPUs are currently unavailable. Please "}
+              link={{
+                href: "https://eresearchqut.atlassian.net/servicedesk/customer/portals",
+                text: "contact eResearch",
+                isExternal: true,
+              }}
+              hasExternalIcon={true}
+              textAfterLink={" if interested."}
+            />
+          }
         />
       );
     },
@@ -250,16 +275,12 @@ export const getGpuModel = (config, onChange) => () => {
   let gpuModels = [];
   if (config?.gpuVendor === "NVIDIA") {
     gpuModels = [
-      ["T4", "Tesla T4 16 GB"],
       ["P100", "TESLA P100-PCIE-16GB"],
       ["V100", "TESLA V100-PCIE-32GB"],
       ["A100", "NVIDIA A100-SXM4-40GB"],
     ];
   } else if (config?.gpuVendor === "AMD") {
-    gpuModels = [
-      ["MI100", "AMD MI100 32 GB"],
-      ["MI210", "AMD MI210 16 GB"],
-    ];
+    gpuModels = [];
   }
   return {
     element: (key, selected) => (
@@ -272,6 +293,9 @@ export const getGpuModel = (config, onChange) => () => {
           value: config?.gpuModel,
           onChange: onChange("gpuModel"),
         }}
+        showAlert={config?.gpuModel === "V100"}
+        alertType={"warning"}
+        alertMsg={"The V100 GPU is reserved for the microbiome group."}
       />
     ),
     show: (config) =>
