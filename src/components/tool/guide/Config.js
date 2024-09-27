@@ -275,7 +275,6 @@ export const getGpuModel = (config, onChange) => () => {
   let gpuModels = [];
   if (config?.gpuVendor === "NVIDIA") {
     gpuModels = [
-      ["T4", "Tesla T4 16 GB"],
       ["P100", "TESLA P100-PCIE-16GB"],
       ["V100", "TESLA V100-PCIE-32GB"],
       ["A100", "NVIDIA A100-SXM4-40GB"],
@@ -294,6 +293,9 @@ export const getGpuModel = (config, onChange) => () => {
           value: config?.gpuModel,
           onChange: onChange("gpuModel"),
         }}
+        showAlert={config?.gpuModel === "V100"}
+        alertType={"warning"}
+        alertMsg={"The V100 GPU is reserved for the microbiome group."}
       />
     ),
     show: (config) =>
