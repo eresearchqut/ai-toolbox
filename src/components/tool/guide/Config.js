@@ -1,5 +1,6 @@
 import { Grid } from "@chakra-ui/react";
 
+import TextWithLink from "../../navigation/TextWithLink";
 import ConfigPicker from "./Config/ConfigPicker";
 import ConfigSlider from "./Config/ConfigSlider";
 
@@ -238,6 +239,20 @@ export const getGpuVendor = (config, onChange) => () => {
             value: config?.gpuVendor,
             onChange: onChange("gpuVendor"),
           }}
+          showAlert={config?.gpuVendor === "AMD"}
+          alertType={"warning"}
+          alertMsg={
+            <TextWithLink
+              textBeforeLink={"AMD GPUs are currently unavailable. Please "}
+              link={{
+                href: "https://eresearchqut.atlassian.net/servicedesk/customer/portals",
+                text: "contact eResearch",
+                isExternal: true,
+              }}
+              hasExternalIcon={true}
+              textAfterLink={" if interested."}
+            />
+          }
         />
       );
     },
@@ -256,10 +271,7 @@ export const getGpuModel = (config, onChange) => () => {
       ["A100", "NVIDIA A100-SXM4-40GB"],
     ];
   } else if (config?.gpuVendor === "AMD") {
-    gpuModels = [
-      ["MI100", "AMD MI100 32 GB"],
-      ["MI210", "AMD MI210 16 GB"],
-    ];
+    gpuModels = [];
   }
   return {
     element: (key, selected) => (
