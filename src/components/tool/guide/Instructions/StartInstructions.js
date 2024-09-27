@@ -43,12 +43,6 @@ export function LyraStartInstructions({
   const jobParameters = [
     jobType === "Interactive" ? " -I -S /bin/bash" : "",
     jobType !== "Interactive" && jobName !== "" ? ' -N "' + jobName + '"' : "",
-    jobType === "Batch" && jobInstanceType === "Array"
-      ? " -J " + arrayConfig?.firstIndex + "-" + arrayConfig?.upperBound
-      : "",
-    jobType === "Batch" && jobInstanceType === "Array" && arrayConfig?.step > 1
-      ? ":" + arrayConfig?.step
-      : "",
   ];
 
   const wallTimeStr =
@@ -66,6 +60,11 @@ export function LyraStartInstructions({
     `#PBS -N ${jobName}`,
     `#PBS -l walltime=${wallTimeStr}`,
     `#PBS -l ${resources.join(":")}`,
+    ...(jobInstanceType === "Array"
+      ? [
+          `#PBS -J ${arrayConfig?.firstIndex}-${arrayConfig?.upperBound}${arrayConfig?.step > 1 ? `:${arrayConfig?.step}` : ""}`,
+        ]
+      : []),
     "",
     "cd $PBS_O_WORKDIR",
     "",
@@ -101,7 +100,7 @@ export function LyraStartInstructions({
           </InstructionText>
           <CommandBox
             command={[
-              `cat <<'EOF' > ${jobName}.pbs`,
+              `cat <<'EOF' > ${scriptPath || `${jobName}.pbs`}`,
               ...batchJobScript,
               "EOF",
               "",
@@ -111,7 +110,7 @@ export function LyraStartInstructions({
             Run the following command to confirm the contents of the script:
           </InstructionText>
           <CommandBox
-            command={`cat ${jobName}.pbs`}
+            command={`cat ${scriptPath || `${jobName}.pbs`}`}
             output={batchJobScript.join("\n")}
           />
         </>

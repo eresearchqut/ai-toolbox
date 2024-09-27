@@ -74,6 +74,7 @@ export function EresearchInstructions({ config }) {
               <LyraStatusInstructions
                 jobType={config.jobType}
                 jobName={batchJobName}
+                jobInstanceType={config.jobInstanceType}
               />
               <TeardownInstructions
                 service={config.service}

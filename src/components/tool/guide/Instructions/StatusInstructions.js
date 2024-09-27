@@ -7,9 +7,9 @@ import InstructionInput from "./InstructionInput";
 import InstructionHeading from "./components/InstructionHeading";
 import InstructionText from "./components/InstructionText";
 
-export function LyraStatusInstructions({ jobType, jobName }) {
+export function LyraStatusInstructions({ jobType, jobName, jobInstanceType }) {
   const [jobId, setJobId] = useState("");
-  const jobIdOrPlaceholder = jobId || "1234567";
+  const jobIdOrPlaceholder = jobId || "12345678";
   return (
     <>
       <InstructionText>
@@ -28,17 +28,52 @@ export function LyraStatusInstructions({ jobType, jobName }) {
             errorText="Job ID must only contain numbers"
           />
           <InstructionHeading>Job status</InstructionHeading>
-          <InstructionText>
-            Check the status of your jobs by running the following command:
-          </InstructionText>
-          <CommandBox
-            command="qstat -xu $USER"
-            output={`pbs:
-                                                   Req'd  Req'd   Elap
-Job ID      Username Queue Jobname  SessID NDS TSK Memory Time  S Time
------------ -------- ----- -------- ------ --- --- ------ ----- - -----
+          {jobInstanceType === "Standalone" && (
+            <>
+              <InstructionText>
+                Check the status of your jobs by running the following command:
+              </InstructionText>
+              <CommandBox
+                command="qstat -xu $USER"
+                output={`pbs:
+                                                    Req'd  Req'd   Elap
+Job ID       Username Queue Jobname  SessID NDS TSK Memory Time  S Time
+------------ -------- ----- -------- ------ --- --- ------ ----- - -----
 ${jobIdOrPlaceholder}.pbs username quick job-name    --    1   4   32gb 01:00 Q   --`}
-          />
+              />
+            </>
+          )}
+          {jobInstanceType === "Array" && (
+            <>
+              <InstructionText>
+                Check the status of your array jobs by running the following
+                command:
+              </InstructionText>
+              <CommandBox
+                command="qstat -Jxu $USER"
+                output={`pbs:
+                                                      Req'd  Req'd   Elap
+Job ID         Username Queue Jobname  SessID NDS TSK Memory Time  S Time
+-------------- -------- ----- -------- ------ --- --- ------ ----- - -----
+${jobIdOrPlaceholder}[].pbs username quick job-name    --    1   4   32gb 01:00 Q   --`}
+              />
+              <InstructionText>
+                Check the status of your array sub-jobs by running the following
+                command:
+              </InstructionText>
+              <CommandBox
+                command="qstat -Jtxu $USER"
+                output={`pbs:
+                                                       Req'd  Req'd   Elap
+Job ID          Username Queue Jobname  SessID NDS TSK Memory Time  S Time
+--------------- -------- ----- -------- ------ --- --- ------ ----- - -----
+${jobIdOrPlaceholder}[0].pbs username quick job-name    --    1   4   32gb 01:00 Q   --
+${jobIdOrPlaceholder}[1].pbs username quick job-name    --    1   4   32gb 01:00 Q   --
+${jobIdOrPlaceholder}[2].pbs username quick job-name    --    1   4   32gb 01:00 Q   --
+`}
+              />
+            </>
+          )}
           <InstructionText>
             The job status will be shown in the <Code>S</Code> column.
           </InstructionText>
@@ -105,39 +140,81 @@ ${jobIdOrPlaceholder}.pbs username quick job-name    --    1   4   32gb 01:00 Q 
           <InstructionText>
             Run the following command to see the output files:
           </InstructionText>
-          <CommandBox
-            command={`ls -lh ${jobName}.*`}
-            output={[
-              `-rw------- 1 username default 100 Jan 01 00:00 ${jobName}.e${jobIdOrPlaceholder}`,
-              `-rw------- 1 username default  80 Jan 01 00:00 ${jobName}.o${jobIdOrPlaceholder}`,
-            ].join("\n")}
-          />
+          {jobInstanceType === "Standalone" && (
+            <CommandBox
+              command={`ls -lh ${jobName}.*`}
+              output={[
+                `-rw------- 1 username default 100 Jan 01 00:00 ${jobName}.e${jobIdOrPlaceholder}`,
+                `-rw------- 1 username default  80 Jan 01 00:00 ${jobName}.o${jobIdOrPlaceholder}`,
+              ].join("\n")}
+            />
+          )}
+          {jobInstanceType === "Array" && (
+            <CommandBox
+              command={`ls -lh ${jobName}.*`}
+              output={[
+                `-rw------- 1 username default 100 Jan 01 00:00 ${jobName}.e${jobIdOrPlaceholder}.0`,
+                `-rw------- 1 username default 100 Jan 01 00:00 ${jobName}.e${jobIdOrPlaceholder}.1`,
+                `-rw------- 1 username default  80 Jan 01 00:00 ${jobName}.o${jobIdOrPlaceholder}.0`,
+                `-rw------- 1 username default  80 Jan 01 00:00 ${jobName}.o${jobIdOrPlaceholder}.1`,
+              ].join("\n")}
+            />
+          )}
           <InstructionText>
             Run the following command to see the output of the job:
           </InstructionText>
-          <CommandBox
-            command={`cat ${jobName}.o${jobIdOrPlaceholder}`}
-            output={[
-              "Hello, world!",
-              `PBS Job ${jobIdOrPlaceholder}.pbs`,
-              "CPU time  : 00:00:00",
-              "Wall time : 00:00:01",
-              "Mem usage : 0b",
-            ].join("\n")}
-          />
+          {jobInstanceType === "Standalone" && (
+            <CommandBox
+              command={`cat ${jobName}.o${jobId || "*"}`}
+              output={[
+                `Running job 'job-name' (${jobIdOrPlaceholder}.pbs) in the following directory: /home/username`,
+                `PBS Job ${jobIdOrPlaceholder}.pbs`,
+                "CPU time  : 00:00:00",
+                "Wall time : 00:00:01",
+                "Mem usage : 0b",
+              ].join("\n")}
+            />
+          )}
+          {jobInstanceType === "Array" && (
+            <CommandBox
+              command={`cat ${jobName}.o${jobId || "*"}.*`}
+              output={[
+                `Running job 'job-name' (${jobIdOrPlaceholder}[0].pbs) in the following directory: /home/username`,
+                `PBS Job ${jobIdOrPlaceholder}[1].pbs`,
+                "CPU time  : 00:00:00",
+                "Wall time : 00:00:01",
+                "Mem usage : 0b",
+                `Running job 'job-name' (${jobIdOrPlaceholder}[1].pbs) in the following directory: /home/username`,
+                `PBS Job ${jobIdOrPlaceholder}[1].pbs`,
+                "CPU time  : 00:00:00",
+                "Wall time : 00:00:01",
+                "Mem usage : 0b",
+              ].join("\n")}
+            />
+          )}
           <InstructionText>
             Run the following command to see the error output of the job:
           </InstructionText>
-          <CommandBox
-            command={`cat ${jobName}.e${jobIdOrPlaceholder}`}
-            output={`Data written to stderr`}
-          />
+          {jobInstanceType === "Standalone" && (
+            <CommandBox
+              command={`cat ${jobName}.e${jobId || "*"}`}
+              output={`Data written to stderr`}
+            />
+          )}
+          {jobInstanceType === "Array" && (
+            <CommandBox
+              command={`cat ${jobName}.e${jobId || "*"}.*`}
+              output={["Data written to stderr", "Data written to stderr"].join(
+                "\n",
+              )}
+            />
+          )}
           <InstructionText>
             Use the following command to get more detailed information about the
             job, including resource usage.
           </InstructionText>
           <CommandBox
-            command={`qstat -fx ${jobIdOrPlaceholder}`}
+            command={`qstat -fx ${jobId || "{jobId}"}`}
             output={`Job Id: ${jobIdOrPlaceholder}.pbs
   ...
   resources_used.cpupercent = 99
