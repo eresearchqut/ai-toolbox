@@ -84,6 +84,13 @@ export const getCpuModel = (config, onChange) => () => {
     cpuModels = ["Any", "6140", "6248", "8260", "E7-8890v4"];
   }
 
+  let alertMsg;
+  if (config?.cpuModel === "E7-8890v4") {
+    alertMsg = "The E7-8890v4 CPU should only be used for large memory jobs.";
+  } else if (config?.cpuModel === "8260") {
+    alertMsg = "The 8260 CPU is reserved for the microbiome group.";
+  }
+
   return {
     element: (key, selected) => (
       <ConfigPicker
@@ -95,6 +102,9 @@ export const getCpuModel = (config, onChange) => () => {
           value: config?.cpuModel,
           onChange: onChange("cpuModel"),
         }}
+        showAlert={["E7-8890v4", "8260"].includes(config?.cpuModel)}
+        alertType={"warning"}
+        alertMsg={alertMsg}
       />
     ),
     show: (config) =>

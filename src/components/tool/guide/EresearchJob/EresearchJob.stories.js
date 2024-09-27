@@ -52,7 +52,7 @@ export const LyraCustomHardware = {
       jobType: "Batch",
       hardware: "GPU",
       cpuVendor: "Intel",
-      cpuModel: "8260",
+      cpuModel: "6248",
       gpuVendor: "NVIDIA",
       gpuModel: "A100",
       gpuModules: 8,
