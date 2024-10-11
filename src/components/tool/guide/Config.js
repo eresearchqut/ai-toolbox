@@ -90,7 +90,7 @@ export const getCpuModel = (config, onChange) => () => {
   let alertMsg;
   if (config?.cpuModel === "E7-8890v4") {
     alertMsg =
-      "The E7-8890v4 CPU should only be used for jobs with more than 512 GB of ram.";
+      "The E7-8890v4 CPU should only be used for jobs that require more than 512 GB of RAM.";
   } else if (config?.cpuModel === "8260") {
     alertMsg = "The 8260 CPU is reserved for the microbiome group.";
   } else if (config?.cpuModel === "6248") {

@@ -106,12 +106,18 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
           <ConfigPicker
             key={key}
             title="Resources"
-            description="The resources available on the nodes used by the job."
+            description="The hardware resources available on the nodes used by the job."
             selected={selected}
             inputProps={{
               choices: [
-                ["Automatic", "Run the job without specifying resources"],
-                ["Custom", "Specify the resources to use for the job"],
+                [
+                  "Automatic",
+                  "Run the job without specifying hardware resources",
+                ],
+                [
+                  "Custom",
+                  "Specify the hardware resources used by the nodes running the job",
+                ],
               ],
               value: config?.resources,
               onChange: onChange("resources"),
