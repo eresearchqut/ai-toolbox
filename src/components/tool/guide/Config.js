@@ -10,6 +10,8 @@ export const DEFAULT_CONFIG = {
   ram: 32,
   gpuModules: 1,
   wallTime: { hours: 1, minutes: 0 },
+  resources: "Automatic",
+  jobType: "Batch",
   jobInstanceType: "Standalone",
   arrayConfig: { firstIndex: 1, upperBound: 10, step: 1 },
 };
@@ -24,6 +26,7 @@ export const isValidChoice = (choices, value) => {
 };
 
 export const isLyra = (config) => config?.service === "Lyra";
+export const isCustom = (config) => config?.resources === "Custom";
 export const isWorkstation = (config) =>
   ["rVDI", "Local"].includes(config?.service);
 export const isGPU = (config) => config?.hardware === "GPU";
@@ -71,7 +74,7 @@ export const getCpuVendor = (config, onChange) => () => {
         }}
       />
     ),
-    show: (config) => isLyra(config),
+    show: (config) => isLyra(config) && isCustom(config),
     selected: (config) => isValidChoice(cpuVendors, config?.cpuVendor),
   };
 };
@@ -86,9 +89,23 @@ export const getCpuModel = (config, onChange) => () => {
 
   let alertMsg;
   if (config?.cpuModel === "E7-8890v4") {
-    alertMsg = "The E7-8890v4 CPU should only be used for large memory jobs.";
+    alertMsg =
+      "The E7-8890v4 CPU should only be used for jobs with more than 512 GB of ram.";
   } else if (config?.cpuModel === "8260") {
     alertMsg = "The 8260 CPU is reserved for the microbiome group.";
+  } else if (config?.cpuModel === "6248") {
+    alertMsg = (
+      <TextWithLink
+        textBeforeLink={"6248 CPUs are currently unavailable. Please "}
+        link={{
+          href: "https://eresearchqut.atlassian.net/servicedesk/customer/portals",
+          text: "contact eResearch",
+          isExternal: true,
+        }}
+        hasExternalIcon={true}
+        textAfterLink={" if interested."}
+      />
+    );
   }
 
   return {
@@ -108,7 +125,10 @@ export const getCpuModel = (config, onChange) => () => {
       />
     ),
     show: (config) =>
-      isLyra(config) && config?.cpuVendor && config.cpuVendor !== "Any",
+      isLyra(config) &&
+      isCustom(config) &&
+      config?.cpuVendor &&
+      config.cpuVendor !== "Any",
     selected: (config) => isValidChoice(cpuModels, config?.cpuModel),
   };
 };
@@ -266,7 +286,7 @@ export const getGpuVendor = (config, onChange) => () => {
         />
       );
     },
-    show: (config) => isLyra(config) && isGPU(config),
+    show: (config) => isLyra(config) && isCustom(config) && isGPU(config),
     selected: (config) => isValidChoice(gpuVendors, config?.gpuVendor),
   };
 };
@@ -300,6 +320,7 @@ export const getGpuModel = (config, onChange) => () => {
     ),
     show: (config) =>
       isLyra(config) &&
+      isCustom(config) &&
       config?.hardware === "GPU" &&
       config?.gpuVendor &&
       config.gpuVendor !== "Any",
@@ -329,7 +350,7 @@ export const getGpuModules = (config, onChange) => () => {
         }
       />
     ),
-    show: (config) => isLyra(config) && isGPU(config),
+    show: (config) => isLyra(config) && isCustom(config) && isGPU(config),
     selected: () => true,
   };
 };

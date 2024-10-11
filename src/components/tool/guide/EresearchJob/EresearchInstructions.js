@@ -58,6 +58,7 @@ export function EresearchInstructions({ config }) {
               <LyraStartInstructions
                 jobType={config.jobType}
                 jobName={batchJobName}
+                resources={config.resources}
                 hardware={config.hardware}
                 cpuVendor={config.cpuVendor}
                 cpuModel={config.cpuModel}

@@ -100,6 +100,34 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
         selected: (config) => isValidChoice(jobTypes, config?.jobType),
       };
     },
+    resources: () => {
+      return {
+        element: (key, selected) => (
+          <ConfigPicker
+            key={key}
+            title="Resources"
+            description="The resources available on the nodes used by the job."
+            selected={selected}
+            inputProps={{
+              choices: [
+                ["Automatic", "Run the job without specifying resources"],
+                ["Custom", "Specify the resources to use for the job"],
+              ],
+              value: config?.resources,
+              onChange: onChange("resources"),
+            }}
+            showAlert={config?.resources === "Custom"}
+            alertType="warning"
+            alertMsg={
+              "Jobs with custom resources may not run, and are not recommended for general use."
+            }
+          />
+        ),
+        show: (config) => config?.service === "Lyra",
+        selected: (config) =>
+          isValidChoice(["Automatic", "Custom"], config?.resources),
+      };
+    },
     nodes: () => {
       return {
         element: (key, selected) => (
@@ -133,7 +161,9 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
           />
         ),
         show: (config) =>
-          config?.service === "Lyra" && config?.jobType === "Batch",
+          config?.service === "Lyra" &&
+          config?.resources === "Custom" &&
+          config?.jobType === "Batch",
         selected: (config) => config?.nodes > 0,
       };
     },
@@ -268,7 +298,10 @@ const getConfigGroups = (config, onConfigChange = () => {}) => {
             }
           />
         ),
-        show: (config) => config?.service,
+        show: (config) =>
+          config?.service === "Lyra"
+            ? config?.resources === "Custom"
+            : config?.service,
         selected: (config) => isValidChoice(["CPU", "GPU"], config?.hardware),
       };
     },
