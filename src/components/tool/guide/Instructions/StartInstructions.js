@@ -11,6 +11,7 @@ import InstructionText from "./components/InstructionText";
 export function LyraStartInstructions({
   jobType,
   jobName = "",
+  resources,
   nodes,
   wallTime,
   hardware,
@@ -24,19 +25,25 @@ export function LyraStartInstructions({
   jobInstanceType,
   arrayConfig,
 }) {
-  const resources = [
+  const resourceValues = [
     `select=${jobType === "Interactive" ? 1 : nodes}`,
     `ncpus=${cpus}`,
     `mem=${ram}gb`,
   ];
-  if (cpuVendor !== "Any") {
-    if (cpuModel !== "Any") resources.push(`cputype=${cpuModel}`);
-    else resources.push(cpuVendor === "AMD" ? "cpuarch=amd" : "cpuarch=avx512");
-  }
-  if (hardware === "GPU") {
-    resources.push(`ngpus=${gpuModules}`);
-    if (gpuVendor !== "Any" && gpuModel) {
-      resources.push(`gputype=${gpuModel}`);
+
+  if (resources === "Custom") {
+    if (cpuVendor !== "Any") {
+      if (cpuModel !== "Any") resourceValues.push(`cputype=${cpuModel}`);
+      else
+        resourceValues.push(
+          cpuVendor === "AMD" ? "cpuarch=amd" : "cpuarch=avx512",
+        );
+    }
+    if (hardware === "GPU") {
+      resourceValues.push(`ngpus=${gpuModules}`);
+      if (gpuVendor !== "Any" && gpuModel) {
+        resourceValues.push(`gputype=${gpuModel}`);
+      }
     }
   }
 
@@ -59,7 +66,7 @@ export function LyraStartInstructions({
     "#!/bin/bash -l",
     `#PBS -N ${jobName}`,
     `#PBS -l walltime=${wallTimeStr}`,
-    `#PBS -l ${resources.join(":")}`,
+    `#PBS -l ${resourceValues.join(":")}`,
     ...(jobInstanceType === "Array"
       ? [
           `#PBS -J ${arrayConfig?.firstIndex}-${arrayConfig?.upperBound}${arrayConfig?.step > 1 ? `:${arrayConfig?.step}` : ""}`,
@@ -76,7 +83,7 @@ export function LyraStartInstructions({
 
   const cmdText =
     jobType === "Interactive"
-      ? `qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resources.join(":")}`
+      ? `qsub${jobParameters.join("")} -l walltime=${wallTimeStr} -l ${resourceValues.join(":")}`
       : `qsub ${scriptPath || `${jobName}.pbs`}`;
 
   return (
@@ -115,12 +122,37 @@ export function LyraStartInstructions({
           />
         </>
       )}
+      {resources === "Custom" && (
+        <>
+          <InstructionHeading>Custom resources</InstructionHeading>
+          <InstructionText>
+            Before running the job, double-check that the resources requested
+            are available on a node by running the following command:
+          </InstructionText>
+          <CommandBox
+            command={`pbsnodeinfo`}
+            output={`Node    :   cputype |        cpuarch ;    cpu usage;    mem usage; gputype; gpu usage
+=====================================================================================
+cl4n001 : E7-8890v4 |       avx,avx2 ; 110 / 192 cpus; 5599 / 5791 GB
+cl4n002 :      6140 |avx,avx2,avx512 ; 11 / 36 cpus; 178 / 183 GB;  P100; 3 / 4 gpus
+cl4n003 :      6140 |avx,avx2,avx512 ; 10 / 36 cpus; 167 / 183 GB;  P100; 3 / 4 gpus
+cl4n007 :      6140 |avx,avx2,avx512 ; 31 / 36 cpus; 352 / 373 GB
+cl4n008 :      6140 |avx,avx2,avx512 ; 25 / 36 cpus; 320 / 373 GB
+cl4n009 :      6140 |avx,avx2,avx512 ; 35 / 36 cpus; 360 / 373 GB
+cl4n010 :      6140 |avx,avx2,avx512 ; 35 / 36 cpus; 266 / 373 GB
+...`}
+          />
+        </>
+      )}
 
       <InstructionHeading>Schedule a job</InstructionHeading>
       <InstructionText>
         Run the following command to schedule the {jobType.toLowerCase()} job:
       </InstructionText>
-      <CommandBox command={cmdText} output="{jobId}.pbs" />
+      <CommandBox
+        command={cmdText}
+        output={`{jobId}${jobInstanceType === "Array" ? "[]" : ""}.pbs`}
+      />
     </>
   );
 }
