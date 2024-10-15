@@ -62,7 +62,7 @@ function LyraInstructions({ username }) {
                 isExternal: true,
               }}
               textAfterLink={
-                ", or cmd.exe, run the following command to connect to Lyra:"
+                ", or cmd.exe, run the following command to connect to Lyra. When prompted, enter your QUT password."
               }
             />
           </InstructionText>
@@ -70,13 +70,13 @@ function LyraInstructions({ username }) {
         <Box>
           <InstructionText>
             In a terminal emulator, run the following command to connect to
-            Lyra:
+            Lyra. When prompted, enter your QUT password.
           </InstructionText>
         </Box>
         <Box>
           <InstructionText>
             In a terminal emulator, run the following command to connect to
-            Lyra:
+            Lyra. When prompted, enter your QUT password.
           </InstructionText>
         </Box>
       </OperatingSystemTabs>
