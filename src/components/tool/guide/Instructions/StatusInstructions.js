@@ -101,7 +101,20 @@ ${jobIdOrPlaceholder}[2].pbs username quick job-name    --    1   4   32gb 01:00
                 <Td>
                   <Text as="b">B</Text>
                 </Td>
-                <Td>Array job has at least one subjob running</Td>
+                <Td>
+                  Parent of array job that has at least one subjob running, e.g
+                  1234567[].pbs
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>
+                  <Text as="b">X</Text>
+                </Td>
+                <Td>
+                  Subjob of array that has finished while other subjobs are
+                  still running, e.g 1234567[1].pbs is in X state, while
+                  1234567[2].pbs is still in R state.
+                </Td>
               </Tr>
               <Tr>
                 <Td>
