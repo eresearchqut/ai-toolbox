@@ -26,7 +26,7 @@ export function LyraStartInstructions({
   arrayConfig,
 }) {
   const resourceValues = [
-    `select=${jobType === "Interactive" ? 1 : nodes}`,
+    `select=${jobType === "Interactive" || resources === "Automatic" ? 1 : nodes}`,
     `ncpus=${cpus}`,
     `mem=${ram}gb`,
   ];
