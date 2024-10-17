@@ -3,6 +3,10 @@ server {
     server_name localhost;
     absolute_redirect off;
 
+    location = / {
+        return 302 "/ai-toolbox/job/";
+    }
+
     location /ai-toolbox/ {
         alias /usr/share/nginx/html/;
         index index.html;
