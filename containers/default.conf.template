@@ -15,5 +15,6 @@ server {
         add_header X-Frame-Options "ALLOW-FROM ${ALLOWED_DOMAINS}";
         add_header X-Content-Type-Options "nosniff";
         add_header Cache-Control "max-age=600";
+        limit_except GET { deny all; }
     }
 }
