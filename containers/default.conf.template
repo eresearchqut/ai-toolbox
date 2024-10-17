@@ -11,6 +11,6 @@ server {
         alias /usr/share/nginx/html/;
         index index.html;
         include  /etc/nginx/mime.types;
-        add_header Content-Security-Policy "frame-ancestors 'self' ${ALLOWED_DOMAINS};";
+        add_header Content-Security-Policy "frame-ancestors 'self' ${ALLOWED_DOMAINS}; form-action 'self'; default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://img.shields.io; font-src 'self'; connect-src 'self'; frame-src 'self'; object-src 'self'; media-src 'self'; worker-src 'self'; child-src 'self'; manifest-src 'self'; base-uri 'self';";
     }
 }
