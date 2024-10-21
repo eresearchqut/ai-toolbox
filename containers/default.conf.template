@@ -3,10 +3,18 @@ server {
     server_name localhost;
     absolute_redirect off;
 
+    location = / {
+        return 302 "/ai-toolbox/job/";
+    }
+
     location /ai-toolbox/ {
         alias /usr/share/nginx/html/;
         index index.html;
         include  /etc/nginx/mime.types;
-        add_header Content-Security-Policy "frame-ancestors 'self' ${ALLOWED_DOMAINS};";
+        add_header Content-Security-Policy "frame-ancestors 'self' ${ALLOWED_DOMAINS}; form-action 'self'; default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://img.shields.io; font-src 'self'; connect-src 'self'; frame-src 'self'; object-src 'self'; media-src 'self'; worker-src 'self'; child-src 'self'; manifest-src 'self'; base-uri 'self';";
+        add_header X-Frame-Options "ALLOW-FROM ${ALLOWED_DOMAINS}";
+        add_header X-Content-Type-Options "nosniff";
+        add_header Cache-Control "max-age=600";
+        limit_except GET { deny all; }
     }
 }
